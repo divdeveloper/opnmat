@@ -1,0 +1,41 @@
+<nb-card>
+    <nb-card-header>Specify/Change</nb-card-header>
+    <nb-card-body>
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon success">%</span>
+                    <input type="number" class="form-control" placeholder="Change" [ngModelOptions]="{standalone: true}" [(ngModel)]="change"/>
+                </div>
+            </div>
+            <div class=" ">
+                <button class="btn btn-success" (click)="onSetting()">Set</button>
+            </div>
+        </form>
+
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-header>{{title}}</nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form1">
+            <div class="form-group">
+                <input type="text" id="name" formControlName="name" placeholder="Name" class="form-control" [ngClass]="displayFieldCss1('name')">
+            </div>
+            <div class="form-group">
+                <input type="text" id="location" formControlName="location" placeholder="Location" class="form-control" [ngClass]="displayFieldCss1('location')">
+            </div>
+            <div class="form-group">
+                <input id="phone" formControlName="phone" type="tel" placeholder="Phone number" required class="form-control" [ngClass]="displayFieldCss1('phone')">
+            </div>
+            <div class="form-group">
+                <input id="email" formControlName="email" type="email" placeholder="Email" required class="form-control" [ngClass]="displayFieldCss1('email')">
+            </div>
+            <div class=" ">
+                <button class="btn btn-success" (click)="onSubmit()">{{button}}</button>
+                <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+
+    </nb-card-body>
+</nb-card>

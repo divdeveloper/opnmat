@@ -1,0 +1,157 @@
+<opn-left-sidebar></opn-left-sidebar>
+<main class="row no-gutters justify-content-center">
+  <opn-manager-panel *ngIf="idAcademy != 0" [academyId]="idAcademy" class="w-100" (checkManager)="isManager = $event"></opn-manager-panel>
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="row">
+        <div class="col-12">
+          <div class="lt-card">
+            <div class="lt-header" *ngIf="!edit">Create Subscription</div>
+            <div class="lt-header" *ngIf="edit">Edit Subscription</div>
+            <form class="f-create-subscribe" [formGroup]="formSubscription">
+              <div class="lt-form-rows">
+                <div class="wrap-row">
+                  <label for="name">Name</label>
+                  <div class="wrap-input">
+                    <input class="input-style" [ngClass]="{'error':formErrors.name}" id="name" formControlName="name" type="text" (blur)="onValueChange()">
+                    <div *ngIf="formErrors.name" class="input-error">
+                      {{ formErrors.name }}
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-row">
+                  <label for="price">Price</label>
+                  <div class="wrap-input">
+                    <div class="row">
+                      <div class="col-8">
+                        <input class="input-style" id="price" [ngClass]="{'error':formErrors.price}" formControlName="price" (blur)="onValueChange()"
+                          type="text">
+                        <div *ngIf="formErrors.price" class="input-error">
+                          {{ formErrors.price }}
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <ng-select placeholder="Select period" formControlName="membership" #elMembership [options]="membership">
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-row">
+                  <label for="registration_fee">Registration Fee</label>
+                  <div class="wrap-input">
+                    <input class="input-style" [ngClass]="{'error':formErrors.registration_fee}" id="registration_fee" min="100" (blur)="onValueChange()"
+                      formControlName="registration_fee" type="number">
+                    <div *ngIf="formErrors.registration_fee" class="input-error">
+                      {{ formErrors.registration_fee }}
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-row">
+                  <label>Trial</label>
+                  <div class="wrap-input">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+                        <label class="sw-box">
+                          <input type="checkbox" [checked]="trial" (click)="toggleTrial()">
+                          <span class="switch">
+                            <span class="switcher"></span>
+                          </span>
+                        </label>
+                      </div>
+                      <div class="col-sm-8" *ngIf='trial'>
+                        <input class="input-style" [ngClass]="{'error':formErrors.trial_days}" (blur)="onValueChange()" formControlName="trial_days"
+                          max="730" type="number">
+                        <div *ngIf="formErrors.trial_days" class="input-error">
+                          {{ formErrors.trial_days }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-row">
+                  <label>Age</label>
+                  <div class="wrap-input lt-radiobox">
+                    <label class="radio-item" for="radio1">
+                      <input id="radio1" formControlName="age" (blur)="onValueChange()" checked value="5-10" type="radio" name="age">
+                      <span></span>
+                      5-10
+                    </label>
+                    <label class="radio-item" for="radio2">
+                      <input id="radio2" formControlName="age" (blur)="onValueChange()" value="10+" type="radio" name="age">
+                      <span></span>
+                      10+
+                    </label>
+                  </div>
+                </div>
+                <div class="wrap-row wrap-textarea">
+                  <label for="information">Information</label>
+                  <div class="wrap-input">
+                    <textarea class="input-style" id="information" formControlName="information"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="lt-form-footer">
+                <button *ngIf="!edit" (click)="onSendForm(formSubscription)" [disabled]="formSubscription.invalid || isLoading" class="lt-btn" type="button">Create
+                </button>
+                <button *ngIf="edit" (click)="updateSubscription(formSubscription)" class="lt-btn" type="button" [disabled]="formSubscription.invalid || isLoading">Update
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="subscriptions.length; else noSub">
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let subscribe of subscriptions">
+          <div class="lt-card">
+            <div class="lt-content">
+              <div class="lt-subscription">
+                <!--<pre>{{subscribe | json}}</pre>-->
+                <div class="icon-info">
+                  <div class="tooltip-btn" *ngIf="subscribe.information != ''">
+                    <div class="tooltip-content">
+                      {{subscribe.information}}
+                    </div>
+                  </div>
+                </div>
+                <div class="subscription-header">
+                  <div class="type">{{subscribe.name}}</div>
+                  <div class="price">${{subscribe?.price}}</div>
+                  <div class="time">{{subscribe?.membership}}</div>
+                </div>
+                <div class="subscription-content">
+                  <div class="content-row">
+                    <div class="label">Registration Fee</div>
+                    <div class="value">{{subscribe?.registration_fee}}</div>
+                  </div>
+                  <div class="content-row">
+                    <div class="label">Age</div>
+                    <div class="value">{{subscribe?.age}}</div>
+                  </div>
+                </div>
+                <div class="subscription-footer">
+                  <span class="f-btn" (click)="editSubscription(subscribe)">
+                    <img src="assets/images/icons/icon-edit.png" alt="">
+                  </span>
+                  <span class="f-btn" (click)="deleteSubscription(subscribe.id)">
+                    <img src="assets/images/icons/icon-delete.png" alt="">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noSub>
+        <div class="row">
+          <div class="col-12">
+            <div class="lt-card">
+              <div class="lt-content">You have no subscriptions yet!</div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar [isManager]="isManager"></opn-right-sidebar>

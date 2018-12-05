@@ -1,0 +1,20 @@
+.n-informer{
+  text-align: center;
+  position: relative;
+  img{
+    display: inline-block;
+  }
+  &.unread:after{
+    display: block;
+    content: '';
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #f91656;
+    position: absolute;
+    border: 3px solid #ffffff;
+    top: -3px;
+    right: -3px;
+    box-shadow: 1px 1px 4px -2px rgba(0,0,0,0.5);
+  }
+}

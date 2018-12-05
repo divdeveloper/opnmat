@@ -1,0 +1,23 @@
+<div #timePicker class="ui-time-picker">
+  <label for="" class="timepicker-btn" (click)="onToggle($event)"></label>
+  <input type="text" [(ngModel)]="time" readonly (click)="onToggle($event)">
+  <div class="time-picker-modal" (mouseup)="onClick($event)">
+    <div class="time-picker-hour">
+      <button class="stepUp" (click)="onHourStepUp(hour.value)"></button>
+      <input type="number" min="1" max="12" [(ngModel)]="hours" step="1" #hour (change)="onCheckHours(hour.value)" (keyup)="onCheckHours(hour.value)">
+      <button class="stepDown" (click)="onHourStepDown()"></button>
+    </div>
+    <div class="time-picker-split">:</div>
+    <div class="time-picker-minute">
+      <button class="stepUp" (click)="onMinuteStepUp()"></button>
+      <input type="number" min="1" max="59" [(ngModel)]="minutes" step="1" #minute (change)="onCheckMinutes(minute.value)" (keyup)="onCheckMinutes(minute.value)">
+      <button class="stepDown" (click)="onMinuteStepDown()"></button>
+    </div>
+    <div class="time-picker-amnet" (click)="onToggleAmnet()">
+      {{amnet}}
+    </div>
+    <button class="time-picker-set" (click)="onSetTime()">
+      Set
+    </button>
+  </div>
+</div>

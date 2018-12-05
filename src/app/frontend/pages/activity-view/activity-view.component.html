@@ -1,0 +1,146 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<opn-payment-stripe (outToken)="onPay($event)"></opn-payment-stripe>
+<opn-modal modalId="payment-fail" closebtn="true">
+  <div class="modal-info error">
+    <i class="ion-alert"></i> <span>Warning!</span>
+    <div class="payment-msg">
+      {{modalAlert}}
+    </div>
+    <button class="pay-event-btn" (click)="onRePay()" >Pay Now</button>
+  </div>
+</opn-modal>
+<opn-modal modalId="join-fail" closebtn="true">
+    <div class="modal-info error">
+      <i class="ion-alert"></i> <span>Warning!</span>
+      <div class="payment-msg">
+        {{modalAlert}}
+      </div>
+    </div>
+  </opn-modal>
+<opn-modal modalId="payment-success" closebtn="true">
+  <div class="modal-info success">
+    <i class="ion-checkmark"></i> <span>Success!</span>
+    <div class="payment-msg">
+      {{modalAlert}}
+    </div>
+  </div>
+</opn-modal>
+<main class="row no-gutters justify-content-center">
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="activity-wrap" *ngIf="activity">
+        <div class="row cover_block no-gutters" [ngStyle]="coverBg" lazy-load-images>
+          <pre>{{activity.isSabscription}}</pre>
+          <pre>{{activity.status_public}}</pre>
+          <div class="col-auto align-self-start activity-type ml-auto" *ngIf="eventLoaded && subscribeLoaded">
+            {{
+              (activity.type == 'class')
+                ? (activity.status_public == 0) 
+                  ? activity.subscriptions[0].name 
+                  : '$' + activity.price_all
+                : (activity.payment_status == 'free')
+                  ? 'Free'
+                  : '$' + activity.price_all
+            }}
+          </div>
+          <div class="col-12 align-self-end join-box">
+            <div class="row no-gutters justify-content-between">
+              <div class="col-auto align-self-start">
+                <div class="activity-name">
+                  {{activity.name}}
+                </div>
+                <div class="activity-academy" *ngIf="activity.academy" (click)="toAcademy(activity.academy.id)">
+                  {{activity.academy.name}}
+                </div>
+                <div class="join-users" *ngIf="join_activities">
+                  <div class="user-avatar" *ngFor="let join_user of join_activities; let i = index;" [ngStyle]="{'z-index': i+1, 'transform': 'translateX(-'+ (6*i) +'px)'}">
+                    <opn-view-avatar [src]="join_user.user.avatar" [widthImg]="'40px'"></opn-view-avatar>
+                  </div>
+                  <div class="user-avatar right-count" *ngIf="rightCount > 0"  [ngStyle]="{'z-index': i+maxJoinAvatar, 'transform': 'translateX(-'+ (6*maxJoinAvatar) +'px)'}">
+                      +{{rightCount}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto align-self-end" *ngIf="eventLoaded && subscribeLoaded">
+                <button *ngIf="(activity.amount > joinedCount) && differenceDate > 0 && (isMember < 0 && ((activity.type == 'class' && activity.status_public == 1) || (activity.type != 'class' )))" class="join-btn" (click)="onJoin(activity)">Join <div class="small-loader inline-block" *ngIf="joinLoader"></div></button>
+                <button *ngIf="(activity.amount > joinedCount) && differenceDate > 0 && isMember >= 0" class="join-btn passed">Joined</button>
+                <button *ngIf="differenceDate <= 0 && (activity.amount > joinedCount)" class="join-btn passed">Passed</button>
+                <button *ngIf="(joinedCount >= activity.amount)" class="join-btn passed">Limit exceeded</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-card-100 pb-3">
+      <div class="content-card">
+        <div class="activity-type {{activity.type}}">
+          Accivity:
+          <span>{{types[activity.type]}}</span>
+        </div>
+        <div class="person-limit">
+          Person limit:
+          <span>{{joinedCount}}/{{(activity.amount < 1000000) ? activity.amount : '-'}}</span>
+        </div>
+        <div class="activity-instructors" *ngIf="instructors != ''">
+          Instructor: <span>{{instructors | pipeJoin: ', '}}</span>
+        </div>
+        <div class="activity-techniques" *ngIf="techniques != ''">
+          Techniques: <span>{{techniques | pipeJoin: ', '}}</span>
+        </div>
+        <div class="activity-about" *ngIf="activity.about">
+          {{activity.about}}
+        </div>
+      </div>
+      <div class="right-content-box" style="float: right;">
+        <div class="content-card-right clearfix p-0">
+          <div class="left-box">
+            <div class="left-tem start"></div>
+            <div class="left-tem center"></div>
+            <div class="left-tem end"></div>
+          </div>
+          <div class="right-date">
+            <div class="datetime start">
+              <div class="day">{{activity.start_date | date:'dd'}}</div>
+              <div class="month-year">{{activity.start_date | date:'MMMM yyyy'}}</div>
+              <div class="time">{{activity.start_date | date:'h:m a'}}</div>
+              <div class="title">Start</div>
+            </div>
+            <div class="datetime end">
+              <div class="day">{{activity.end_date | date:'dd'}}</div>
+              <div class="month-year">{{activity.end_date | date:'MMMM yyyy'}}</div>
+              <div class="time">{{activity.end_date | date:'h:m a'}}</div>
+              <div class="title">End</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-card activity-comments card-m">
+        <div class="row no-gutters activity-comment-form">
+          <div class="col-auto comment-user-avatar">
+            <opn-view-avatar [src]="userAvatar" [widthImg]="'50px'"></opn-view-avatar>
+          </div>
+          <div class="col-auto activity-comment-fields">
+            <textarea #newComment placeholder="Start typing your commet here..." [(ngModel)]="commentText" (keyup)="(newComment.value == '')? addComment = true : addComment = fasle"></textarea>
+            <button class="comment-post-btn" (click)="onSaveComment($event)" [disabled]="addComment">Post</button>
+          </div>
+        </div>
+        <div class="row no-gutters comment-item" *ngFor="let comment of comments">
+          <div class="col-auto comment-user-avatar" (click)="toProfile(comment.user.id)">
+            <opn-view-avatar [src]="comment.user.avatar" [widthImg]="'50px'"></opn-view-avatar>
+          </div>
+          <div class="col-auto comment-data">
+            <div class="comment-user-name" (click)="toProfile(comment.user.id)">{{comment.user.first_name}} {{comment.user.last_name}}</div>
+            <div class="comment-datetime">{{comment.created_at | amCalendar}}</div>
+            <div class="clearfix"></div>
+            <div class="comment-text">{{comment.content}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar>
+</opn-right-sidebar>

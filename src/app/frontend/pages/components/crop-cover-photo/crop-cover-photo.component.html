@@ -1,0 +1,17 @@
+<div class="overlay-modal-bg">
+  <div class="closeModal" (click)="onCloseModal()">Close</div>
+  <div class="modalConteiner">
+    <div class="row no-gutters">
+      <div class="col-auto">
+        <div class="file-upload">
+          <label class="text" for="custom-input-upload"></label>
+          <input id="custom-input-upload" type="file" (change)="fileChangeListener($event)">
+        </div>
+      </div>
+      <div class="col-auto">
+        <button class="save-cover" (click)="onSave()">Save</button>
+      </div>
+      <img-cropper #cropper [image]="data" (onCrop)="cropped($event)" [settings]="cropperSettings"></img-cropper>
+    </div>
+  </div>
+</div>

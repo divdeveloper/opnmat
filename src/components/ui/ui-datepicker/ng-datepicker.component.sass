@@ -1,0 +1,160 @@
+$white: #ffffff
+$background: $white
+$border: #DFE3E9
+$shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08)
+$radius: 2px
+$text: #172a47
+$text-secondary: #A4A9B1
+$color: #1A91EB
+
+$white-gray: #d3dce9;
+$border-radius: 2px;
+$font-family: 'Proxima Nova';
+
+.ngx-datepicker-container
+  position: relative
+  border: 1px solid $white-gray
+  border-radius: $border-radius
+  .ngx-datepicker-btn
+    width: 50px
+    height: 48px
+    position: absolute
+    top: 0
+    right: 0
+    border-left: 1px solid $white-gray
+    cursor: pointer
+    &:after
+      display: block
+      content: ''
+      width: 16px
+      height: 18px
+      background: url("/assets/images/icons/date-btn-icon.png") center top no-repeat
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate3d(-50%, -50%, 0)
+  .ngx-datepicker-input
+    width: 100% 
+    height: 48px
+    padding-left: 24px
+    font-family: $font-family
+    color: #202f3b
+    font-family: "MuseoSansCyrl"
+    font-size: 15px
+    font-weight: 300
+    outline: none
+    cursor: pointer
+    border: 0
+  &.open, &:hover
+    border-color: #98a6bc
+    .ngx-datepicker-btn
+      border-left: 1px solid #98a6bc
+      &:after
+        background: url("/assets/images/icons/date-btn-icon.png") center bottom no-repeat
+      
+  .ngx-datepicker-calendar-container
+    position: absolute
+    width: calc( 100% + 2px )
+    background: $background
+    top: 49px
+    left: -1px
+    border: 1px solid #d3dce9
+    border-radius: 2px
+    background: white
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15)
+    z-index: 99
+
+    .topbar-container
+      width: 100%
+      height: 50px
+      padding: 15px
+      border-bottom: 1px solid $border
+      display: flex
+      justify-content: space-between
+      align-items: center
+      user-select: none
+
+      svg
+        cursor: pointer
+
+        g
+          fill: #CED0DA
+
+      .topbar-title
+        color: $text
+        font-family: "MuseoSansCyrl"
+        font-size: 15px
+        font-weight: 300
+        cursor: pointer
+
+    .main-calendar-container
+      width: 100%
+      height: 100%
+      font-size: 12px
+      font-weight: 500
+
+      .main-calendar-day-names
+        color: $text-secondary
+        width: 100%
+        font-size: 11px
+        display: none
+        align-items: center
+
+        .day-name-unit
+          width: calc(100% / 7)
+          text-transform: uppercase
+          text-align: center
+          border: 1px solid #d3dce9
+          font-family: "MuseoSansCyrl"
+          font-size: 15px
+          font-weight: 300
+
+      .main-calendar-days, .main-calendar-years
+        width: 100%
+        display: inline-block
+        max-height: 275px
+        overflow: hidden
+
+        .day-unit, .year-unit
+          width: calc(100% / 7)
+          height: 40px
+          display: inline-flex
+          float: left
+          align-items: center
+          justify-content: center
+          cursor: pointer
+          user-select: none
+          color: $text
+          border-right: 1px solid #d3dce9
+          border-bottom: 1px solid #d3dce9
+          font-family: "MuseoSansCyrl"
+          font-size: 15px
+          font-weight: 300
+
+          &.is-prev-month
+            color: $text-secondary
+
+          &:hover
+            color: #4ca1ff
+
+          &.is-today
+            background: #4ca1ff
+            color: white !important
+
+          &.is-selected
+            // box-shadow: inset 0 0 1px 1px #4ca1ff
+            color: #4ca1ff
+            
+
+          &.is-disabled
+            pointer-events: none
+            cursor: not-allowed
+            background: #f1f2f5
+
+      .main-calendar-years
+        height: 210px
+        display: block
+        padding: 0
+
+        .year-unit
+          width: calc(100% / 3)

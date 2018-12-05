@@ -1,0 +1,126 @@
+$input-color: #bababa;
+$red: #ff0000;
+.max-content{
+  .grid-box{
+    width: calc( 50% - 7.5px );
+    padding: 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+    background: white;
+    &:last-child{
+      margin-left: 15px;
+    }
+    .grid-panel{
+      height: 60px;
+      border-bottom: 1px solid #d3dce9;
+      padding: 0 30px;
+      .grid-title{
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        font-size: 16px;
+        color: #202f3b;
+        text-overflow: ellipsis;
+      }
+      .grid-add-btn{
+        height: 30px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 14px;
+        color: #4ca1ff;
+        border: 0;
+        background: transparent;
+        float: right;
+        outline: none;
+        &:before{
+          display: inline-block;
+          content: '';
+          width: 20px;
+          height: 20px;
+          background: url("/assets/images/icons/add-icon.png") center no-repeat;
+          margin-right: 11px;
+          transform: translateY(5px);
+        }
+      }
+    }
+    .grid-container{
+      padding: 0 30px;
+      position: relative;
+      .grid-form{
+        padding: 20px 0;
+        border-bottom: 1px solid #d3dce9;
+        .form-group{
+          margin: 0;
+          padding:0;
+          input[type="text"]{
+            width: calc( 100% - 79px );
+            height: 40px;
+            border: 1px solid #d3dce9;
+            border-radius: 3px 0 0 3px;
+            padding-left: 18px;
+            font-family: "MuseoSansCyrl";
+            font-weight: 500;
+            font-size: 14px;
+            color: #202f3b;
+            outline: none;
+            float: left;
+            &:focus, &:hover{
+              border-color: #98a6bc;
+            }
+          }
+          button{
+            width: 80px;
+            border: 0;
+            border-radius: 0 3px 3px 0;
+            height: 40px;
+            font-size: 15px;
+            color: white;
+            background: #4ca1ff;
+            font-family: 'Proxima Nova Condensed';
+            cursor: pointer;
+            margin-left: -1px;
+            box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+            float: left;
+            &:disabled{
+              cursor: default;
+              background: #f1f2f5;
+              color: #cdcfd6;
+            }
+            &:hover{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+      .grid-row{
+        height: 50px;
+        border-bottom: 1px solid #d3dce9;
+        .grid-title{
+          width: calc( 100% - 60px );
+          font-family: "MuseoSansCyrl";
+          font-weight: 500;
+          font-size: 14px;
+          color: #202f3b;
+          text-overflow: ellipsis;
+        }
+        .grid-controls{
+          width: 60px;
+          .grid-btn-delete{
+            width: 12px;
+            height: 14px;
+            background: url("/assets/images/icons/icon-delete.png") right center no-repeat;
+            float: right;
+            cursor: pointer;
+          }
+          .grid-btn-edit{
+            width: 14px;
+            height: 14px;
+            background: url("/assets/images/icons/icon-edit.png") right center no-repeat;
+            float: right;
+            margin-right: 25px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

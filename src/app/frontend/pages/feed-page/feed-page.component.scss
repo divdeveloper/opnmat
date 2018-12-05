@@ -1,0 +1,84 @@
+.feed-box{
+  margin-top: 15px;
+}
+.right-content-box{
+  width: 370px;
+}
+.content-card-right{
+  padding: 0 !important;
+  .dropdown-box{
+    overflow: hidden;
+    &:not(:last-child){
+      margin-bottom: 14px;
+    }
+    
+    button.dropdown-btn{
+      font-size: 16px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      color: #202f3b;
+      width: 100%;
+      height: 60px;
+      border: 0;
+      background-color: transparent;
+      text-align: left;
+      padding: 0 30px;
+      outline: none;
+      position: relative;
+      cursor: pointer;
+    }
+    .drop-icon{
+      color: #4ca1ff;
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+    }
+    .ion-android-add{
+      display: inline-block;
+    }
+    .ion-android-remove{
+      display: none;
+    }
+    &.open-dropdown{
+      button.dropdown-btn{
+        .ion-android-add{
+          display: none;
+        }
+        .ion-android-remove{
+          display: inline-block;
+        }
+        // background: url("/assets/images/icons/carret-o.png") calc( 100% - 16px ) center no-repeat, #1772a7;
+      }
+    }
+    .no-events{
+      background: #f0f2f8;
+      height: 31px;
+      font-size: 13px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      line-height: 31px;
+      color: #90949c;
+      padding: 0 30px;
+    }
+  }
+}
+
+.feed-panel{
+  width: calc( 100% - 385px);
+  float: left;
+  .panel-tab{
+    font-size: 14px;
+    color: #bababa;
+    font-family: "MuseoSansCyrl";
+    font-weight: 300;
+    padding-right: 18px;
+    margin-top: 15px;
+    cursor: pointer;
+    &.active{
+      color: #23354d;
+      pointer-events: none;
+    }
+  }
+}

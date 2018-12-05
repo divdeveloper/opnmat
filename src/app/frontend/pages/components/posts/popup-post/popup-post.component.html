@@ -1,0 +1,94 @@
+<div class="overlay-modal-bg opn-scroll">
+  <div class="closeModal" (click)="onCloseModal()"><span class="ion-close-round"></span></div>
+  <div class="modalConteiner">
+    <div class="row no-gutters">
+      <div class="col-auto media-box">
+        <div *ngIf="currentFile.type == 'image'" class="media-item">
+          <img [src]="serverUrl+currentFile.url" alt="foto1" class="align-self-center" />
+        </div>
+        <div *ngIf="currentFile.type == 'video'" class="media-item">
+          <video width="100%" height="100%" controls class="align-self-center" controlsList="nodownload">
+            <source [src]="serverUrl+currentFile.url" type="video/mp4"> Your browser does not support the video tag.
+          </video>
+        </div>
+        <div *ngIf="files.length > 1" class="prevMedia" (click)="onPrevMedia()"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+        <div *ngIf="files.length > 1" class="nextMedia" (click)="onNextMedia()"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      </div>
+      <div class="col-auto post-box">
+        <div class="opn-scroll post-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()">
+          <div class="row justify-content-between no-gutters">
+            <div class="col-md-auto">
+              <div class="feed-user-avatar">
+                <opn-view-avatar *ngIf="!academyId" [src]="userAvatar" [widthImg]="'50px'"></opn-view-avatar>
+                <opn-view-logo-academy *ngIf="academyId" [src]="post.academy.photo" [widthImg]="'128px'"></opn-view-logo-academy>
+              </div>
+              <div class="feed-user-data">
+                <div *ngIf="!academyId" class="user-fio">{{post.user.first_name}} {{post.user.last_name}}</div>
+                <div *ngIf="academyId" class="academy-name">{{post.academy.name}}</div>
+                <div class="feed-time-passed">{{post.time}}
+                  <span class="feed-visibility {{post.share_from}}"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-auto" style="padding-right: 10px;">
+              <opn-controlls-post [direction]="'left'" *ngIf="_updatePost" (onSelected)="onControllAction($event)"></opn-controlls-post>
+            </div>
+          </div>
+          <div class="row no-gutters align-items-center feed-social-btn">
+            <div class="col-4 text-center" [ngClass]="{'is-like': post.is_like}" (click)="onLike($event, post.is_like, post)">
+              <div class="social-btn">
+                <i class="hand-gesture" [class.hand-gesture-blue]="post.is_like" ></i> Like
+              </div>
+            </div> 
+            <div class="col-4 text-center"  (click)="onCommentToggle($event, post)">
+              <div class="social-btn" [ngClass]="{'active': commentToggle}">
+                <i class="comment"></i> Comment
+              </div>
+            </div>
+            <div class="col-4 text-center" (click)="onShareToggle($event)">
+              <div class="social-btn" [class.active]="shareToggle">
+                <div class="share-buttons-wrap bottom" *ngIf="shareToggle">
+                  <button class="share-me" (click)="onShareTimline(post.id)"><i class="share-me"></i>My Timeline</button>
+                  <share-button (closed)="onCloseSahre('Facebook')" [theme]="'custom-theme'" [button]="'facebook'" [showText]="true" [url]="'http://opn-mat.roketdev.pro/'"></share-button>
+                  <share-button (closed)="onCloseSahre('Twitter')" [theme]="'custom-theme'" [button]="'twitter'" [showText]="true" [url]="'http://opn-mat.roketdev.pro/'" ></share-button>
+                </div>
+                <i class="share-symbol"></i> Share
+              </div>
+            </div>
+          </div>
+          <div class="feed-comments" *ngIf="commentToggle">
+            <div class="feed-comments-scroll">
+              <div class="row feed-comment no-gutters" *ngFor="let comment of comments;">
+                <div class="col-md-auto comment-user-avatar">
+                  <opn-view-avatar [src]="comment.user.avatar" [widthImg]="'36px'"></opn-view-avatar>
+                </div>
+                <div class="col-md-auto comment-content">
+                  <div class="comment-user-date">
+                    {{comment.user.first_name}} {{comment.user.last_name}}
+                    <div class="comment-date">{{comment.created_at | niceDateFormatPipe}}</div>
+                  </div>
+                  <div class="text">{{comment.content}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background-color: white" class="row new-comment-form no-gutters align-items-center" *ngIf="commentToggle">
+          <div class="col-12 separator">
+            <hr>
+          </div>
+          <div class="col-md-auto user-avatar">
+            <opn-view-avatar [src]="userAvatar" [widthImg]="'36px'"></opn-view-avatar>
+          </div>
+          <div class="col-md-auto form-group">
+            <input type="text" #newComment class="coment-field" (keyup)="(newComment.value == '')? addComment = true : addComment = fasle" />
+            <button class="post-comment" (click)="onSaveComment(newComment, post)" [disabled]="addComment">Post</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<opn-modal modalId="shured-modal" blocking="true" closebtn="true">
+  
+</opn-modal>

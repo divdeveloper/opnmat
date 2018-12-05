@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                Avatar
+            </nb-card-header>
+            <nb-card-body>
+
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                User detail
+            </nb-card-header>
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-3">First Name</div>
+                    <div class="col-8">{{userModel.firstName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">Last Name</div>
+                    <div class="col-8">{{userModel.lastName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-3">E-mail</div>
+                    <div class="col-8">{{userModel.email}}</div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header>
+                Actions
+            </nb-card-header>
+            <nb-card-body>
+                <div>
+                    <button class="btn btn-warning" (click)="noResetPassword(userModel.id)">Reset password</button>
+                    <button class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>

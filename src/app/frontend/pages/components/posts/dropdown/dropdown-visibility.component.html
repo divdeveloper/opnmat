@@ -1,0 +1,8 @@
+<div class="dropdown-visibility" #dropdownVisibility>
+  <button class="btn-visibility" #dropdownBtn (click)="onToggle($event)"><i class="public"></i>Public</button>
+  <ul class="dropdown-menu-visibility">
+      <li class="item" (mousedown)="onSelect($event, 'all')"><i class="public"></i>Public</li>
+      <li class="item" (mousedown)="onSelect($event, 'me')"><i class="only-me"></i>Only me</li>
+      <li class="item" (mousedown)="onSelect($event, 'followers')"><i class="followers"></i>My followers</li>
+  </ul>
+</div>

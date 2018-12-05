@@ -1,0 +1,330 @@
+.overlay-modal-bg{
+  background: rgba(22, 42, 53, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  border-top: 1px solid rgba(22, 42, 53, 0.8);
+  top: 0;
+  left: 0;
+  z-index: 999999999999;
+  .modalConteiner{
+    width: 540px;
+    background: white;
+    padding: 25px 20px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+    .modal-panel{
+      margin: 0;
+      .prev-modal{
+        width: 25px;
+        height: 17px;
+        background: url("/assets/images/icons/prev.png") center no-repeat;
+        padding: 0;
+        cursor: pointer;
+      }
+      .close-modal{
+        width: 14px;
+        height: 14px;
+        background: url("/assets/images/icons/close.png") center no-repeat;
+        padding: 0;
+        cursor: pointer;
+        transform: translateY(2px);
+        transition: 0.2s ease-in-out;
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
+    }
+    .modal-head{
+      margin-top: 20px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 34px;
+      color: #323844;
+      text-align: center;
+    }
+    .steps{
+      text-align: center;
+      margin: 40px 0 30px 0;
+      .spet-nuber{
+        font-family: "MuseoSansCyrl";
+        font-weight: 900;
+        font-size: 11px;
+        text-transform: uppercase;
+      }
+      .step-bar{
+        width: 110px;
+        height: 6px;
+        background: #efefef 70%;
+        border-radius: 2px;
+        display: inline-block;
+        &.step1{
+          &::after{
+            width: 33%;
+            height: 6px;
+            display: block;
+            content: '';
+            background: #4ca1ff;
+            border-radius: 2px 0 0 2px;
+            transition: 0.4s ease-in;
+          }
+        }
+        &.step2{
+          &::after{
+            width: 66%;
+            height: 6px;
+            display: block;
+            content: '';
+            background: #4ca1ff;
+            border-radius: 2px 0 0 2px;
+            transition: 0.4s ease-in;
+          }
+        }
+        &.step3{
+          &::after{
+            width: 100%;
+            height: 6px;
+            display: block;
+            content: '';
+            background: #4ca1ff;
+            border-radius: 2px;
+            transition: 0.4s ease-in;
+          }
+        }
+      }
+    }
+    .step-container{
+      padding: 0 76px;
+      .step-container-head{
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 20px;
+        text-align: center;
+        color: #282d38;
+      }
+      .step-container-types{
+        margin-top: 30px;
+        .step-type{
+          width: 85px;
+          float: left;
+          .event, .special-event, .others{
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 2px solid rgba(196, 201, 207, 0.5);
+            position: relative;
+            transition: 0.4s;
+            cursor: pointer;
+            &:hover{
+              border-color: #4196f4;
+            }
+            &.active{
+              border: 0;
+              &:after{
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                content: '';
+                border-radius: 50%;
+                background: url("/assets/images/icons/check-icon.png") center no-repeat, #4196f4;
+                z-index: 9;
+                transition: 0.2s;
+              }
+            }
+          }
+          .event:before, .special-event:before{
+            display: block;
+            width: 40px;
+            height: 40px;
+            content: url("/assets/images/icons/calendar-icon.png");
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+          }
+          &:nth-child(2){
+            margin-left: 46px; 
+          }
+          &:last-child{
+            float: right;
+          }
+          .others:before{
+            display: block;
+            width: 40px;
+            height: 40px;
+            content: url("/assets/images/icons/others-icon.png");
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+          }
+          .step-type-title{
+            margin-top: 24px;
+            text-align: center;
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 14px;
+            color: #202f3b;
+          }
+        }
+      }
+      .next-step{
+        width: 100%;
+        height: 54px;
+        border: 0;
+        background: #f1f2f5;
+        color: #cdcfd6;
+        margin: 35px 0 25px 0;
+        border-radius: 2px;
+        transition: 0.2s ease-in;
+        outline: none;
+        cursor: default;
+        &.accept{
+          background: #4ca1ff;
+          color: white;
+          box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+          cursor: pointer;
+          &::after{
+            display: inline-block;
+            content: '';
+            width: 22px;
+            height: 16px;
+            background: url("/assets/images/icons/next-icon.png") top center no-repeat;
+            transform: translate3d(22px, 3px, 0);
+          }
+        }
+        &::after{
+          display: inline-block;
+            content: '';
+            width: 22px;
+            height: 16px;
+            background: url("/assets/images/icons/next-icon.png") bottom center no-repeat;
+            transform: translate3d(22px, 3px, 0);
+        }
+        &:hover{
+          box-shadow: none;
+        }
+      }
+      .create-event-btn{
+        width: 100%;
+        height: 54px;
+        border: 0;
+        background: #f1f2f5;
+        color: #cdcfd6;
+        margin: 35px 0 25px 0;
+        border-radius: 2px;
+        transition: 0.2s ease-in;
+        outline: none;
+        cursor: default;
+        &.accept{
+          background: #4ca1ff;
+          color: white;
+          box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+          cursor: pointer;
+        }
+        &:hover{
+          box-shadow: none;
+        }
+      }
+      .activiti-group{
+        margin-bottom: 10px;
+        &:after{
+          display: block;
+          content: '';
+          clear: both;
+        }
+        label{
+          font-size: 11px;
+          color: #c5cacf;
+          font-family: "MuseoSansCyrl";
+          font-weight: 700;
+          display: block;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        input[type="text"], textarea{
+          width: 100%;
+          height: 50px;
+          border: 1px solid #d3dce9;
+          border-radius: 2px;
+          padding-left: 24px;
+          color: #202f3b;
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+          font-weight: 300;
+          outline: none;
+          &:hover, &:focus{
+            border-color: #98a6bc;
+          }
+          ::-webkit-input-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          ::-moz-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          :-ms-input-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          :-moz-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+        }
+        textarea{
+          padding: 24px;
+          height: 90px;
+          min-height: 90px;
+          max-height: 140px;
+        }
+        .activiti-group-left{
+          width: 118px;
+          float: left;
+          height: 50px;
+          padding-top: 36px;
+          .payment-text{
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+            font-weight: 300;
+            color: #202f3b;
+            width: 43px;
+            height: 18px;
+            display: block;
+            float: left;
+          }
+          .payment-control{
+            width: 70px;
+            display: block;
+            float: left;
+          }
+        }
+        .activiti-group-right{
+          width: calc( 100% - 118px );
+          float: right;
+        }
+        .activiti-date{
+          width: calc( 100% - 160px );
+          float: left;
+        }
+        .activiti-time{
+          width: 148px;
+          float: left;
+          margin-left: 12px;
+          input[type="text"]{
+            padding-left: 8px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

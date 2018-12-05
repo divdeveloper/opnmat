@@ -1,0 +1,164 @@
+.overlay-modal-bg{
+  background: rgba(22, 42, 53, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  border-top: 1px solid rgba(22, 42, 53, 0.8);
+  top: 0;
+  left: 0;
+  z-index: 999999999999;
+  .modalConteiner{
+    width: 540px;
+    background: white;
+    padding: 25px 20px;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+    .modal-panel{
+      margin: 0;
+      .close-modal{
+        width: 14px;
+        height: 14px;
+        background: url("/assets/images/icons/close.png") center no-repeat;
+        padding: 0;
+        cursor: pointer;
+        transform: translateY(2px);
+      }
+    }
+    .modal-head{
+      margin-top: 20px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 34px;
+      color: #323844;
+      text-align: center;
+    }
+    .payment-form{
+      padding: 0 76px;
+      .payment-errors{
+        margin-top: 10px;
+        color: #202f3b;
+        font-family: "MuseoSansCyrl";
+        font-size: 12px;
+        font-weight: 100;
+        color: #eb1c26;
+      }
+      .payment-group{
+        border: 1px solid #d3dce9;
+        padding: 0 10px;
+        margin-top: 15px;
+        min-height: 52px;
+        .selelct-cards{
+          position: relative;
+          button.select-btn{
+            width: 100%;
+            height: 50px;
+            text-align: left;
+            background:  url("/assets/images/icons/select-btn-icon.png") right 22px no-repeat, transparent;
+            border: 0;
+            color: #202f3b;
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+            font-weight: 300;
+            outline: none;
+            line-height: 48px;
+            white-space: nowrap;
+            position: relative;
+            cursor: pointer;
+            padding: 0;
+            &:hover{
+              background:  url("/assets/images/icons/select-btn-icon.png") right -51px no-repeat, transparent;
+            }
+          }
+          .wrap-options{
+            position: absolute;
+            top: 51px;
+            left: -11px;
+            padding: 0 10px;
+            min-width: calc( 100% + 22px );
+            list-style-type: none;
+            border: 1px solid #d3dce9;
+            border-radius: 2px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+            z-index: 9;
+            display: none;
+            .option-card{
+              margin: 0 -10px;
+              padding: 0 10px ;
+              color: #202f3b;
+              height: 50px;
+              font-family: "MuseoSansCyrl";
+              line-height: 50px;
+              font-size: 15px;
+              font-weight: 300;
+              white-space: nowrap;
+              &.new{
+                color: #4ca1ff;
+              }
+              &:hover{
+                background: #f1f2f5;
+                cursor: pointer;
+              }
+              &:not(:last-child){
+                border-bottom: 1px solid #d3dce9;
+              }
+            }
+          }
+        }
+        input[type="text"]{
+          width: 100%;
+          height: 50px;
+          border: 0;
+          border-radius: 2px;
+          padding-left: 24px;
+          color: #202f3b;
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+          font-weight: 300;
+          outline: none;
+          ::-webkit-input-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          ::-moz-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          :-ms-input-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+          :-moz-placeholder {
+            font-family: "MuseoSansCyrl";
+            font-size: 15px;
+          }
+        }
+      }
+      .payment-btn{
+        width: 100%;
+        height: 54px;
+        border: 0;
+        background: #4ca1ff;
+        color: white;
+        margin: 35px 0 25px 0;
+        border-radius: 2px;
+        transition: 0.2s ease-in;
+        box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+        cursor: pointer;
+        outline: none;
+        &:hover{
+          box-shadow: none;
+        }
+        &[disabled]{
+          background: #f1f2f5;
+          color: #cdcfd6;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

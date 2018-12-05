@@ -1,0 +1,95 @@
+.content-card-100 {
+  padding: 0;
+  float: left;
+  .row-10{
+    margin: 0 -7px;
+    .col-p{
+      padding: 0 7px;
+    }
+    .user-card{
+      
+    }
+    .level-stripe{
+      
+    }
+  }
+  .student-card{
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+    .card-head{
+      height: 60px;
+      border-bottom: 1px solid #d3dce9;
+      line-height: 60px;
+      padding: 0 30px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      font-size: 16px;
+      color: #202f3b;
+    }
+    .card-content{
+      padding: 30px;
+      min-height: 180px;
+    }
+  }
+  .level-stripe, .level-activity{
+    width: 120px;
+    height: 120px;
+    position: relative;
+    margin: 0 auto;
+    .legend{
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      position: absolute;
+      .numbers{
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        font-size: 18px;
+        color: #202f3b;
+        text-align: center;
+      }
+      .name{
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 13px;
+        color: #90949c;
+        text-align: center;
+      }
+    }
+  }
+  .level-activity{
+    float: left;
+    margin: 0 0.5%;
+  }
+  .user-data{
+    padding-left: 24px;
+    width: calc(100% - 70px);
+    .user-name{
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      font-size: 15px;
+      color: #172a47;
+    }
+    .user-academy{
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 13px;
+      color: #4ca1ff;
+    }
+    .user-address{
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 13px;
+      color: #90949c;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+@media (max-width: 1491px) {
+  .content-card-100 {
+    width: calc( 100% - 22px);
+    margin: 14px 22px 0 22px;
+  }
+}

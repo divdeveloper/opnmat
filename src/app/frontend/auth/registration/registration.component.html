@@ -1,0 +1,84 @@
+<section class="register">
+    <!--<opn-header></opn-header>-->
+    <div style="background-color: white;" class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+                <h4 class="welcome">{{ title }}</h4>
+                <form [formGroup]="form" class="form-margin">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">FIRST NAME</h6>
+                        <input type="text" id="firstName" formControlName="firstName" [ngClass]="displayFieldCss('firstName')">
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">LAST NAME</h6>
+                        <input type="text" id="lastName" formControlName="lastName" [ngClass]="displayFieldCss('lastName')">
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">EMAIL</h6>
+                        <input id="email" formControlName="email" type="email" required [ngClass]="displayFieldCss('email')">
+                    </div>
+                    <div class="form-group select-academy">
+                        <div class="form-group">
+                            <h6 class="text-left credentials">ACADEMY</h6>
+                            <opn-academies-select [valid]="validErrAcademy" (selected)="setAcademy($event)"></opn-academies-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">Date of Birth</h6>
+                        <ng-datepicker [options]="dateOptions" [(ngModel)]="birthDay" [ngModelOptions]="{standalone: true}"></ng-datepicker>
+                        <!-- <input type="text" id="birthDay" formControlName="birthDay" dropSpecialCharacters="false" mask="00/00/0000" [ngClass]="displayFieldCss('birthDay')" placeholder="09/25/1991"> -->
+                    </div>
+                    <!-- <div class="form-group select-belt">
+                        <select2 [data]="belts" [cssImport]="true" [width]="100" [options]="optionsBelt" (valueChanged)="changeBelt($event)"></select2>
+                    </div> -->
+                    <div class="form-group">
+                        <h6 class="text-left credentials">AGE</h6>
+                        <opn-ui-select-type [currentValue]="ageType" [dataSource]="[
+                        {value: 'junior', title: 'Junior'}, 
+                        {value: 'adult', title: 'Adult'}
+                      ]" (change)="onChangeAge($event)"></opn-ui-select-type>
+                    </div>
+                    <opn-belts [colors]="colorsBelt" [belts]="arrBelts" (change)="onChangeColor($event)" (changeBelt)="changeBeltColor($event)"></opn-belts>
+                    <!-- <div class="form-group">
+                        <input id="weight" formControlName="weight" type="text" placeholder="Weight" [ngClass]="displayFieldCss('weight')">
+                        <i class="ion-alert" [ngClass]="displayFieldCss('weight')" tooltip="This field is required" [tooltipDisabled]="!isFieldValid('weight')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                    </div> -->
+                    <div class="form-group">
+                        <h6 class="text-left credentials">WEIGHT</h6>
+                        <input type="number" step="5" min="1" id="weight" formControlName="weight" [ngClass]="displayFieldCss('weight')">
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">PASSWORD</h6>
+                        <input id="password" formControlName="password" type="password" [ngClass]="displayFieldCss('password')">
+                    </div>
+                    <div class=" form-group ">
+                        <h6 class="text-left credentials">CONFIRM PASSWORD</h6>
+                        <input id="passwordConfirm" formControlName="passwordConfirm" type="password" [ngClass]="displayFieldCss('passwordConfirm')">
+                    </div>
+                    <div class="text-right" style="margin-bottom: 30px">
+                        <button class="button-submit" (click)="onSubmit()">Sign up</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-8 carousel right-side" style="position: relative;">
+              <div style="position: fixed; width: 66.66666667%">
+                <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+                    <slide *ngFor="let slidez of slides; let index=index"
+                           [active]="slidez.active">
+                        <div style="background-color: rgb( 23, 42, 71 ); z-index: -111;">
+                            <img src="/assets/images/BG.jpg" class="slide-img">
+                        </div>
+                        <div class="carousel-caption" style="bottom: 200px;">
+                            <img class="icon-with" src="assets/images/icons/some.png">
+                            <h3 class="slide-title">{{slidez.title}}</h3>
+                            <p  class="slide-text">{{slidez.text}}</p>
+                        </div>
+                    </slide>
+                </carousel>
+              </div>
+                <!--<img src="assets/images/icons/some.png">-->
+            </div>
+        </div>
+    </div>
+</section>

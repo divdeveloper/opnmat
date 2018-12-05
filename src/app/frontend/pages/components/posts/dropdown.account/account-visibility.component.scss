@@ -1,0 +1,75 @@
+@mixin dropdown-icon($url){
+  width: 24px;
+  height: 18px;
+  background: url($url) center no-repeat;
+  transform: translateY(3px);
+  display: inline-block;
+}
+.dropdown-visibility{
+  .btn-visibility{
+    width: calc( 100% - 50px );
+    height: 42px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    background: url("/assets/images/icons/carret-g.png") calc( 100% - 10px ) center no-repeat, transparent;
+    border-radius: 3px;
+    font-family: "Proxima Nova Condensed";
+    color: #333333;
+    font-size: 16px;
+    padding: 0 20px;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
+    float: left;
+  }
+  .visibiliti-icon{
+    width: 50px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    float: right;
+    i.public{
+      @include dropdown-icon('/assets/images/icons/padlock-b-open.png');
+    }
+    i.private{
+      @include dropdown-icon('/assets/images/icons/padlock-b.png');
+    }
+  }
+  .dropdown-menu-visibility{
+    width: calc( 100% - 50px );
+    display: none;
+    list-style: none;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 3px;
+    padding: 0;
+    position: absolute;
+    top: 42px;
+    z-index: 999;
+    background: white;
+    .item{
+      padding: 8px 20px;
+      cursor: pointer;
+      font-family: "Proxima Nova Condensed";
+      color: #333333;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      &:last-child{
+        border-color: transparent;
+      }
+    }
+
+  }
+  &.open{
+    .dropdown-menu-visibility{
+      display: block;
+    }
+  }
+  // i.public{
+  //   @include dropdown-icon('/assets/images/icons/padlock-g-open.png');
+  // }
+  // i.only-me{
+  //   @include dropdown-icon('/assets/images/icons/padlock-g.png');
+  // }
+  // i.followers{
+  //   @include dropdown-icon('/assets/images/icons/me-followers-g.png');
+  // }
+}

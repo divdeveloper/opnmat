@@ -1,0 +1,18 @@
+<div *ngIf="!!dialog" class="lt-dialog" [ngClass]="{'active': isActive}">
+    <div class="dialog-img" [ngClass] = "{'active': userOnline}">
+        <div class="wrap-img">
+            <img *ngIf="!!academy" [src]="academy?.photo ? baseUrl + academy?.photo : noImg" alt="">
+            <img *ngIf="!!user" [src]="user?.avatar ? baseUrl + user?.avatar : noImg" alt="">
+        </div>
+    </div>
+    <div class="dialog-info">
+        <div class="user-name">
+            <span *ngIf="!!academy">{{ academy?.name || 'No name' }}</span>
+            <span *ngIf="!!user">{{user?.first_name ? user?.first_name + ' ' + user?.last_name  : 'No name' }}</span>
+            <div class="date">{{dialog.updated_at | date:'shortTime'}}</div>
+        </div>
+        <div class="user-msg">
+            {{ dialog?.last_message?.content ? dialog.last_message.content : 'no message yet' }}
+        </div>
+    </div>
+</div>

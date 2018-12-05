@@ -1,0 +1,229 @@
+<section class="lt-section-search">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="search-header">
+                    <div class="search-result">Found: {{total}} academies</div>
+                    <div class="search-view">
+                        <span>View:</span>
+                        <i (click)="toggleView('list')" class="icon-view-grid"></i>
+                        <i (click)="toggleView('map')" class="icon-view-map"></i>
+                    </div>
+                </div>
+                <div class="lt-card">
+                    <div class="search-form">
+                        <div class="wrap-inputs">
+                            <div class="wrap-input icon-right name-search-wrapper">
+                                <input #search type="text" class="input-style"
+                                       placeholder="Search" (keyup.enter)="searchItems(search.value)">
+                                <i class="icon icon-search"></i>
+                            </div>
+                            <div class="wrap-input lt-drop-down icon-right" (clickOutside)="activeSlider = false">
+                                <span (click)="activeSlider = !activeSlider">
+                                    <div class="input-style lt-drop-label">Radius</div>
+                                    <i class="icon toggle">▼</i>
+                                </span>
+                                <div class="lt-drop-content" *ngIf="activeSlider" [ngClass]="{'active': activeSlider}">
+                                    <div>{{newRadius}}</div>
+                                    <div ngD3Slider id="slider2"
+                                         [length]="sliderOptions.length"
+                                         [maxValue]="sliderOptions.maxValue"
+                                         [minValue]="sliderOptions.minValue"
+                                         [initialValue]="sliderOptions.initialValue"
+                                         [color]="sliderOptions.color"
+                                         [emptyColor]="sliderOptions.emptyColor"
+                                         [thumbColor]="sliderOptions.thumbColor"
+                                         [thumbSize]="sliderOptions.thumbSize"
+                                         [lineWidth]="sliderOptions.lineWidth"
+                                         (selectedValue)="onChangeRadius($event)"></div>
+                                    <div class="radius-btns">
+                                        <span (click)="toggleRadius()">Clear</span>
+                                        <span class="btn-apply" (click)="toggleRadius('apply')">Apply</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="wrap-input lt-drop-down lt-radius">
+                                <div class="input-style lt-drop-label" click-outside (clickOutside)="toggleDropDown($event)">
+                                    <div>Radius</div>
+                                    <div class="lt-drop-content" [ngClass] = "{'active': activeSlider}">
+                                        <div>{{newRadius}}</div>
+                                        <div ngD3Slider id="slider2"
+                                             [length]="sliderOptions.length"
+                                             [maxValue]="sliderOptions.maxValue"
+                                             [minValue]="sliderOptions.minValue"
+                                             [initialValue]="sliderOptions.initialValue"
+                                             [color]="sliderOptions.color"
+                                             [emptyColor]="sliderOptions.emptyColor"
+                                             [thumbColor]="sliderOptions.thumbColor"
+                                             [thumbSize]="sliderOptions.thumbSize"
+                                             [lineWidth] = "sliderOptions.lineWidth"
+                                             (selectedValue)="onChangeRadius($event)"></div>
+                                        <div class="radius-btns">
+                                            <span (click)="toggleRadius()">Clear</span>
+                                            <span class="btn-apply" (click)="toggleRadius('apply')">Apply</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="toggle">▼</div>
+                                <i class="icon icon-geo" (click)="toggleInputRadius()"></i>
+                                <div class="lt-enter-radius" [ngClass] = "{'active': isInputRadius}">
+                                    <input #customRadius type="text" class="input-style" placeholder="Enter radius"
+                                           (keyup.enter)="searchByCustomRadius(customRadius.value)">
+                                </div>
+                            </div>-->
+                        </div>
+                        <span *ngIf="view == 'list'" class="sort-table">
+                          <span class="sort" (click)='sortItems()'>
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="346.000000pt"
+                                 height="346.000000pt"
+                                 viewBox="0 0 346.000000 346.000000">
+                                <g transform="translate(0.000000,346.000000) scale(0.100000,-0.100000)"
+                                   fill="#000000" stroke="none">
+                                    <g>
+                                        <path d="M1570 2913 c-101 -214 -240 -560 -360 -898 l-68 -190 126 -3 c69 -1
+                                        131 -1 137 1 5 3 28 59 50 126 l39 121 227 0 227 0 30 -82 c16 -46 35 -102 42
+                                        -125 l13 -43 139 0 c76 0 138 3 138 6 0 11 -114 327 -178 495 -70 181 -172
+                                        424 -235 562 l-46 97 -124 0 -125 0 -32 -67z m260 -481 c28 -73 50 -137 50
+                                        -142 0 -6 -61 -10 -160 -10 -88 0 -160 2 -160 5 0 5 118 318 150 400 l12 30
+                                        29 -75 c16 -41 52 -135 79 -208z"/>
+                                        <path d="M1300 1530 l0 -110 256 0 c251 0 256 0 243 -19 -8 -11 -62 -81 -120
+                                        -158 -127 -166 -254 -349 -343 -497 l-66 -109 0 -78 0 -79 455 0 455 0 0 110
+                                        0 110 -290 0 c-159 0 -290 4 -290 8 0 33 326 480 478 654 l93 108 -3 82 -3 83
+                                        -432 3 -433 2 0 -110z"/>
+                                    </g>
+                                    <path *ngIf='requestOptions.sort.type == 1 || requestOptions.sort.type == 2' d="M268 2192 c-199 -199 -268 -273 -268 -291 0 -29 162 -199 198 -208
+                                20 -5 37 8 106 76 45 44 85 81 89 81 4 0 7 -238 7 -528 0 -397 3 -531 12 -540
+                                17 -17 289 -17 306 0 9 9 12 143 12 540 0 290 3 528 8 528 4 0 43 -36 87 -80
+                                44 -44 88 -80 99 -80 10 0 60 41 112 92 70 69 94 98 94 117 0 21 -56 82 -268
+                                294 -230 229 -271 267 -297 267 -25 0 -67 -38 -297 -268z"/>
+                                    <path *ngIf='requestOptions.sort.type == 1 || requestOptions.sort.type == 3' d="M2742 2448 c-9 -9 -12 -143 -12 -540 0 -290 -3 -528 -8 -528 -4 0
+                                -43 36 -87 80 -44 44 -88 80 -99 80 -10 0 -60 -41 -112 -92 -70 -69 -94 -98
+                                -94 -117 0 -21 56 -82 268 -294 230 -229 271 -267 297 -267 25 0 67 38 297
+                                268 199 199 268 273 268 291 0 29 -162 199 -198 208 -20 5 -37 -8 -106 -76
+                                -45 -44 -85 -81 -89 -81 -4 0 -7 238 -7 528 0 397 -3 531 -12 540 -8 8 -57 12
+                                -153 12 -96 0 -145 -4 -153 -12z"/>
+                                </g>
+                            </svg>
+                          </span>
+                        </span>
+                    </div>
+                    <div class="lt-main-wrapper" [ngClass]="{'active': view == 'list'}">
+                        <div class="lt-search-list">
+                            <div class="lt-loader" *ngIf="isLoading">
+                                <div class="loader"></div>
+                            </div>
+                            <div class="lt-items">
+                                <div class="list-items" *ngIf="!isLoading">
+                                    <div class="item" *ngFor="let item of academies" (click)="selectItem(item)">
+                                        <div class="item-img">
+                                            <img [src]="item.photo ? baseUrl + item.photo : noImg" alt="">
+                                        </div>
+                                        <div class="item-info">
+                                            <div class="info">
+                                                <div class="item-name">{{item.name}}</div>
+                                                <div class="info-row item-address">{{item?.location || 'no address'}}
+                                                </div>
+                                                <div class="info-row item-followers">
+                                                    <span>Followers:</span>
+                                                    <span
+                                                        class="amount color-active">{{item?.followers?.length || 0}}</span>
+                                                </div>
+                                                <div class="info-row item-students">
+                                                    <span>Students:</span>
+                                                    <span
+                                                        class="amount color-active">{{item?.students?.length || 0}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="lt-btn" (click)="signIn(item.id)">Sign up</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="loader-sm" *ngIf="isLoadingNew">
+                                    <div class="loader"></div>
+                                </div>
+                                <div *ngIf="!allItems && !isLoadingNew" class="lt-load-more">
+                                    <span class="lt-btn lt-sm" (click)="loadMoreItems()">Load more</span>
+                                </div>
+                            </div>
+                            <div class="no-found" *ngIf="!academies.length && !isLoadingNew">
+                                Nothing was found
+                            </div>
+                        </div>
+                        <div class="lt-search-map">
+                            <div class="lt-loader" *ngIf="isLoading && view != 'list'">
+                                <div class="loader"></div>
+                            </div>
+                            <div class="lt-geoloc">
+                                <div class="wrap-input icon-right">
+                                    <input class="input-style"
+                                           placeholder="Search for location"
+                                           autocorrect="off"
+                                           autocapitalize="off"
+                                           spellcheck="off" type="text"
+                                           #searchLocation
+                                           [formControl]="searchControl">
+                                    <i class="icon icon-geo" (click)="setCurrentPosition()"></i>
+                                </div>
+                            </div>
+                            <agm-map #map id="map"
+                                     [latitude]="lat"
+                                     [longitude]="lng"
+                                     [styles]="mapStyles"
+                                     [minZoom]="3"
+                                     [zoom]="zoom">
+                                <agm-marker-cluster *ngIf="academies?.length > 0" [styles]="[{
+                                                        url: 'assets/images/icons/icon-cluster.png',
+                                                        width: '42',
+                                                        height: '42',
+                                                        textColor: '#fff'
+                                                    }]">
+                                    <agm-marker *ngFor="let item of academies"
+                                                [latitude]="item.latitude"
+                                                [longitude]="item.longitude"
+                                                [iconUrl]="item.photo ? {   url: baseUrl + item.photo, scaledSize: {width: 42,height: 38}} : {   url: noImg, scaledSize: {width: 42,height: 42}}">
+                                        <agm-snazzy-info-window [closeWhenOthersOpen]="true"
+                                                                [maxWidth]="250"
+                                                                [maxHeight]="400">
+                                            <ng-template>
+                                                <div class="info-academy">
+                                                    <div class="info-header" [ngClass]="{'no-image': !item.photo}">
+                                                        <img [src]="item.photo ? baseUrl + item.photo : noImg" alt="">
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="item-name">{{item.name}}</div>
+                                                        <div class="info-row item-address">{{item?.location || 'no address'}}
+                                                        </div>
+                                                        <div class="info-row item-followers">
+                                                            <span>Followers:</span>
+                                                            <span class="amount color-active">{{item?.followers?.length || 0}}</span>
+                                                        </div>
+                                                        <div class="info-row item-students">
+                                                            <span>Students:</span>
+                                                            <span class="amount color-active">{{item?.students?.length || 0}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info-footer">
+                                                        <a href="" class="lt-btn" (click)="join(item.id)">Join</a>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </agm-snazzy-info-window>
+                                    </agm-marker>
+                                    <agm-circle [latitude]="lat"
+                                                [longitude]="lng"
+                                                [circleDraggable]="false"
+                                                [editable]="false"
+                                                [radius]="radiusValue"
+                                                [fillColor]="'#4ca1ff'"
+                                                [fillOpacity]="0.2">
+                                    </agm-circle>
+                                </agm-marker-cluster>
+                            </agm-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

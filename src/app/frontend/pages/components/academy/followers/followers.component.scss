@@ -1,0 +1,147 @@
+.content-card-100{
+  width: 100%;
+  padding-bottom: 30px;
+  .followers-panel{
+    .total-followers{
+      font-size: 15px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      color: #202f3b;
+      line-height: 40px;
+    }
+    .filter-name{
+      width: 240px;
+      height: 40px;
+      border-radius: 2px;
+      border: 1px solid #d3dce9;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 16px;
+      color: #202f3b;
+      float: right;
+      padding: 0 30px 0 20px;
+      background: url("/assets/images/icons/search-f.png") right center no-repeat;
+      outline: none;
+      &:hover, &:focus{
+        border: 1px solid #98a6bc;
+      }
+    }
+  }
+  .profile-followers{
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+    margin-top: 15px;
+    .profile-follower-item{
+      margin-top: 10px;
+      padding: 0 10px;
+      position: relative;
+      .follower-item-data{
+        padding: 8px 10px;
+        .follower-avatar{
+          width: 65px;
+          height: 65px;
+          background-size: cover !important;
+          border-radius: 50%;
+        }
+        .follower-info{
+          padding: 0 20px;
+          width: calc( 100% - 66px );
+          .follower-fio{
+            font-family: "MuseoSansCyrl";
+            font-weight: 500;
+            font-size: 15px;
+            color: #172a47;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .follower-academy{
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 13px;
+            color: #4ca1ff;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .follower-address{
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 11px;
+            color: #90949c;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .follower-followers{
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 11px;
+            color: #90949c;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            span{
+              color: #4ca1ff;
+            }
+          }
+        }
+        .follower-btn{
+          margin-top: 5px;
+          padding: 0;
+          button{
+            width: 100px;
+            height: 30px;
+            background: #4ca1ff;
+            border-radius: 3px;
+            border: 0;
+            font-size: 13px;
+            color: rgba($color: white, $alpha: 0.9);
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+            &.unfollow{
+              background: #f1f2f5;
+              color: #cdcfd6;
+            }
+            &:hover{
+              box-shadow: none;
+            }
+          }
+        }
+      }
+    }
+    .pagination{
+      padding: 28px;
+      .pages{
+        .page{
+          width: 30px;
+          height: 30px;
+          border-radius: 2px;
+          border: 1px solid #d3dce9;
+          float: left;
+          margin-left: 6px;
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          font-size: 14px;
+          color: #172a47;
+          text-align: center;
+          line-height: 30px;
+          cursor: pointer;
+          &.active{
+            cursor: default;
+            pointer-events: none;
+            border: 1px solid #4ca1ff;
+            background: #4ca1ff;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+.crop-container {
+  width: 260px;
+  position: absolute;
+  top:-20px;
+  right: - 65px;
+  background: #f0f2f8;
+  box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+  z-index: 10;
+  padding: 5px 5px 0 5px;
+  label {
+    display: inline-block;
+    width: 80px;
+    height: 40px;
+    background: url(/assets/images/icons/posts/photos.png) center no-repeat, #ededed;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: inset 0 0 13px rgba(0, 0, 0, 0.27);
+    }
+  }
+  input[type=file] {
+    display: none;
+  }
+  .save-cover {
+    width: 100%;
+    height: 24px;
+    border-radius: 3px;
+    border: 0;
+    font-size: 17px;
+    color: white;
+    background: #4ca1ff;
+    box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+    font-family: 'Proxima Nova Condensed';
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 5px;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+  .close-cover {
+    width: 100%;
+    height: 24px;
+    border-radius: 3px;
+    border: 0;
+    font-size: 17px;
+    background: #f1f2f5;
+    color: #cdcfd6;
+    box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+    font-family: 'Proxima Nova Condensed';
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 5px;
+    &:hover {
+      box-shadow: none;
+    }
+  }
+}
+
+.edit-logo-photo {
+  height: 35px;
+  i{
+    font-size: 35px;
+    color: #4ca1ff;
+    cursor: pointer;
+    line-height: 35px;
+  }
+  input#edit-logo-photo {
+    display: none;
+  }
+}

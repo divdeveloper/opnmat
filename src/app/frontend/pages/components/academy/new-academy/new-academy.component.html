@@ -1,0 +1,38 @@
+<div class="overlay-modal-bg open" #newCtegoryModalRef>
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto close-modal ml-auto" (click)="closeModal()"></div>
+    </div>
+    <div class="modal-head">
+      Create Academy
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form" *ngIf="!created">
+        <div class="form-group">
+          <input type="text" id="name" formControlName="name" placeholder="Business name" [ngClass]="displayFieldCss('name')">
+        </div>
+        <div class="form-group clearfix">
+          <ng4geo-autocomplete [userSettings]="gaAutocompleteStings" (componentCallback)="autoCompleteCallback1($event)" required></ng4geo-autocomplete>
+        </div>
+        <div class="form-group">
+          <input type="text" id="phone" formControlName="phone" placeholder="267-535-4705" dropSpecialCharacters="false" mask="000-000-0000" [ngClass]="displayFieldCss('phone')">
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" formControlName="email" placeholder="Email Adress" [ngClass]="displayFieldCss('email')">
+        </div>
+        <div class="form-group">
+          <button class="button-submit" (click)="onSubmit()">Create</button>
+        </div>
+      </form>
+      <div class="addded-alert" *ngIf="created">
+        <div style="color: rgb( 76, 161, 255 ); font-size: 24px"><img src="assets/images/icons/success.png" style="width: 50px;margin-top: -20px;margin-right: 10px;">Success!</div>
+        <div class="alert-text">
+          You have successfully<br/> created an academy!
+        </div>
+        <div class="form-group" style="margin-top:50px">
+          <button class="button-submit" (click)="onDone()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

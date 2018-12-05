@@ -1,0 +1,225 @@
+@import '../../../../../../variables';
+
+@mixin menu-icon($url){
+  display: block;
+  width: 32px;
+  height: 45px;
+  background: url($url) center no-repeat;
+  float: left;
+  margin-right: 10px;
+}
+aside.left{
+  width: 240px;
+  min-height: 990px;
+  height: 100%;
+  float: left;
+  // background: url('/assets/images/aside-bg.jpg') no-repeat;
+  background-color: #141e2a;
+  background-size: cover;
+  // box-shadow: 0 0 5px #004d6f;
+  padding: 0 15px;
+  .logo{
+    padding: 30px 0;
+  }
+  .divider{
+    display: block;
+    content: "";
+    width: 240px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.27);
+  }
+  .card-box{
+    margin-top: 0;
+    padding: 15px 10px;
+    font-family: $font-family-cond;
+    position: relative;
+    .avatar{
+      padding-right: 5px;
+    }
+    .card_fio{
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      font-size: 15px;
+      color: #ffffff;
+      margin-top: 10px;
+    }
+    .card_address{
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 12px;
+      color: #4ca1ff;
+    }
+    .card_academy{
+      font-size: 13px;
+      color: $white;
+      font-family: $font-family;
+    }
+    .card-follower, .card-following{
+      margin-top: 25px;
+      text-align: center;
+      height: 66px;
+      border-top: 1px solid rgba($color: #ffffff, $alpha: 0.12);
+      border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.12);
+      padding-top: 10px;
+      a{
+        text-decoration: none;
+        &:hover .title{
+          color: #4ca1ff;
+        }
+      }
+      .count{
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 17px;
+        color: #4ca1ff;
+      }
+      .title{
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 10px;
+        color: white;
+        text-transform: uppercase;
+        a{
+          font-size: 10px;
+          color: white;
+          text-transform: uppercase;
+          text-decoration: none;
+          &:hover{
+            color: #4ca1ff;
+          }
+        }
+      }
+    }
+    .card-follower{
+      border-right: 1px solid rgba($color: #ffffff, $alpha: 0.12);
+    }
+  }
+  .menu-box{
+    margin-top: 5px;
+    .menu{
+      list-style: none;
+      padding: 0;
+      li.menu-item{
+        display: block;
+        height: 45px;
+        line-height: 45px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 14px;
+        color: white;
+        position: relative;
+        a{
+          display: block;
+          color: white;
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          font-size: 14px;
+          text-decoration: none;
+          outline: none;
+          &:hover{
+            color: #4ca1ff;
+          }
+          &.active-link{
+            color: #4ca1ff;
+          }
+        }
+
+        cursor: pointer;
+        i.my-profile{
+          @include menu-icon('/assets/images/icons/my-profile.png');
+        }
+        i.my-feed{
+          @include menu-icon('/assets/images/icons/my-feed.png');
+        }
+        i.academies{
+          @include menu-icon('/assets/images/icons/academies.png');
+        }
+        i.messages{
+          @include menu-icon('/assets/images/icons/messages.png');
+        }
+        i.notifications{
+          @include menu-icon('/assets/images/icons/notifications.png');
+        }
+        i.roadmap{
+          @include menu-icon('/assets/images/icons/roadmap.png');
+        }
+        i.events{
+          @include menu-icon('/assets/images/icons/events.png');
+        }
+        i.checkin{
+          @include menu-icon('/assets/images/icons/checkin.png');
+        }
+        i.subscriptions{
+          @include menu-icon('/assets/images/icons/subscriptions.png');
+        }
+        i.logout{
+          @include menu-icon('/assets/images/icons/logout.png');
+          & + span{
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 14px;
+            color: #4ca1ff;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1340px){
+  aside.left{
+    width: 240px;
+    .logo{
+      img{
+        width: 80px;
+      }
+    }
+    .divider{
+      width: 200px;
+    }
+    .padlock{
+      top: -10px;
+    }
+    .menu{
+
+    }
+    .card-box{
+      margin-top: 0;
+
+    }
+  }
+}
+@media (max-height: 990px) and (min-width: 1239px){
+  aside.left{
+    min-height: 300px;
+    height: 100vh;
+    overflow-y: auto;
+  }
+}
+@media (min-width: 1240px){
+  aside.left{
+    position: fixed;
+    top:0;
+    left: 0;
+  }
+
+  .sidebar-scroll {
+    overflow-y: auto;
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.23);
+      background-color:  rgba(0,0,0, 0.2);
+      border-radius: 3px;
+    }
+    &::-webkit-scrollbar {
+      width: 8px;
+      background-color: rgba(255,255,255,0.3);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 3px;
+    }
+  }
+}
+
+.user-logo-name-wrapper{
+    cursor: pointer;
+}

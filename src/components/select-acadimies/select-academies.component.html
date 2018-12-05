@@ -1,0 +1,13 @@
+<div class="academies-wrapp">
+    <div class="academy-group">
+        <input type="text" #academyInput [ngClass]="{'has-error': valid}" [value]="curent" (blur)="onBlur()" (focus)="onLoadAcademies($event)" (keyup)="searchAcademy($event)">
+        <!--<i *ngIf="exclamation" class="ion-alert" [ngClass]="{'has-error': valid}" tooltip="This field is required" [tooltipDisabled]="!valid" [tooltipAnimation]="true" tooltipPlacement="left"></i>-->
+    </div>
+    <div class="academies-results" #results>
+        <button class="apply-btn" (mousedown)="onSetMyAcademy()" [disabled]="disabledButton">Select</button>
+        <ul class="academies-results__options">
+            <li class="academies-results__option text-left" *ngFor="let academy of _academies" data-academy-id="academy.id" (mousedown)="selectAcademy($event, academy)">{{academy.text}}</li>
+            <li class="academies-results__option text-left" *ngIf="_academies.length == 0">No results found</li>
+        </ul>
+    </div>
+</div>

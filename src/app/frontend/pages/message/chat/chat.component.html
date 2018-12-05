@@ -1,0 +1,30 @@
+<!--<pre>{{user | json}}</pre>-->
+<div class="lt-chat">
+    <div class="lt-chat-name">
+        <div class="user-name" *ngIf="user">{{user?.first_name + ' ' + user?.last_name}}</div>
+        <div class="user-location"> {{user?.short_address}} </div>
+    </div>
+    <div class="list-messages">
+        <div class="lt-scroll" #scrollMe (scroll)="checkScrollTop($event); disableInitScrollBottom($event);">
+            <div class="lt-message" *ngFor = "let message of messages"
+                 [ngClass]= "{'lt-sender': message?.sender_id == userMy.id}">
+                <div class="msg-img" *ngIf="message?.sender_id != userMy.id">
+                    <img [src]="user?.user?.avatar ? baseUrl + user?.user?.avatar : noImg" alt="">
+                </div>
+                <div class="msg-info">
+                    <div class="msg-date">{{message.created_at | date:'short'}}</div>
+                    <div class="msg-text">{{message.content}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="lt-loader" *ngIf="isLoading">
+            <div class="loader"></div>
+        </div>
+    </div>
+    <form novalidate class="lt-message-form">
+        <div class="wrap-input icon-right">
+            <input #elMsg type="text" placeholder="Start typing..." class="input-style">
+        </div>
+        <button (click)="sendMessage(elMsg.value)" (keyup.enter)="sendMessage(elMsg.value)" class="lt-btn">Send</button>
+    </form>
+</div>

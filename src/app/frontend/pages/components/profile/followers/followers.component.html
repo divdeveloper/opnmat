@@ -1,0 +1,47 @@
+<div class="content-card-100">
+  <div class="row justify-content-between no-gutters followers-panel">
+    <div class="col-md-auto total-followers">Users ({{(total)?total:0}})</div>
+    <div class="col-md-auto">
+      <input class="filter-name" type="text" placeholder="Search" #filterName (keyup)="onChangeFilter(filterName.value)">
+    </div>
+  </div>
+  <div class="row profile-followers no-gutters">
+    <div class="col-4 profile-follower-item" *ngFor="let follower of followers">
+      <div class="row no-gutters follower-item-data clearfix align-items-center">
+        <div class="col-auto follower-avatar" (click)="toProfile(follower.id)" [ngStyle]="{background: ((follower.avatar) ? 'url(' + (serverUrl + follower.belt.sourse_round) + ') center no-repeat, url('+ (serverUrl + follower.avatar) +') center no-repeat':'url(' + (serverUrl + follower.belt.sourse_round) + ') center no-repeat, url(/assets/images/user-dafault.png) center no-repeat')}"></div>
+        <div class="col-auto follower-info">
+          <div class="follower-fio" (click)="toProfile(follower.id)">{{follower.first_name}} {{follower.last_name}}</div>
+          <div class="follower-academy" (click)="toAcademy(follower.academy.id)">{{(follower.academy)?follower.academy.name:'No academy'}}</div>
+          <div class="follower-address">{{
+            (follower.short_address)
+              ? follower.short_address
+              : (follower.address)
+                ? follower.address
+                : 'No Address'
+          }}</div>
+          <div class="follower-followers">Followers: <span>{{(follower.followers)?follower.followers.length:0}}</span></div>
+          <div class="col-12 follower-btn" *ngIf="me == user">
+            <button *ngIf="follower.is_follower.status == 0" (click)="onFollow(follower, 1)">Follow</button>
+            <button class="unfollow" *ngIf="follower.is_follower.status == 1" (click)="onFollowing(follower, 0)">Unfollow</button>
+          </div>
+          <div class="col-12 follower-btn" *ngIf="me != user && me != follower.id">
+            <button *ngIf="!follower.is_my_following" (click)="onFollowing(follower, true)">Follow</button>
+            <button class="unfollow" *ngIf="follower.is_my_following" (click)="onUnfollowing(follower, false)">Unfollow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12" *ngIf="followers.length == 0">
+      <div class="no-data">
+        Not found followers
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row no-gutters justify-content-end pagination" *ngIf="followers.length > 0">
+        <div class="col-auto pages" *ngIf="pagintion.show">
+          <div class="page" *ngFor="let p of pagintion.pages;" [class.active]="page == p" (click)="onLoadPage(p);">{{p}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

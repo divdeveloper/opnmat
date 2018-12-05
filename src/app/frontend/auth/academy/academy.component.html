@@ -1,0 +1,99 @@
+<section class="register">
+    <!--<opn-header></opn-header>-->
+    <div style="background-color: white;" class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side" *ngIf="!stape2">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+                <h4 class="welcome">Create academy</h4>
+                <form [formGroup]="form1" class="form-margin">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">NAME</h6>
+                        <input class="input-credentials" type="text" id="name" formControlName="name" >
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">LOCATION</h6>
+                        <input class="input-credentials" type="text" id="location" formControlName="location" >
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">PHONE NUMBER</h6>
+                        <input class="input-credentials" id="phone" formControlName="phone" type="tel"  required>
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">EMAIL</h6>
+                        <input class="input-credentials" id="email" formControlName="email" type="email"  required>
+                    </div>
+                    <div class="text-right" style="margin-bottom: 60px">
+                        <button class="button-submit" (click)="onSubmit1()">Next</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side" *ngIf="stape2">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+                <h4 class="welcome">Register</h4>
+                <form [formGroup]="form2" class="form-margin">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">FIRST NAME</h6>
+                        <input class="input-credentials" type="text" id="firstName" formControlName="firstName">
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">LAST NAME</h6>
+                        <input class="input-credentials" type="text" id="lastName" formControlName="lastName">
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">EMAIL</h6>
+                        <input class="input-credentials" id="email" formControlName="email" type="email" required>
+                    </div>
+                    <div class="form-group select-academy">
+                        <div class="form-group">
+                            <select2 [data]="academies" [cssImport]="true" [width]="100" [options]="optionsAcademy" (valueChanged)="changeAcademy($event)"></select2>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <ng-datepicker [options]="dateOptions" [(ngModel)]="birthDay" [ngModelOptions]="{standalone: true}"></ng-datepicker>
+                    </div>
+                    <!-- <div class="form-group select-belt">
+                        <select2 [data]="belts" [cssImport]="true" [width]="100" [options]="optionsBelt" (valueChanged)="changeBelt($event)"></select2>
+                    </div> -->
+                    <opn-belts [colors]="colorsBelt" [belts]="arrBelts" (change)="onChangeColor($event)" (changeBelt)="changeBeltColor($event)"></opn-belts>
+                    <!-- <div class="form-group">
+                        <input id="weight" formControlName="weight" type="text" placeholder="Weight" [ngClass]="displayFieldCss('weight')">
+                        <i class="ion-alert" [ngClass]="displayFieldCss('weight')" tooltip="This field is required" [tooltipDisabled]="!isFieldValid('weight')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                    </div> -->
+                    <div class="form-group select-academy">
+                        <div class="form-group">
+                            <select2 [data]="weights" [cssImport]="true" [width]="100" [options]="optionsWeight" (valueChanged)="changeWeight($event)"></select2>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h6 class="text-left credentials">PASSWORD</h6>
+                        <input id="password" formControlName="password" type="password">
+                    </div>
+                    <div class=" form-group ">
+                        <h6 class="text-left credentials">CONFIRM PASSWORD</h6>
+                        <input id="passwordConfirm" formControlName="passwordConfirm" type="password">
+                    </div>
+                    <div class="text-right" style="margin-bottom: 30px;">
+                        <button class="button-submit" (click)="onSubmit2()">Sign up</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-8 carousel right-side" style="position: relative">
+                <carousel style="position: fixed" [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+                    <slide *ngFor="let slidez of slides; let index=index"
+                           [active]="slidez.active">
+                        <div style="background-color: rgb( 23, 42, 71 ); z-index: -111;">
+                            <img src="/assets/images/BG.jpg" class="slide-img">
+                        </div>
+                        <div class="carousel-caption" style="bottom: 200px;">
+                            <img class="icon-with" src="assets/images/icons/some.png">
+                            <h3 class="slide-title">{{slidez.title}}</h3>
+                            <p  class="slide-text">{{slidez.text}}</p>
+                        </div>
+                    </slide>
+                </carousel>
+                <!--<img src="assets/images/icons/some.png">-->
+            </div>
+        </div>
+    </div>
+</section>

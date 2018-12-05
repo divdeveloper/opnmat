@@ -1,0 +1,325 @@
+<aside class="right sidebar-scroll" [class.is-manager]="isManager"
+       [ngClass]="{'no-scroll': itemsSearchActive, 'o-settings': profile }">
+    <div class="search" [ngClass]="{'lt-active': itemsSearchActive }">
+        <div class="button search mx-auto" (click)="openItemsSearch();"></div>
+        <div class="lt-search" [hidden]="!itemsSearchActive">
+            <div class="search-row">
+                <div class="wrap-input">
+                    <input class="input-style" #search type="text" placeholder="Search"
+                           (keyup)="onSearch(search.value)">
+                </div>
+            </div>
+            <div class="lt-loader" *ngIf="isLoading">
+                <div class="loader"></div>
+            </div>
+            <div class="wrap-results" *ngIf="!isLoading">
+                <div *ngIf="usersSearch.length">
+                    <div class="search-row row-bg">
+                        <div class="title">Users</div>
+                    </div>
+                    <div class="list-items">
+                        <div class="search-item" *ngFor='let item of usersSearch' (click)="toItem('user', item.id)">
+                            <div class="search-img">
+                                <img [src]="item.avatar ? baseUrl + item.avatar : defaultUserIcon" alt="">
+                            </div>
+                            <div class="search-name">
+                                <span>{{item.first_name}} {{ item.last_name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-row">
+                        <span class="link-view" (click)="toItem('user')">View all</span>
+                    </div>
+                </div>
+                <div *ngIf="academiesSearch.length">
+                    <div class="search-row row-bg">
+                        <div class="title">Academies</div>
+                    </div>
+                    <div class="list-items">
+                        <div class="search-item" *ngFor='let item of academiesSearch'
+                             (click)="toItem('academy', item.id)">
+                            <div class="search-img">
+                                <img [src]="item.photo ? baseUrl + item.photo : defaultAcademyIcon" alt="">
+                            </div>
+                            <div class="search-name">
+                                <span>{{item.name}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-row">
+                        <span class="link-view" (click)="toItem('academy')">View all</span>
+                    </div>
+                </div>
+                <div *ngIf="eventsSearch.length">
+                    <div class="search-row row-bg">
+                        <div class="title">Events</div>
+                    </div>
+                    <div class="list-items">
+                        <div class="search-item" *ngFor="let item of eventsSearch"
+                             (click)="toItem('activity', item.id)">
+                            <div class="search-img">
+                                <img [src]="getActivityAvatar(item.type)" alt="">
+                            </div>
+                            <div class="search-name">
+                                <div class="wrap-date">
+                                    <div class="start">{{item.name}}</div>
+                                    <div class="create">{{ item.start_date | date: 'longDate'}}</div>
+                                </div>
+                                <div class="price" *ngIf="item.price_all">${{item.price_all}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-row">
+                        <span class="link-view" (click)="toItem('activity')">View all</span>
+                    </div>
+                </div>
+            </div>
+            <div class="search-row" *ngIf="!emptySearch && !isLoading">
+                <div class="title">Please, enter another value</div>
+            </div>
+        </div>
+    </div>
+    <div class="button setting mx-auto" (click)="openProfile();"><img class="setting-icon"
+                                                                      src="assets/images/icons/settings.png"></div>
+    <div class="button filter mx-auto"><img class="setting-icon" src="assets/images/icons/filters.png"></div>
+    <div class="button message-info mx-auto">
+        <div class="wrap-img" (click)="toggleChat()">
+            <span class="notify-new" [hidden]="!newMessage"></span>
+            <img class="setting-icon" src="assets/images/icons/chat.png">
+        </div>
+
+        <div class="lt-aside-chat" *ngIf="openChat">
+            <div class="chat-content">
+                <div class="lt-dialogs">
+                    <div class="lt-dialog-search" *ngIf="!isMessages">
+                        <div class="wrap-input icon-right">
+                            <input type="text" placeholder="Search" class="input-style"
+                                   #searchChat (keyup)="onSearchChat(searchChat.value)">
+                            <div *ngIf="!listSearch.length" class="icon icon-search"></div>
+                            <div *ngIf="listSearch.length" class="lt-icon-close icon icon-close"
+                                 (click)="closeSearch()"></div>
+                            <div *ngIf="listSearch.length" class="lt-list-search">
+                                <div class="user-item" *ngFor="let item of listSearch" (click)="toMessages(item.id)">
+                                    <!--<pre>{{item | json}}</pre>-->
+                                    <div class="info">
+                                        <div class="avatar">
+                                            <img [src]="item.avatar ? baseUrl + item.avatar : defaultUserIcon" alt="">
+                                        </div>
+                                        <span>{{item.first_name}} {{item.last_name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="lt-icon-close" (click)="toggleChat($event)"></i>
+                    </div>
+                    <div class="wrap-list-dialogs">
+                        <div class="list-dialogs" *ngIf="!isMessages">
+                            <right-app-dialog [dialog]="dialog"
+                                              *ngFor="let dialog of dialogs"
+                                              (click)="openMessage(dialog)">
+                            </right-app-dialog>
+                        </div>
+                        <div class="wrap-chat" *ngIf="isMessages">
+                            <!--<div class="lt-btn-back" (click)="closeMessage()">Back</div>-->
+                            <i class="lt-icon-close lt-close-chat" *ngIf="isMessages" (click)="closeMessage()"></i>
+                            <right-app-chat [dialog]="activeDialog"></right-app-chat>
+                        </div>
+                        <div class="lt-loader" *ngIf="isLoading">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="lt-aside-chat" *ngIf="openAcademyChat">
+            <div class="chat-content">
+                <div class="lt-dialogs">
+                    <div class="lt-dialog-search" *ngIf="!isMessages">
+                        <div class="wrap-input icon-right">
+                            <input type="text" placeholder="Search" class="input-style"
+                                   #searchChat (keyup)="onSearchAcademyChat(searchChat.value)">
+                            <div *ngIf="!listSearch.length" class="icon icon-search"></div>
+                            <div *ngIf="listSearch.length" class="lt-icon-close icon icon-close"
+                                 (click)="closeSearch()"></div>
+                            <div *ngIf="listSearch.length" class="lt-list-search">
+                                <div class="user-item" *ngFor="let item of listSearch" (click)="toMessages(item.id)">
+                                    <!--<pre>{{item | json}}</pre>-->
+                                    <div class="info">
+                                        <div class="avatar">
+                                            <img *ngIf="chatType == 'manager'"
+                                                 [src]="item.avatar ? baseUrl + item.avatar : defaultUserIcon" alt="">
+                                            <img *ngIf="chatType == 'user'"
+                                                 [src]="item?.photo ? baseUrl + item?.photo : defaultUserIcon" alt="">
+                                        </div>
+                                        <span *ngIf="chatType == 'manager'" class="name">{{item.first_name}} {{item.last_name}}</span>
+                                        <span *ngIf="chatType == 'user'" class="name">{{item.name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="lt-icon-close" (click)="toggleAcademyChat($event)"></i>
+                    </div>
+                    <div class="wrap-list-dialogs">
+                        <div class="list-dialogs" *ngIf="!isMessages">
+                            <right-app-dialog-academy [typeAcademyChat]="chatType" [dialog]="dialog"
+                                                      *ngFor="let dialog of dialogs"
+                                                      (click)="openAcademyMessage(dialog)">
+                            </right-app-dialog-academy>
+                        </div>
+                        <div class="wrap-chat" *ngIf="isMessages">
+                            <!--<div class="lt-btn-back" (click)="closeMessage()">Back</div>-->
+                            <i class="lt-icon-close lt-close-chat" *ngIf="isMessages"
+                               (click)="closeAcademyMessage()"></i>
+                            <right-app-chat-academy [typeAcademyChat]="[chatType]"
+                                                    [dialog]="activeDialog"></right-app-chat-academy>
+                        </div>
+                        <div class="lt-loader" *ngIf="isLoading">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button notification-info mx-auto">
+        <a href="/#/notification">
+            <opn-notification-informer></opn-notification-informer>
+        </a>
+    </div>
+    <div class="button plus mx-auto" (click)="onCreateAcademy()"
+         style="background-color: rgb(76, 161, 255) !important;"><img class="setting-icon"
+                                                                      src="assets/images/icons/add.png"></div>
+    <div class="academies-list mx-auto">
+        <opn-item-academy *ngFor="let academy of myAcademies;" [academy]="academy"></opn-item-academy>
+    </div>
+    <div [hidden]="!itemsSearchActive" class="overlay" (click)="closeItemsSearch();"></div>
+</aside>
+
+<opn-new-academy *ngIf="modalAcademy" (closedModal)="onCloseodalAcademy()"
+                 (addedAcademy)="onAcademyAdd($event)"></opn-new-academy>
+
+<div class="overlay-bg" *ngIf="firstLogin" (click)="onClickOverlay($event)">
+    <div class="modal-conteiner opn-scroll">
+        <div class="d-block position-relative">
+            <div class="close-modal" (click)="onSkip()"></div>
+            <div class="tooltip-content" *ngIf="addresEmpty">
+                    Your address cant be empty
+                </div>
+        </div>
+        <div class="modal-head">
+            Settings
+        </div>
+        <div class="profile-setings">
+            <div class="profile-avatar">
+                <div class="avatar-load">
+                    <div class="avatar-photo">
+                        <div class="change-avatar">
+                            <opn-crop-logo-photo (onCropped)="setAvatar($event)"></opn-crop-logo-photo>
+                        </div>
+                        <opn-view-avatar [src]="userAvatar" [widthImg]="'128px'"></opn-view-avatar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form [formGroup]="form" style="margin-top: 20px;">
+            <div class="row">
+                <div class="form-group col-6">
+                    <h6 class="text-left credentials">FIRST NAME</h6>
+                    <input type="text" id="firstName" formControlName="firstName"
+                           [ngClass]="displayFieldCss('firstName')">
+                    <i class="ion-alert" [ngClass]="displayFieldCss('firstName')" tooltip="This field is required"
+                       [tooltipDisabled]="!isFieldValid('firstName')"
+                       [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                </div>
+                <div class="form-group col-6">
+                    <h6 class="text-left credentials">LAST NAME</h6>
+                    <input type="text" id="lastName" formControlName="lastName" [ngClass]="displayFieldCss('lastName')">
+                    <i class="ion-alert" [ngClass]="displayFieldCss('lastName')" tooltip="This field is required"
+                       [tooltipDisabled]="!isFieldValid('lastName')"
+                       [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                </div>
+                <div class="select-academy col-6">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">ACADEMY</h6>
+                        <opn-academies-select [setCurrent]="currentAcademy" [valid]="validErrAcademy"
+                                              (selected)="setAcademy($event)"></opn-academies-select>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <h6 class="text-left credentials">Date of Birth</h6>
+                    <ng-datepicker [options]="dateOptions" [(ngModel)]="birthDay"
+                                   [ngModelOptions]="{standalone: true}"></ng-datepicker>
+                </div>
+                <div class="form-group clearfix col-6">
+                    <h6 class="text-left credentials">ADDRESS</h6>
+                    <ng4geo-autocomplete [class.error]="addres == ''" *ngIf="currentBelt"
+                                         [userSettings]="gaAutocompleteStings" (keyup)="searchinputCallback($event)"
+                                         (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                </div>
+                <div class="form-group col-6">
+                    <h6 class="text-left credentials">AGE</h6>
+                    <opn-ui-select-type-setting [currentValue]="ageType" [dataSource]="[
+            {value: 'junior', title: 'Junior'},
+            {value: 'adult', title: 'Adult'}
+          ]" (change)="onChangeAge($event)"></opn-ui-select-type-setting>
+                </div>
+                <div class="select-academy col-6">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">WEIGHT</h6>
+                        <input type="number" step="5" min="1" id="weight" formControlName="weight"
+                               [ngClass]="displayFieldCss('weight')">
+                        <!-- <select2 [data]="weights" [value]="weightCurrent" [cssImport]="true" [width]="100" [options]="optionsWeight" (valueChanged)="changeWeight($event)"></select2> -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <opn-belts [current]="currentBelt" [colors]="colorsBelt" [belts]="arrBelts"
+                               (change)="onChangeColor($event)" (changeBelt)="changeBeltColor($event)"></opn-belts>
+                </div>
+                <div class="form-group clearfix col-12">
+                    <h6 class="text-left credentials">PRIVACY</h6>
+                    <opn-account-visibility [current]="status_public"
+                                            (onSelected)="selectPrivate($event)"></opn-account-visibility>
+                </div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <div class="position-relative">
+                                <h6 class="text-left credentials">EMAIL</h6>
+                                <input id="email" formControlName="email" type="email" required
+                                       [ngClass]="displayFieldCss('email')">
+                                <i class="ion-alert" [ngClass]="displayFieldCss('email')"
+                                   tooltip="This field is required" [tooltipDisabled]="!isFieldValid('email')"
+                                   [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                                <div class="changeEmiter" (click)="onChangeEmail($event)">Change</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <div class="position-relative">
+                                <h6 class="text-left credentials">PASSWORD</h6>
+                                <input id="password" formControlName="password" type="password"
+                                       [ngClass]="displayFieldCss('password')">
+                                <i class="ion-alert" [ngClass]="displayFieldCss('password')"
+                                   tooltip="Password (8 characters: 1 letter / 1 number at least)"
+                                   [tooltipDisabled]="!isFieldValid('password')" [tooltipAnimation]="true"
+                                   tooltipPlacement="left"></i>
+                                <div class="changeEmiter" (click)="onChangePassword($event)">Change</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="row justify-content-center no-gutters">
+                        <div class="col-6">
+                            <p *ngIf="allSaved" class="text-center allSaved">All changes are saved!</p>
+                            <p *ngIf="!changeAddres" class="text-center allSaved" style="color: #ff0000;">Please select your address from the drop-down list.</p>
+                            <button class="button-submit" [disabled]="!changeAddres || addres == ''" (click)="onSubmit()">Save</button>
+                            <!-- <button class="button-skip" (click)="onSkip()">Skip</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="overlay-bg" [hidden]="!itemsSearchActive" (click)="closeItemsSearch()"></div>

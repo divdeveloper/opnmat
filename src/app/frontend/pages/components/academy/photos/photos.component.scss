@@ -1,0 +1,27 @@
+.content-card-100{
+  width: 100%;
+  background-color: white;
+  padding: 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba($color: #172a47, $alpha: 0.15);
+  padding: 15px 15px 0 15px;
+  float: left;
+  .profile-photos{
+    margin: 0 -7.5px;
+    .profile-photo-item{
+      margin-bottom: 15px;
+      padding: 0 7.5px;
+      position: relative;
+      .photo-item-img{
+        display: flex;
+        height: 100%;
+        box-shadow: 0 2px 4px rgba($color: #172a47, $alpha: 0.15);
+        background: rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<section class="register">
+    <!--<opn-header></opn-header>-->
+    <div style="background-color: white;" class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+                    <h4 class="welcome">{{ title }}</h4><br>
+                    <div class="login-via-email">
+                        Please enter new password
+                    </div>
+                <form [formGroup]="form" class="form-margin">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">NEW PASSWORD</h6>
+                        <input id="password" formControlName="password" type="password" >
+                    </div>
+                    <div class=" form-group">
+                        <h6 class="text-left credentials">CONFIRM PASSWORD</h6>
+                        <input id="passwordConfirm" formControlName="passwordConfirm" type="password">
+                    </div>
+                    <div class="text-right">
+                        <button class="button-submit" (click)="onSubmit()">Confirm</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-8 carousel right-side">
+                <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+                    <slide *ngFor="let slidez of slides; let index=index"
+                           [active]="slidez.active">
+                        <div style="background-color: rgb( 23, 42, 71 ); z-index: -111;">
+                            <img src="/assets/images/BG.jpg" class="slide-img">
+                        </div>
+                        <div class="carousel-caption" style="bottom: 200px;">
+                            <img class="icon-with" src="assets/images/icons/some.png">
+                            <h3 class="slide-title">{{slidez.title}}</h3>
+                            <p  class="slide-text">{{slidez.text}}</p>
+                        </div>
+                    </slide>
+                </carousel>
+                <!--<img src="assets/images/icons/some.png">-->
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,137 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<opn-popup-post [academyId]="academyId" (onRemovePost)="onRemovePost($event)" (closeModal)="onCloseModal()" [indexFile]="modalIndex" [post]="popupPost" [show]="showModal" *ngIf="showModal"></opn-popup-post>
+<opn-crop-cover-photo #cropCover [academyId]="academyId" [cropperSrc]="cropper" (closeModel)="onCloseCoverModal()" (saveCover)="onChangeCover($event)"></opn-crop-cover-photo>
+<opn-create-activity [academy]="academyProfile" *ngIf="createActivitiOpen" (close)="onActivitiModalClose()"></opn-create-activity>
+<opn-update-activity [dataSource]="editEventSource" (close)="onCloseUpdateEvent()" *ngIf="editEventModal"></opn-update-activity>
+<opn-create-class [academy]="academyProfile" *ngIf="createClassOpen" (close)="onClassModalClose()"></opn-create-class>
+<opn-update-class [dataSource]="editClassSource" [academy]="academyProfile" *ngIf="editClassModal" (close)="onCloseUpdateClass()"></opn-update-class>
+<main class="row no-gutters justify-content-center">
+  <opn-manager-panel [academyId]="academyId" class="w-100" (checkManager)="onCheckManager($event)" (onCheckPro)="onSetPro($event)"></opn-manager-panel>
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="user-data-wrap clearfix">
+        <div class="row cover_block no-gutters align-items-end" [ngStyle]="coverBg" lazy-load-images>
+          <div class="edit-cover-photo" *ngIf="isManager">
+            <label for="edit-cover-photo">Edit Cover</label>
+            <input id="edit-cover-photo" type="file" (change)="onEditCoverPhoto($event)">
+          </div>
+          <div class="col-12 profle-user-box">
+            <div class="row no-gutters">
+              <div class="col-auto profile-avatar">
+                <opn-view-logo-academy [src]="academyProfile.photo" [widthImg]="'128px'"></opn-view-logo-academy>
+              </div>
+              <div class="col-auto academy-data">
+                <div class="row align-items-end academy-info justify-content-between no-gutters">
+                  <div class="col-8">
+                      <div class="academy-name">{{academyProfile.name}}</div>
+                      <div class="academy-location">{{academyProfile.location}}</div>
+                  </div>
+                  <div class="col-3 text-right count-followers" (click)="academyTab = 'followers'">
+                    <div class="follower-count">{{countFolowers}}</div>
+                    <div class="follower-title">Followers</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row no-gutters profile-panel justify-content-between">
+          <div class="col-auto">
+            <div class="row no-gutters">
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'posts'" (click)="onChangeTab($event, 'posts')">
+                Timeline
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'subscriptions'" (click)="onChangeTab($event, 'subscriptions')">
+                Subscriptions
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'photos'" (click)="onChangeTab($event, 'photos')">
+                Photos
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'videos'" (click)="onChangeTab($event, 'videos')">
+                Videos
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'followers'" (click)="onChangeTab($event, 'followers')">
+                Followers
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'activiti'" (click)="onChangeTab($event, 'activiti')">
+                Activity
+              </div>
+              <div class="col-auto align-self-center panel-btn" [class.active-tab]="academyTab == 'contacts'" (click)="onChangeTab($event, 'contacts')">
+                Contacts
+              </div>
+            </div>
+          </div>
+          <div class="col-auto align-self-center" *ngIf="!isManager">
+            <button class="btn-msg" (click)="onEventMessage()" *ngIf="!isManager">Message</button>
+            <button  *ngIf="!isFolow" class="btn-follow-me" (click)="onFollowAdd(academyId)" >Follow</button>
+            <button *ngIf="isFolow" class="btn-follow-me unfollow" (click)="onFollowRemove(academyId)" >Unfollow</button>
+          </div>
+          <div class="col-auto align-self-center" *ngIf="isManager">
+            <div class="group-btns">
+              <i class="ion-plus"></i> Add <i class="ion-chevron-down"></i>
+              <ul class="btns-list">
+                <li class="btn-item" (click)="onActivitiModalOpen(true)">Create Activity</li>
+                <li class="btn-item" [class.not-pro]="!isPro" (click)="onClassModalOpen(true)">Create Class {{(!isPro)?'(pro)':''}}</li>
+                <li class="btn-item" [class.not-pro]="!isPro" (click)="goToLink('/create-subscriptions')">Subscriptions {{(!isPro)?'(pro)':''}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-card-100">
+      <div *ngIf="academyTab === 'posts'" class="tab-container">
+        <div class="content-card" style="padding-bottom: 24px;" *ngIf="isManager">
+          <opn-new-post-form [academyId]="academyId" (postAdded)="onPostAdded($event)"></opn-new-post-form>
+        </div>
+        <div class="right-content-box float-right">
+          <div class="content-card-right clearfix">
+            <div class="dropdown-box" [ngClass]="{'open-dropdown': events.length, 'not-found': events.length == 0}" #eventsRef>
+              <button class="dropdown-btn" (click)="onToggleActivity('events')">
+                Events
+                <i class="ion-android-remove drop-icon"></i>
+                <i class="ion-android-add drop-icon"></i>
+              </button>
+              <opn-events-academy *ngIf="events.length > 0" [academyId]="academyId" [type]="'getEventsByAcademy'" [dataSource]="events" [allRedirect]="'events-near-me'"></opn-events-academy>
+              <div *ngIf="events.length == 0" class="no-events">Events are not available</div>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper clearfix" infiniteScroll [infiniteScrollDistance]="2"[infiniteScrollThrottle]="300" (scrolled)="onScrollDown()" [class.hide-new]="!isManager">
+          <div class="content-card feed-box" *ngFor="let post of posts;" id="{{'post_'+post.id}}">
+            <opn-view-post [academyId]="academyId" (openModal)="onOpenModal($event)" (onRemove)="onRemovePost($event)" [post]="post" [me]="viewUser"></opn-view-post>
+          </div>
+          <div class="content-card feed-box p-0">
+            <div class="loader" *ngIf="!load">Loading...</div>
+            <div class="col-12" *ngIf="posts.length == 0 && load">
+              <div class="no-data">
+                Not found posts
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="academyTab === 'subscriptions'" class="tab-container">
+        <opn-subscriptions [type]="'academy'"></opn-subscriptions>
+      </div>
+      <div *ngIf="academyTab === 'photos'" class="tab-container">
+        <opn-academy-photos></opn-academy-photos>
+      </div>
+      <div *ngIf="academyTab === 'videos'" class="tab-container">
+        <opn-academy-videos></opn-academy-videos>
+      </div>
+      <div *ngIf="academyTab === 'followers'" class="tab-container">
+        <opn-academy-followers></opn-academy-followers>
+      </div>
+      <div *ngIf="academyTab === 'activiti'" class="tab-container">
+        <opn-academy-activiti [isManager]="isManager" [academyId]="academyId" (openUpdate)="onUpdateEvent($event);"></opn-academy-activiti>
+      </div>
+      <div *ngIf="academyTab === 'contacts'" class="tab-container">
+        <opn-academy-contacts></opn-academy-contacts>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar [isManager]="isManager" style="margin-top: 20px;">
+</opn-right-sidebar>

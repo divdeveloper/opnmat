@@ -1,0 +1,143 @@
+$input-color: #bababa;
+$red: #ff0000;
+
+.content-card-100 {
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+  float: left;
+  .no-data {
+    font-family: "MuseoSansCyrl";
+    font-weight: 500;
+    font-size: 13px;
+    color: #172a47;
+    text-align: center;
+    padding: 30px 0;
+  }
+  .grid-panel {
+    height: 61px;
+    border-bottom: 1px solid #d3dce9;
+    padding: 0 30px;
+    .grid-title {
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      font-size: 16px;
+      color: #202f3b;
+    }
+    .grid-form {
+      input.filter {
+        width: 240px;
+        height: 40px;
+        border-radius: 2px;
+        border: 1px solid #d3dce9;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 16px;
+        color: #202f3b;
+        float: right;
+        padding: 0 30px 0 20px;
+        background: url("/assets/images/icons/search-f.png") right center no-repeat;
+        outline: none;
+        &:hover, &:focus {
+          border: 1px solid #98a6bc;
+        }
+      }
+    }
+  }
+  .grid-content {
+    padding: 0 30px;
+    .grid-table {
+      width: 100%;
+      .grid-table-head th {
+        height: 50px;
+        border-bottom: 1px solid #d3dce9;
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        font-size: 13px;
+        color: #172a47;
+      }
+      .grid-table-row {
+        & th:first-child, & td:first-child {
+        }
+        & th:last-child, & td:last-child {
+          padding-right: 10px;
+          text-align: right;
+        }
+      }
+      tbody {
+        .grid-table-row {
+          border-bottom: 1px solid #d3dce9;
+          &:hover {
+            background: #f0f2f8;
+          }
+          .grid-table-cel {
+            font-family: "MuseoSansCyrl";
+            font-weight: 300;
+            font-size: 14px;
+            color: #90949c;
+            height: 50px;
+            &.blue-text {
+              color: #4ca1ff;
+            }
+            .grid-btn-delete {
+              width: 12px;
+              height: 14px;
+              background: url("/assets/images/icons/icon-delete.png") right center no-repeat;
+              float: right;
+              cursor: pointer;
+              border: 0;
+              outline: none;
+            }
+            .grid-btn-edit {
+              width: 14px;
+              height: 14px;
+              background: url("/assets/images/icons/icon-edit.png") right center no-repeat;
+              float: right;
+              margin-right: 25px;
+              cursor: pointer;
+              border: 0;
+              outline: none;
+            }
+          }
+        }
+      }
+      &.no-pagination {
+        tbody .grid-table-row:last-child {
+          border: 0;
+        }
+      }
+    }
+  }
+  .pagination {
+    margin-top: 20px;
+    padding: 0 30px 26px 30px;
+    .pages {
+      .page {
+        width: 30px;
+        height: 30px;
+        border-radius: 2px;
+        border: 1px solid #d3dce9;
+        float: left;
+        margin-left: 6px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 14px;
+        color: #172a47;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+        &.active {
+          cursor: default;
+          pointer-events: none;
+          border: 1px solid #4ca1ff;
+          background: #4ca1ff;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.link-text{
+  cursor: pointer;
+}

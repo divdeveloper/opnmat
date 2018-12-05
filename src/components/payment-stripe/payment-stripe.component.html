@@ -1,0 +1,31 @@
+<div class="overlay-modal-bg" #payForm>
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto close-modal ml-auto" (click)="onClose()"></div>
+    </div>
+    <div class="modal-head">
+      Payment Form
+    </div>
+    <div class="payment-form">
+      <form (ngSubmit)="getToken($event)">
+        <div class="payment-group">
+          <div class="selelct-cards">
+            <button type="button" #current class="select-btn" (click)="onToggle($event)" (blur)="statusSelect(false)">Select your card</button>
+            <div class="wrap-options" #selectOptions>
+              <div class="option-card" *ngFor="let card of meCards" (mousedown)="onSelectCard(card)">
+                <div class="card-number">{{card.brand}} **** **** **** {{card.last4}}</div>
+              </div>
+              <div class="option-card new" (mousedown)="onNewCard($event)">New Card</div>
+            </div>
+          </div>
+        </div>
+        <div class="payment-group" [class.d-none]="!addStatus">
+          <div id="card-element" class="field" #card></div>
+        </div>
+        <div #error class="payment-errors"></div>
+
+        <button class="payment-btn" type="submit" [disabled]="paymentType == '' || process">Buy</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!--<pre>{{user | json}}</pre>-->
+<div class="lt-dialog" [ngClass]="{'active': isActive}">
+    <div class="dialog-img" [ngClass] = "{'active': userOnline}">
+        <div class="wrap-img">
+            <img [src]="user?.photo ? baseUrl + user?.photo : noImg" alt="">
+        </div>
+    </div>
+    <div class="dialog-info">
+        <div class="user-name">
+            <span>{{user?.name ? user?.name  : 'No name' }}</span>
+            <div class="date">{{dialog.updated_at | date:'shortTime'}}</div>
+        </div>
+        <div class="user-msg">
+            {{ dialog?.last_message?.content ? dialog.last_message.content : 'no message yet' }}
+        </div>
+    </div>
+</div>

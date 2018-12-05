@@ -1,0 +1,20 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<main class="row no-gutters justify-content-center">
+  <div class="col-12 max-content">
+    <h1>Academy page</h1>
+    <div class="content-card" style="padding-bottom: 24px;">
+      <opn-new-post-form (postAdded)="onPostAdded($event)"></opn-new-post-form>
+    </div>
+    <div class="content-card-right">
+
+    </div> 
+    <div class="wrapper clearfix" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()">
+      <div class="content-card" *ngFor="let post of posts;">
+        <opn-view-post [post]="post" [me]="me"></opn-view-post>
+      </div> 
+    </div>
+  </div>
+</main>
+<opn-right-sidebar>
+</opn-right-sidebar>

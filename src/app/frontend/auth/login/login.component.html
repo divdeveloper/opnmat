@@ -1,0 +1,58 @@
+<section class="register">
+  <!--<opn-header></opn-header>-->
+  <div style="background-color: white;" class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side pb-4">
+        <a [routerLink]="['/auth/login']">
+          <img src="assets/images/logo.png" alt="OPN MAT">
+        </a>
+        <div class="welcome col-lg-12">Welcome to OPN MAT</div>
+        <div class="login-via-email col-lg-12">Login via email address</div>
+        <form [formGroup]="form" class="form-margin">
+          <div class="form-group">
+            <h6 class="text-left credentials">EMAIL</h6>
+            <input class="input-credentials" id="email" formControlName="email" type="email" required [ngClass]="displayFieldCss('email')">
+          </div>
+          <div class="form-group">
+            <h6 class="text-left credentials">PASSWORD</h6>
+            <input class="input-credentials" id="password" formControlName="password" type="password" [ngClass]="displayFieldCss('password')">
+          </div>
+          <p class="text-right">
+            <a [routerLink]="['/auth/forgot']">Forgot password?</a>
+          </p>
+          <div class="row">
+            <div class="col-6 text-left">
+              <p class="dont-have">
+                Don't have an account?
+                <br>
+                <a [routerLink]="['/auth/registration']">Sign up</a>
+              </p>
+            </div>
+            <div class="col-6 text-right">
+              <button class="button-submit" (click)="onSubmit()">Sign in</button>
+            </div>
+          </div>
+          <div class="title"> Or </div>
+          <button class="academy-button" [routerLink]="['/auth/academy']">Academy Sign Up</button>
+        </form>
+      </div>
+      <div class="col-md-8 col-lg-8 col-sm-8 carousel right-side" style="position: relative;">
+        <div style="position: fixed; width: 66.66666667%">
+          <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+            <slide *ngFor="let slidez of slides; let index=index" [active]="slidez.active">
+              <div style="background-color: rgb( 23, 42, 71 ); z-index: -111;">
+                <img src="/assets/images/BG.jpg" class="slide-img">
+              </div>
+              <div class="carousel-caption" style="bottom: 200px;">
+                <img class="icon-with" src="assets/images/icons/some.png">
+                <h3 class="slide-title">{{slidez.title}}</h3>
+                <p class="slide-text">{{slidez.text}}</p>
+              </div>
+            </slide>
+          </carousel>
+        </div>
+        <!--<img src="assets/images/icons/some.png">-->
+      </div>
+    </div>
+  </div>
+</section>

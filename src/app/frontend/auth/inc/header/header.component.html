@@ -1,0 +1,26 @@
+<header>
+    <div class="container">
+        <div class="row header-box align-items-center">
+            <div class="col-3 justify-content-start logo">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+            </div>
+            <div class="col justify-content-end">
+                <div class="row justify-content-end">
+                    <form [formGroup]="form">
+                        <div class="form-group">
+                            <input id="email2" formControlName="email" type="email" placeholder="Email" required>
+                            <i class="ion-alert" [ngClass]="displayFieldCss('email')" tooltip="This field is required" [tooltipDisabled]="!isFieldValid('email')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                        </div>
+                        <div class="form-group">
+                            <input id="password2" formControlName="password" type="password" placeholder="Password">
+                            <i class="ion-alert" [ngClass]="displayFieldCss('password')" tooltip="Password (8 characters: 1 letter / 1 number at least)" [tooltipDisabled]="!isFieldValid('password')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                        </div>
+                        <div class="form-group"><button class="button-submit" (click)="onSubmit()">Sign in</button></div>
+                    </form>
+                    <div class="button-link"><a [routerLink]="['/auth/registration']">Sign Up</a></div>
+                    <div class="button-link"><a [routerLink]="['/auth/academy']">Add Academy</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

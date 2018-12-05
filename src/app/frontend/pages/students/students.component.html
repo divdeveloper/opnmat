@@ -1,0 +1,10 @@
+<opn-left-sidebar></opn-left-sidebar>
+  <main class="row no-gutters justify-content-center">
+    <opn-manager-panel [academyId]="academyId" class="w-100" (checkManager)="onCheckManager($event)"></opn-manager-panel>
+    <div class="col-12 max-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  <opn-right-sidebar [isManager]="isManager">
+  </opn-right-sidebar>
+  

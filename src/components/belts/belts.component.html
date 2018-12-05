@@ -1,0 +1,20 @@
+<div class="belts-wrapp">
+  <div class="form-group">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12 color-title">Choose Ranking</div>
+        <div class="col belt-color" [ngClass]="{'active': i==current_index}" [ngStyle]="{'background': color.hex}" (click)="onSelectColor(color.id, $event)"  *ngFor="let color of colors; let i = index">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-12 belt" *ngIf="activeBelt">
+        <button class="prev_belt" (click)="onPrev()"></button>
+        <button class="next_belt" (click)="onNext()"></button>
+        <img src="{{activeBelt.source}}" alt="activeBelt.id">
+      </div>
+    </div>
+  </div>
+</div>

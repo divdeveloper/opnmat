@@ -1,0 +1,133 @@
+<div class="one-feed-post" >
+  <div class="row justify-content-between i">
+    <div class="col-auto">
+      <div class="feed-user-avatar" (click)="toProfile(post.user.id)">
+        <opn-view-avatar *ngIf="!academyId" [src]="userAvatar" [widthImg]="'50px'"></opn-view-avatar>
+        <opn-view-logo-academy *ngIf="academyId" [src]="post.academy.photo" [widthImg]="'50px'"></opn-view-logo-academy>
+      </div>
+      <div class="feed-user-data">
+        <div *ngIf="!academyId" class="user-fio" (click)="toProfile(post.user.id)">{{post.user.first_name}} {{post.user.last_name}}</div>
+        <div *ngIf="academyId" class="academy-name" (click)="toProfile(post.user.id)">{{post.academy.name}}</div>
+        <div class="feed-time-passed">{{post.time}}
+          <span class="feed-visibility {{post.share_from}}"></span>
+        </div>
+      </div>
+    </div>
+    <div class="col-auto controlls-post">
+      <opn-controlls-post *ngIf="_updatePost" [current]="post.share_from" (onSelected)="onControllAction($event)"></opn-controlls-post>
+    </div>
+  </div>
+  <div class="row no-gutters" >
+    <div class="w-100" [ngClass]="{'edit': _updatePost}">
+      <textarea class="feed-content opn-scroll" #feedContent readonly [placeholder]="(_updatePost)?'Say something about this photo or video':''">{{post.content}}</textarea>
+      <button (click)="onEdit($event, post)" class="edit-icon"></button>
+    </div>
+    <div class="moreText w-100" #showMore>
+      <span class="more-box" (click)="toggleMore($event)">
+        <i class="ion-more"></i>
+    </span>
+    </div>
+  </div>
+  <div class="row no-gutters feed-box-media">
+    <div class="col-{{_gridFiles[countFiles][i].col}} feed-media" *ngFor="let file of post.files; let i = index;">
+      <div *ngIf="file.type == 'image'" class="media-box" (click)="onClickMedia(post, i)">
+        <img [src]="serverUrl+file.url" alt="foto1" class="align-self-center"/>
+      </div>
+      <div *ngIf="file.type == 'video'" class="media-box" (click)="onClickMedia(post, i)">
+        <video style="margin: auto; max-width: 100%;" height="100%" controls class="align-self-center" controlsList="nodownload" video autobuffer>
+          <source [src]="serverUrl+file.url" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row no-gutters align-items-center feed-social-btn">
+    <div class="col-4  text-center" [ngClass]="{'is-like': post.is_like}" (click)="onLike($event, post.is_like, post)">
+      <div class="social-btn">
+        <i class="hand-gesture" [class.hand-gesture-blue]="post.is_like" ></i> Like
+      </div>
+    </div> 
+    <div class="col-4 text-center" (click)="onCommentToggle($event, post)">
+      <div class="social-btn">
+        <i class="comment"></i> Comment
+      </div>
+    </div>
+    <div class="col-4 text-center" (click)="onShareToggle($event)">
+      <div class="social-btn" [class.active]="shareToggle">
+        <div class="share-buttons-wrap top" *ngIf="shareToggle">
+          <button class="share-me" (click)="onShareTimline(post.id)"><i class="share-me"></i>My Timeline</button>
+          <share-button (closed)="onCloseSahre('Facebook')" [theme]="'custom-theme'" [button]="'facebook'" [showText]="true" [url]="'http://opn-mat.roketdev.pro/'"></share-button>
+          <share-button (closed)="onCloseSahre('Twitter')" [theme]="'custom-theme'" [button]="'twitter'" [showText]="true" [url]="'http://opn-mat.roketdev.pro/'" [description]="post.content"></share-button>
+        </div>
+        <i class="share-symbol"></i> Share
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="separator">
+    </div>
+  </div>
+  <div class="row justify-content-between align-items-center" style="height: 50px;">
+    <div class="col-7">
+      <span class="feed-last-like" *ngIf="post.name_user_like">{{post.name_user_like}}, <span>likes this</span></span>
+    </div>
+    <div class="col-5">
+      <div class="feed-comments-count">
+        {{post.count_comments}} <span> Comments</span>
+      </div>
+      <div class="feed-likes-count">
+        {{post.count_like}} <span> Likes</span>
+      </div>
+    </div>
+  </div>
+  <div class="feed-comments" *ngIf="(!commentToggle && lastComment)">
+    <div class="row">
+      <div class="separator"></div>
+    </div>
+    <div class="row feed-comment no-gutters">
+      <div class="col-md-auto comment-user-avatar" (click)="toProfile(lastComment.user.id)">
+          <opn-view-avatar [src]="lastComment.user.avatar" [widthImg]="'50px'"></opn-view-avatar>
+      </div>
+      <div class="col-md-auto comment-content">
+        <div class="comment-user-date">
+          <span (click)="toProfile(lastComment.user.id)">{{lastComment.user.first_name}} {{lastComment.user.last_name}}</span>
+          <div class="comment-date">Commented on {{lastComment.created_at | amCalendar}}</div>
+        </div>
+        <div class="text">{{lastComment.content}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="feed-comments" *ngIf="commentToggle">
+    <div class="row">
+      <div class="separator"></div>
+    </div>
+    <div class="opn-scroll feed-comments-scroll" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()">
+      <div class="row feed-comment no-gutters" *ngFor="let comment of comments;">
+        <div class="col-md-auto comment-user-avatar" (click)="toProfile(comment.user.id)">
+            <opn-view-avatar [src]="comment.user.avatar" [widthImg]="'50px'"></opn-view-avatar>
+        </div>
+        <div class="col-md-auto comment-content">
+          <div class="comment-user-date">
+            <span (click)="toProfile(comment.user.id)">{{comment.user.first_name}} {{comment.user.last_name}}</span>
+            <div class="comment-date">Commented on {{comment.created_at | amCalendar}}</div>
+          </div>
+          <div class="text">{{comment.content}}</div>
+          <div class="separator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="separator"></div>
+    </div>
+    <div class="row new-comment-form no-gutters align-items-center">
+      <div class="col-md-auto user-avatar">
+          <opn-view-avatar [src]="me.avatar" [widthImg]="'50px'"></opn-view-avatar>
+      </div>
+      <div class="col-md-auto form-group">
+        <input type="text" #newComment class="coment-field" (keyup)="(newComment.value == '')? addComment = true : addComment = fasle" maxlength="350" placeholder="Typing comment here ..."/>
+        <button class="post-comment" (click)="onSaveComment(newComment, post)" [disabled]="addComment">Post</button>
+      </div>
+    </div>
+  </div>
+</div>

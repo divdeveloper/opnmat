@@ -1,0 +1,130 @@
+.panel-radio-group{
+  .radio-item{
+    display: inline-block;
+    position: relative;
+    &.unread:after{
+      display: inline-block;
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: #f91656;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      right: 10px;
+    }
+    label{
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 14px;
+      color: #202f3b;
+      padding-left: 26px;
+      position: relative;
+      padding-right: 20px;
+      cursor: pointer;
+      &:before{
+        display: block;
+        content: '';
+        width: 18px;
+        height: 18px;
+        border: 2px solid #babec9;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition: 0.5s ease-in-out;
+      }
+      &:hover{
+        &:before{
+          border-color: #4ca1ff;
+        }
+      }
+      &:after{
+        display: none;
+        content: '';
+        width: 8px;
+        height: 8px;
+        background-color: #4ca1ff;
+        border-radius: 50%;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+      }
+    }
+    input[type="radio"]{
+      display: none;
+      &:checked + label{
+        &:before{
+          border-color: #4ca1ff;
+        }
+        &:after{
+          display: block;
+        }
+      }
+    }
+  }
+}
+.notification-list{
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+  margin-top: 15px;
+  padding: 10px 0;
+  .notification-item{
+    min-height:60px;
+    padding: 10px 50px 5px 50px;
+    position: relative;
+    &:before{
+      display: block;
+      content: '';
+      height: 100%;
+      position: absolute;
+      border-right: 1px solid #e0e6f0;
+      top: 0;
+      left: 23px; 
+    }
+    .nt-date{
+      font-family: "MuseoSansCyrl";
+      font-weight: 400;
+      font-size: 12px;
+      color: #90949c; 
+      position: relative;
+      &:before{
+        display: block;
+        content: '';
+        width: 9px;
+        height: 9px;
+        position: absolute;
+        top: 5px;
+        left: -31px;
+        border-radius: 50%;
+        border: 2px solid #4ca1ff;
+        background: white;
+        outline: 10px solid white;
+      }
+    }
+    .nt-text{
+      font-family: "MuseoSansCyrl";
+      font-weight: 500;
+      font-size: 13px;
+      color: #202f3b;
+      a{
+        color: #4ca1ff;
+        text-decoration: none;
+      }
+    }
+    &.unread{
+      .nt-date:before{
+        border-color: #f91656;
+      }
+    }
+    &:hover{
+      background-color: #f7f7f7;
+      .nt-date{
+        &:before{
+          outline: 10px solid #f7f7f7;
+        }
+      }
+    }
+  }
+}

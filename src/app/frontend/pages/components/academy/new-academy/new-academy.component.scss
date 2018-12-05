@@ -1,0 +1,169 @@
+@import '../../../../../../variables';
+$border-radius: 3px;
+$input-color: #bababa;
+.overlay-modal-bg {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: calc( 100% - 320px);
+  height: 100%;
+  overflow-y: auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  display: none;
+  padding-bottom: 20px;
+  &.open {
+    display: block;
+  }
+  z-index: 999999999999;
+  .closeModal {
+    font-size: 15px;
+    color: white;
+    font-family: 'Proxima Nova Condensed'; 
+    position: absolute;
+    right: 23px;
+    top: 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .modalConteiner {
+    width: 540px;
+    min-height: 440px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    background: white;
+    padding: 30px;
+    .modal-panel{
+      margin: 0;
+      .close-modal{
+        width: 14px;
+        height: 14px;
+        background: url("/assets/images/icons/close.png") center no-repeat;
+        padding: 0;
+        cursor: pointer;
+        transform: translateY(2px);
+        transition: 0.2s ease-in-out;
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
+    }
+    .modal-head {
+      margin-top: 20px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 34px;
+      color: #323844;
+      text-align: center;
+    }
+    .modal-body {
+      .addded-alert{
+        margin-top: 50px;
+        font-family: "MuseoSansCyrl";
+        text-align: center;
+        .alert-text{
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          font-size: 24px;
+          color: #323844;
+          text-align: center;
+        }
+      }
+      .form-group {
+        margin-bottom: 10px;
+        position: relative;
+        input {
+          width: 100%;
+          border: 1px solid $white-gray;
+          border-radius: $border-radius;
+          height: 42px;
+          padding: 0 22px;
+          outline: none;
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          color: $dark;
+          &::-moz-placeholder {
+            color: $input-color;
+            font-weight: 300;
+          }
+          &::-webkit-input-placeholder {
+            color: $input-color;
+            font-weight: 300;
+          }
+          &:-ms-input-placeholder {
+            color: $input-color;
+            font-weight: 300;
+          }
+          &:-moz-placeholder {
+            color: $input-color;
+            font-weight: 300;
+          }
+          /*&.ng-invalid.ng-touched {
+            border-color: $red;
+          }*/
+          &:focus {
+            box-shadow: 0 0 9px rgba(79, 157, 191, 25);
+          }
+        }
+        i {
+          width: 10px;
+          height: 18px;
+          line-height: 15px;
+          text-align: center;
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: $gray;
+          font-weight: 300;
+          font-size: 13px;
+          display: none;
+          &.has-error {
+            display: block;
+            color: $red;
+            cursor: help;
+          }
+        }
+        .button-submit {
+          width: 100%;
+          height: 54px;
+          border: 0;
+          background: #4ca1ff;
+          color: white;
+          box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+          font-family: "MuseoSansCyrl";
+          margin: 35px 0 25px 0;
+          border-radius: 2px;
+          transition: 0.2s ease-in;
+          outline: none;
+          float: left;
+          cursor: pointer;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1492px) {
+  .overlay-modal-bg {
+    left: 320px;
+  }
+}
+
+@media (max-width: 1491px) {
+  .overlay-modal-bg {
+    width: calc( 100% - 240px);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1491px) {
+  .overlay-modal-bg {
+    left: 240px;
+  }
+}

@@ -1,0 +1,54 @@
+.content-card-100{
+  width: 100%;
+  //border: 1px solid #afc7d2;
+  padding: 0;
+  border-radius: 3px;
+  //box-shadow: 0 0 10px rgba(23, 114, 167, 0.25);
+  float: left;
+  .calendar-btn-group{
+    width: 100%;
+    .calendar-btn{
+      width: calc( 100% / 3 );
+      height: 40px;
+      line-height: 38px;
+      float: left;
+      border: 1px solid #d3dce9;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 14px;
+      color: #172a47;
+      cursor: pointer;
+      &:first-child{
+        border-radius: 3px 0 0 3px;
+      }
+      &:last-child{
+        border-radius: 0 3px 3px 0;
+      }
+      &:nth-child(2){
+        border-width: 1px 0 1px 0;
+        margin: 0 -1px;
+        position: relative;
+        z-index: 2;
+      }
+      &.active{
+        border: 0;
+        background: white;
+        border-radius: 3px;
+        box-shadow: 0 2px 4px rgba($color: #172a47, $alpha: 0.15);
+        width: calc( 100% / 3 );
+        transition: 0.2s;
+      }
+    }
+  }
+  .calendar-wrap{
+    margin-top: 24px;
+    background: white;
+    box-shadow: 0 2px 4px rgba($color: #172a47, $alpha: 0.15); 
+  }
+  .calendar-title{
+    font-family: "MuseoSansCyrl";
+    font-weight: 300;
+    font-size: 18px;
+    color: #202f3b;
+  }
+}

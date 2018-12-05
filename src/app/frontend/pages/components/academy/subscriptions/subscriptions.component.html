@@ -1,0 +1,57 @@
+<opn-academy-modal modalId="payment-fail" closebtn="true">
+  <div class="modal-info error">
+    <i class="ion-alert"></i> <span>Warning!</span>
+    <div class="payment-msg">
+      {{modalAlert}}
+    </div>
+    <button class="pay-event-btn" (click)="onRePay()" >Pay Now</button>
+  </div>
+</opn-academy-modal>
+<opn-academy-modal modalId="payment-success" closebtn="true">
+  <div class="modal-info success">
+    <i class="ion-checkmark"></i> <span>Success!</span>
+    <div class="payment-msg">
+      {{modalAlert}}
+    </div>
+  </div>
+</opn-academy-modal>
+<opn-payment-stripe (outToken)="onPay($event)"></opn-payment-stripe>
+  <div class="row no-gutters subscription-wrap">
+    <div class="col-3 subscription-card" *ngFor="let subscribe of subscriptions;">
+     <div class="card-body">
+        <div class="tooltip-btn" *ngIf="subscribe.information != ''">
+          <div class="tooltip-content">
+            {{subscribe.information}}
+          </div>
+        </div>
+        <div class="card-title">{{subscribe.name}}</div>
+        <div class="card-price">$ {{subscribe.price}}</div>
+        <div class="card-time">{{membership[subscribe.membership]}}</div>
+        <div class="card-divider"></div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Trial</div>
+          <div class="col-4 value">{{subscribe.trial_days?subscribe.trial_days + ' day':'-'}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Registration Fee</div>
+          <div class="col-4 value">$ {{subscribe.registration_fee}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Age</div>
+          <div class="col-4 value">{{subscribe.age}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-12">
+            <button class="sign-up" *ngIf="!subscribe.member" (click)="onSignUp(subscribe)">Sign up <div class="small-loader inline-block" *ngIf="subscribe.joinLoader"></div></button>
+            <button class="sign-up" *ngIf="subscribe.member" (click)="onCancel(subscribe)">Cancel <div class="small-loader inline-block" *ngIf="subscribe.joinLoader"></div></button>
+          </div>
+        </div>
+     </div>
+    </div>
+    <div class="loader" *ngIf="!load">Loading...</div>
+    <div class="col-12" *ngIf="subscriptions.length == 0 && load">
+      <div class="no-data">
+          Academy does not have any subscriptions yet.
+      </div>
+    </div>
+  </div>

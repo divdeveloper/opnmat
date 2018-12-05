@@ -1,0 +1,60 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<opn-popup-post (onRemovePost)="onRemovePost($event)" (closeModal)="onCloseModal()" [indexFile]="modalIndex" [post]="popupPost" [show]="showModal" *ngIf="showModal"></opn-popup-post>
+<opn-modal modalId="one-post" closebtn="true" (onClose)="onReplaceL()">
+  <opn-view-post *ngIf="onePostData !==  null" [post]="onePostData" [me]="viewUser"></opn-view-post>
+</opn-modal>
+<main class="row no-gutters justify-content-center">
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="content-card" style="padding-bottom: 15px;">
+        <opn-new-post-form (postAdded)="onPostAdded($event)"></opn-new-post-form>
+      </div>
+      <div class="right-content-box float-right">
+        <div class="content-card-right clearfix">
+          <div class="dropdown-box" [ngClass]="{'open-dropdown': events.length}" #eventsRef>
+            <button class="dropdown-btn" (click)="onToggleActivity('events')">
+              Events 
+              <i class="ion-android-remove drop-icon"></i>
+              <i class="ion-android-add drop-icon"></i>
+            </button>
+            <opn-events-widget *ngIf="events.length > 0" [type]="'getEventsFilter'" [dataSource]="events" [allRedirect]="'events-near-me'"></opn-events-widget>
+            <div *ngIf="events.length == 0" class="no-events">Events are not available</div>
+          </div>
+        </div>
+        <div class="content-card-right clearfix" style="margin-top: 15px;">
+          <div class="dropdown-box" [ngClass]="{'open-dropdown': classes.length}" #classesRef>
+            <button class="dropdown-btn" (click)="onToggleActivity('classes')">
+              Upcoming classes & events 
+              <i class="ion-android-remove drop-icon"></i>
+              <i class="ion-android-add drop-icon"></i>
+            </button>
+            <opn-events-widget *ngIf="classes.length > 0" [type]="'getUpcomingFilter'" [dataSource]="classes" [allRedirect]="'events-near-me'"></opn-events-widget>
+            <div *ngIf="classes.length == 0" class="no-events">Events are not available </div>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper clearfix" style="padding-bottom: 24px;" infiniteScroll [infiniteScrollThrottle]="100" [infiniteScrollDistance]="1" (scrolled)="onScrollDown()">
+          <div class="no-guters justify-content-end feed-panel">
+            <div class="d-flex flex-nowrap">
+              <div #panelWorldRef class="order-1 panel-tab" (click)="onChangeFeedTab('World')">Worldwide</div>
+              <div #panelAllRef class="order-2 panel-tab" (click)="onChangeFeedTab('All')">My timeline</div>
+            </div>
+          </div>
+        <div class="content-card feed-box" *ngFor="let post of posts;" id="{{'post_' + post.id}}">
+          <opn-view-post *ngIf="post" (openModal)="onOpenModal($event)" (onRemove)="onRemovePost($event)" [post]="post" [me]="viewUser"></opn-view-post>
+        </div>
+        <div class="content-card feed-box p-0">
+          <div class="loader" *ngIf="!load">Loading...</div>
+          <div class="col-12" *ngIf="posts.length == 0 && load">
+            <div class="no-data">
+              Not found posts
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar>
+</opn-right-sidebar>

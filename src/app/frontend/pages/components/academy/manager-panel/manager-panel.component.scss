@@ -1,0 +1,126 @@
+.max-content{
+  max-width: 1080px;
+}
+.manager-panel{
+  width: 100%;
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid #d3dce9;
+  float: left;
+  position: relative;
+  &::after{
+    display: block;
+    content: '';
+    width: 94px;
+    height: 60px;
+    background: white;
+    border-bottom: 1px solid #d3dce9;
+    position: absolute;
+    right: -94px;
+    top: 0;
+  }
+  .manager-panel-container{
+    width: calc( 100% - 30px );
+    height: 60px;
+    margin-left: 30px;
+    padding: 0;
+    float: left;
+    .mg-menu{
+      float: left;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      .mg-menu-item{
+        display: inline-block;
+        position: relative;
+        &.not-pro{
+          a{
+            cursor: default;
+            color: #cdcfd6;
+          }
+        }
+        a{
+          display: block;
+          height: 40px;
+          line-height: 40px;
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          font-size: 14px;
+          color: #202f3b;
+          font-weight: 300;
+          cursor: pointer;
+          text-decoration: none;
+        }
+        &:not(:first-child){
+          margin-left: 30px;
+        }
+        &.has-childs > a:after{
+          display: inline-block;
+          content: '';
+          width: 12px;
+          height: 7px;
+          background: url("/assets/images/icons/select-btn-icon.png") center top no-repeat;
+          margin-left: 12px;
+        }
+        &:hover > a:after{
+          background: url("/assets/images/icons/select-btn-icon.png") center bottom no-repeat;
+        }
+        ul.menu-child{
+          min-width: 150px;
+          position: absolute;
+          right: 0;
+          top: 30px;
+          list-style: none;
+          display: none;
+          border: 0;
+          padding: 0;
+          background: white;
+          border: 1px solid #d3dce9;
+          border-radius: 2px;
+          background: white;
+          box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+          transition: 0.2s;
+          white-space: nowrap;
+          z-index: 10;
+          .menu-child-item{
+            display: block;
+            padding: 5px 20px;
+            &.not-pro{
+              a{
+                cursor: default;
+                color: #cdcfd6;
+              }
+            }
+            &:hover{
+              background: #f7f7f7;
+            }
+          }
+        }
+        &:hover{
+          ul.menu-child{
+            display: block;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    .go-pro-btn{
+      width: 100px;
+      height: 30px;
+      border-radius: 2px;
+      border: 0;
+      background: #ff5e8b;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 14px;
+      color: #ffffff;
+      text-transform: uppercase;
+      outline: none;
+      cursor: pointer;
+      float: right;
+      &.pro{
+        background: #4ca1ff;
+      }
+    }
+  }
+}

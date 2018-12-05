@@ -1,0 +1,30 @@
+<div class="events-widget">
+  <div #eventsList class="clearfix opn-scroll" [ngStyle]="styles">
+    <div class="date-group" *ngFor="let date of dates">
+      <div class="row no-gutters">
+        <div class="col-12 date">{{date | date: 'longDate'}}</div>
+      </div>
+      <div class="row event-item no-gutters" *ngFor="let item of events[date]">
+        <div class="col-auto time">{{item.start_date | date: 'hh:mm a'}}</div>
+        <div class="col-auto icon"><img [src]="'/assets/images/icons/'+item.type+'-icon.png'" [alt]="item.name"></div>
+        <div class="col-auto name" (click)="onRedirectTo(item.id)">{{item.name}}</div>
+        <div class="col-auto other ml-auto">
+            {{
+              (item.type == 'class')
+                ? (item.status_public == 0) 
+                  ? item.subscriptions[0].subscription.name 
+                  : '$' + item.price_all
+                : (item.payment_status == 'free')
+                  ? 'Free'
+                  : '$' + item.price_all
+            }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-12">
+      <button class="more-events" (click)="onLoadMore(type)" *ngIf="more">View More</button>
+    </div>
+  </div>
+</div>

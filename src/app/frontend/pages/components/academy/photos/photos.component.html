@@ -1,0 +1,17 @@
+<ngx-image-gallery [images]="images" [conf]="conf"></ngx-image-gallery>
+<div class="content-card-100" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()">
+  <div class="row profile-photos no-gutters">
+    <div class="col-6 profile-photo-item" *ngFor="let photo of photos; let i = index;">
+      <div class="photo-item-img">
+        <img [src]="serverUrl+photo.url" alt="foto1" class="align-self-center" (click)="openGallery(i)"/>
+      </div>
+    </div>
+    
+    <div class="loader" *ngIf="!load">Loading...</div>
+    <div class="col-12" *ngIf="photos.length == 0 && load">
+      <div class="no-data">
+        Not found photos
+      </div>
+    </div>
+  </div>
+</div>

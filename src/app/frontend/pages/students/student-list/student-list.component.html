@@ -1,0 +1,57 @@
+<div class="content-card-100">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div class="students-panel row no-gutters justify-content-between align-items-center">
+        <div class="col-auto panel-radio-group">
+          <div class="radio-item">
+            <input type="radio" name="status" [(ngModel)]="status" value="all" id="status1" (change)="onChangeFilterStatus(status)">
+            <label for="status1">All</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" name="status" [(ngModel)]="status" value="1" id="status2" (change)="onChangeFilterStatus(status)">
+            <label for="status2">Activated</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" name="status" [(ngModel)]="status" value="0" id="status3" (change)="onChangeFilterStatus(status)">
+            <label for="status3">No Active</label>
+          </div>
+        </div>
+        <div class="col-auto filter">
+          <input type="text" class="filter" #filter placeholder="Search" (keyup)="onFilterName(filter.value)">
+        </div>
+      </div>
+      <div class="row no-gutters students-list">
+        <div class="col-3 student-card" *ngFor="let student of studentsData">
+          <div class="student-avatar">
+            <div class="student-status" [class.active]="student.academy_status"></div>
+            <opn-view-avatar [belt]="(student.belt_user.belt)?student.belt_user.belt.sourse_round:null" [src]="student.avatar" [widthImg]="'65px'"></opn-view-avatar>
+          </div>
+          <div class="student-name" (click)="toDashboard(student.id)">
+            {{student.first_name}} {{student.last_name}}
+          </div>
+          <div class="student-address">
+            {{student.address?student.address:'No address'}}
+          </div>
+          <div class="student-action">
+            <button class="activate-btn" (click)="onActivate(student)" *ngIf="!student.academy_status; else active">Activate</button>
+            <ng-template #active>
+                <button class="deactivate-btn" (click)="onDeactivate(student)">Deactivate</button>
+            </ng-template>
+          </div>
+        </div>
+        <div class="col-12" *ngIf="studentsData.length == 0">
+          <div class="no-data">
+            Not found students
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row no-gutters justify-content-end pagination" *ngIf="studentsData.length > 0">
+            <div class="col-auto pages" *ngIf="pagintion.show">
+              <div class="page" *ngFor="let p of pagintion.pages;" [class.active]="page == p" (click)="onLoadPage(p);">{{p}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

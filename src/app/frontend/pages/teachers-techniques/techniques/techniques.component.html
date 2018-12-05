@@ -1,0 +1,40 @@
+<div class="row no-gutters align-items-center grid-panel">
+  <div class="col-8 grid-title">Create a techniques</div>
+  <div class="col-4 grid-btns">
+    <button class="grid-add-btn" [class.open]="newTechniquesShow" (click)="newTechniquesShow = !newTechniquesShow;">
+      <span *ngIf="!newTechniquesShow">Add</span>  
+      <span *ngIf="newTechniquesShow">Hide</span>  
+    </button>
+  </div>
+</div>
+<div class="grid-container">
+  <div class="grid-form clearfix" *ngIf="newTechniquesShow">
+    <form [formGroup]="formTechniques">
+      <div class="form-group">
+        <input formControlName="name" type="text">
+        <button [disabled]="formTechniques.invalid" (click)="onCreateTechnique(formTechniques)">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="clearfix position-relative">
+    <div id="update-technique" class="grid-update clearfix">
+      <form [formGroup]="formTechnique">
+        <div class="form-group">
+          <input formControlName="name" type="text">
+          <input formControlName="id" type="hidden">
+          <button [disabled]="formTechnique.invalid" (click)="onUpdateTechnique(formTechnique)">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="grid-row row no-gutters align-items-center" *ngFor="let technique of techniquesArr">
+      <div class="col-auto grid-title">{{technique.name}}</div>
+      <div class="col-auto grid-controls">
+        <div class="grid-btn-delete" (click)="onRemove(technique)"></div>
+        <div class="grid-btn-edit" (click)="onOpenEdit($event, technique)"></div>
+      </div>
+    </div>
+    <div *ngIf = "!techniquesArr.length" class="grid-row row no-gutters align-items-center">
+        <div class="col-auto grid-title">No techniques yet</div>
+    </div>
+  </div>
+</div>

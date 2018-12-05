@@ -1,0 +1,105 @@
+<aside class="left sidebar-scroll">
+    <div class="row">
+        <div class="col logo">
+            <a href="/#/"><img src="/assets/images/logo-white.png" class="mx-auto d-block" alt="OPN MAT"></a>
+        </div>
+    </div>
+    <!-- <div class="divider mx-auto"></div> -->
+    <div class="row card-box no-gutters justify-content-center align-items-center">
+        <div class="text-center user-logo-name-wrapper" (click)="router.navigate(['/profile/'+user.id])">
+            <div class="col-auto">
+                <opn-view-avatar [belt]="belt" [src]="user.avatar" [widthImg]="'100px'"
+                                 [md]="'sidebar'"></opn-view-avatar>
+            </div>
+            <div class="card_fio">{{user.first_name}} {{user.last_name}}</div>
+        </div>
+        <div class="col-11 text-center">
+            <div class="card_address">{{(user.short_address)?user.short_address:user.address}}</div>
+        </div>
+        <div class="col-11">
+            <div class="row no-gutters">
+                <div class="col-6 card-follower">
+                    <a href="/#/profile/{{user.id}}/followers">
+                        <div class="count">{{user.count_followers}}</div>
+                        <div class="title">Followers</div>
+                    </a>
+                </div>
+                <div class="col-6 card-following">
+                    <a href="/#/profile/{{user.id}}/followings">
+                        <div class="count">{{user.count_followings}}</div>
+                        <div class="title">Following</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-11 menu-box" *ngIf="load">
+        <ul class="menu">
+            <li class="menu-item">
+                <a opnActiveRoute routerLink="/" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="my-feed"></i>
+                    <span>My Feed</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a opnActiveRoute [routerLink]="'/profile/'+user.id" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="my-profile"></i>
+                    <span>My Profile</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="/#/academies">
+                <i class="academies"></i>
+                <span>Academies</span>
+              </a>
+            </li> -->
+            <li class="menu-item">
+                <a opnActiveRoute routerLink="/message" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="messages"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a opnActiveRoute routerLink="/notification" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="notifications"></i>
+                    <span>Notification</span>
+                </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="/#/my-technique-roadmap">
+                <i class="roadmap"></i>
+                <span>My Technique Roadmap</span>
+              </a>
+            </li> -->
+            <li opnActiveRoute class="menu-item">
+                <a opnActiveRoute="search/activity" (click)="toSearchEvent()" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="events"></i>
+                    <span>Events Near Me</span>
+                </a>
+            </li>
+            <li opnActiveRoute class="menu-item">
+                <a opnActiveRoute routerLink="/check-in" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="checkin"></i>
+                    <span>Check In</span>
+                </a>
+            </li>
+            <li class="menu-item">
+                <a opnActiveRoute routerLink="/subscriptions" routerLinkActive="active-link"
+                   [routerLinkActiveOptions]="{exact: true}">
+                    <i class="subscriptions"></i>
+                    <span>Subscriptions</span>
+                </a>
+            </li>
+            <li class="menu-item" (click)="onLogout()">
+                <i class="logout"></i>
+                <span>Log Out</span>
+            </li>
+        </ul>
+    </div>
+</aside>

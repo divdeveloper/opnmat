@@ -1,0 +1,17 @@
+<div class="edit-logo-photo">
+  <label for="edit-logo-photo"><i class="ion-camera"></i></label>
+  <input #file id="edit-logo-photo" type="file" (change)="onEditLogoPhoto($event)">
+</div>
+<div class="crop-container" #cropLogo>
+  <div class="row no-gutters justify-content-between">
+    <div class="col-2">
+      <button class="save-cover" (click)="onSave()"><i class="ion-ios-crop-strong"></i></button>
+    </div>
+    <div class="col-2">
+      <button class="close-cover" (click)="onCloseModal()"><i class="ion-android-close"></i></button>
+    </div>
+    <div class="col-12">
+        <img-cropper #cropper [image]="data" (onCrop)="cropped($event)" [settings]="cropperSettings"></img-cropper>
+    </div>
+  </div>
+</div>

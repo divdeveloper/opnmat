@@ -1,0 +1,334 @@
+$input-color: #bababa;
+$red: #ff0000;
+.user-data-wrap {
+  background-color: white;
+  border-radius: 0px;
+  box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+  .cover_block {
+    background-size: cover !important;
+    position: relative;
+    height: 320px;
+    position: relative;
+    border-radius: 0;
+    &::before {
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: rgba(23, 42, 71, 0.6);
+      border-radius: 2px 2px 0 0;
+    }
+    .edit-cover-photo {
+      width: 100px;
+      opacity: 0.65;
+      label {
+        width: 116px;
+        height: 40px;
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        border-radius: 2px;
+        text-align: center;
+        line-height: 38px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 200;
+        font-size: 14px;
+        color: #ffffff;
+        cursor: pointer;
+        border: 1px solid #d3dce9;
+        letter-spacing: 1px;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+          background: #d3dce9;
+          color: #333333;
+        }
+      }
+      input[type=file] {
+        display: none;
+      }
+    }
+  }
+  .profle-user-box {
+    margin: 0 auto;
+    .profile-avatar {
+      display: inline-block;
+      margin: 0 0 27px 30px;
+    }
+    .academy-data {
+      width: calc( 100% - 158px);
+      padding-left: 30px;
+    }
+    .academy-info {
+      height: 120px;
+      .academy-name {
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        font-size: 24px;
+        color: #ffffff;
+        padding-bottom: 10px;
+        letter-spacing: 1px;
+      }
+      .academy-location {
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 13px;
+        color: #ffffff;
+      }
+      .follower-count {
+        display: inline-block;
+        width: 140px;
+        text-align: center;
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        font-size: 24px;
+        color: #4ca1ff;
+        padding-bottom: 10px;
+      }
+      .follower-title {
+        display: inline-block;
+        width: 140px;
+        text-align: center;
+        font-family: "MuseoSansCyrl";
+        font-weight: 700;
+        font-size: 11px;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .count-followers{
+        cursor: pointer;
+        &:hover .follower-title{
+          color: #4ca1ff;
+        }
+      }
+    }
+  }
+  .profile-panel {
+    border-radius: 0 0 6px 6px;
+    height: 70px;
+    background: white;
+    .panel-btn {
+      padding: 0 15px;
+      height: 70px;
+      position: relative;
+      line-height: 70px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 15px;
+      border-bottom: 2px solid transparent;
+      color: #202f3b;
+      cursor: pointer;
+      &.active-tab {
+        color: #4ca1ff;
+        border-bottom: 2px solid #4ca1ff;
+      }
+      &:hover{
+        transition: 0.2s ease-in-out;
+        color: #4ca1ff;
+        border-color: rgba($color: #4ca1ff, $alpha: 0.5);
+      }
+    }
+    .btn-follow-me {
+      width: 115px;
+      border: 0;
+      border-radius: 3px;
+      height: 40px;
+      font-size: 15px;
+      background: #4ca1ff;
+      color: white;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      cursor: pointer;
+      margin-right: 28px;
+      box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+      &:hover {
+        box-shadow: none;
+      }
+      &.unfollow{
+        background: #f1f2f5;
+        color: #cdcfd6;
+        transition: 0.2s ease-in;
+        outline: none;
+      }
+    }
+    .btn-msg {
+      width: 115px;
+      border: 0;
+      border-radius: 3px;
+      height: 40px;
+      font-size: 15px;
+      background: transparent;
+      border: 1px solid #d3dce9;
+      color: #202f3b;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      cursor: pointer;
+      margin-right: 10px;
+      box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+      &:hover {
+        box-shadow: none;
+      }
+    }
+    .group-btns {
+      margin-right: 28px;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 14px;
+      color: #4ca1ff;
+      height: 50px;
+      padding-top: 15px;
+      cursor: pointer;
+      i.ion-plus {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
+        border-radius: 50%;
+        border: 2px solid #4ca1ff;
+        text-align: center;
+        line-height: 18px;
+        padding: 0 0 1px 1px;
+        margin-right: 8px;
+      }
+      i.ion-chevron-down {
+        color: #c4c4c4;
+        margin-left: 8px;
+        font-size: 14px;
+      }
+      &:hover {
+        ul.btns-list {
+          display: block;
+          margin-top: 10px;
+        }
+      }
+    }
+    .btns-list {
+      min-width: 150px;
+      position: absolute;
+      right: 0;
+      top: 40px;
+      list-style: none;
+      display: none;
+      border: 0;
+      padding: 0;
+      background: white;
+      border: 1px solid #d3dce9;
+      border-radius: 2px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+      transition: 0.2s;
+      white-space: nowrap;
+      z-index: 10;
+      .btn-item {
+        display: block;
+        padding: 10px 20px;
+        cursor: pointer;
+        &.not-pro {
+          cursor: default;
+          color: #cdcfd6;
+          a {
+            cursor: default;
+            color: #cdcfd6;
+          }
+        }
+        &:hover {
+          background: #f7f7f7;
+        }
+      }
+    }
+  }
+}
+
+.feed-box {
+  margin-top: 15px !important;
+}
+.hide-new{
+  .feed-box:first-child{
+    margin-top: 0;
+  }
+}
+.right-content-box {
+  width: 370px;
+  padding: 0;
+  .content-card-right {
+    padding: 0;
+    .dropdown-box{
+      overflow: hidden;
+      &:not(:last-child){
+        margin-bottom: 14px;
+      }
+      
+      button.dropdown-btn{
+        font-size: 16px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 500;
+        color: #202f3b;
+        width: 100%;
+        height: 60px;
+        border: 0;
+        background-color: transparent;
+        text-align: left;
+        padding: 0 30px;
+        outline: none;
+        position: relative;
+        cursor: pointer;
+      }
+      .drop-icon{
+        color: #4ca1ff;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+      }
+      .ion-android-add{
+        display: inline-block;
+      }
+      .ion-android-remove{
+        display: none;
+      }
+      &.not-found{
+        button.dropdown-btn{
+          .ion-android-add{
+            display: none;
+          }
+          .ion-android-remove{
+            display: inline-block;
+          }
+        }
+      }
+      &.open-dropdown{
+        button.dropdown-btn{
+          .ion-android-add{
+            display: none;
+          }
+          .ion-android-remove{
+            display: inline-block;
+          }
+          // background: url("/assets/images/icons/carret-o.png") calc( 100% - 16px ) center no-repeat, #1772a7;
+        }
+      }
+      .no-events{
+        background: #f0f2f8;
+        height: 31px;
+        font-size: 13px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        line-height: 31px;
+        color: #90949c;
+        padding: 0 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1340px) {
+  .user-data-wrap{
+    .profile-panel {
+      .panel-btn {
+        padding: 0 12px;
+      }
+    }
+  }
+}

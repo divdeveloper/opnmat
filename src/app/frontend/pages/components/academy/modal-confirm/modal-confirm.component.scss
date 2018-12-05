@@ -1,0 +1,70 @@
+.modal-container {
+  .modal-overlay {
+    background-color: rgba(22, 42, 53, 0.8);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 20200;
+  }
+  .app-modal {
+    width: 540px;
+    background: white;
+    padding: 25px 20px;
+    left: calc(50% - 250px);
+    max-height: calc(100% - 50px);
+    overflow-y: auto;
+    position: fixed;
+    top: 50px;
+    width: 500px;
+    z-index: 20201;
+    .close-modal{
+      width: 14px;
+      height: 14px;
+      background: url("/assets/images/icons/close.png") center no-repeat;
+      padding: 0;
+      cursor: pointer;
+      transform: translateY(2px);
+      border: 0;
+      outline: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      transition: 0.2s ease-in-out;
+      &:hover{
+        transform: scale(1.1);
+      }
+    }
+    .title {
+      h3 {
+        margin-top: 20px;
+        font-family: "MuseoSansCyrl";
+        font-weight: 300;
+        font-size: 34px;
+        color: #323844;
+        text-align: center;
+      }
+    }
+    button.action{
+      width: 100%;
+      height: 44px;
+      border: 0;
+      background: #f1f2f5;
+      color: #cdcfd6;
+      margin: 35px 0 25px 0;
+      border-radius: 2px;
+      transition: 0.2s ease-in;
+      outline: none;
+      box-shadow: 0 3px 4px rgba(91, 96, 116, 0.3);
+      cursor: pointer;
+      &.accept {
+        background: #4ca1ff;
+        color: white;
+      }
+      &:hover{
+        box-shadow: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+.avatar{
+  background-size: cover !important; 
+  border-radius: 50%; 
+}
+
+@media (max-width: 1491px){
+  .avatar{
+    &.sidebar{
+      width: 84px !important;
+      height: 84px !important;
+    }
+  }
+}

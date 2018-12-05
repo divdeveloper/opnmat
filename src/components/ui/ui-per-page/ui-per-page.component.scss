@@ -1,0 +1,94 @@
+.opn-ui-select{
+  width: 100%;
+  height: 40px;
+  border: 1px solid #d3dce9;
+  border-radius: 2px;
+  padding-left: 24px ;
+  color: #202f3b;
+  font-family: "MuseoSansCyrl";
+  font-size: 15px;
+  font-weight: 300;
+  outline: none;
+  line-height: 38px;
+  white-space: nowrap;
+  position: relative;
+  .select-current-value{
+    position: relative;
+    padding-right: 60px;
+    overflow: hidden;
+    button.select-btn{
+      width: 40px;
+      height: 38px;
+      border: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: white;
+      cursor: pointer;
+      outline: none;
+      &::after{
+        display: block;
+        content: '';
+        width: 12px;
+        height: 9px;
+        background: url("/assets/images/icons/select-btn-icon.png") center top no-repeat;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+      }
+    }
+  }
+  .ui-select-options{
+    padding: 0;
+    position: absolute;
+    min-width: calc( 100% + 2px );
+    top: 39px;
+    left: -1px;
+    list-style-type: none;
+    border: 1px solid #d3dce9;
+    border-radius: 2px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+    display: none;
+    z-index: 9;
+    .ui-select-otion{
+      padding-left: 24px ;
+      color: #202f3b;
+      font-family: "MuseoSansCyrl";
+      font-size: 15px;
+      font-weight: 300;
+      white-space: nowrap;
+      &:hover{
+        background: #f1f2f5;
+        cursor: pointer;
+      }
+      &:not(:last-child){
+        border-bottom: 1px solid #d3dce9;
+      }
+    }
+  }
+  &.open{
+    border-color: #98a6bc;
+    .ui-select-options{
+      display: block;
+    }
+    .select-current-value{
+      button.select-btn{
+        &::after{
+          background: url("/assets/images/icons/select-btn-icon.png") center -73px no-repeat;
+        }
+      }
+    }
+  }
+  &:hover{
+    border-color: #98a6bc;
+    .select-current-value{
+      button.select-btn{
+        &::after{
+          background: url("/assets/images/icons/select-btn-icon.png") center -73px no-repeat;
+        }
+      }
+    }
+  }
+}

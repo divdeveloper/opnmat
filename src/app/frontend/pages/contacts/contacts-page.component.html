@@ -1,0 +1,82 @@
+<opn-left-sidebar></opn-left-sidebar>
+<main class="lt-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="lt-card">
+                    <form [formGroup]="formContacts">
+                        <div class="lt-header">
+                            <div class="title">Contacts</div>
+                        </div>
+                        <div class="lt-form-rows">
+                            <div class="wrap-row">
+                                <label for="name">Name</label>
+                                <div class="wrap-input">
+                                    <input class="input-style" id="name" formControlName="name" type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="wrap-row">
+                                <label>Location</label>
+                                <div class="wrap-input">
+                                    <input class="input-style" id="location" formControlName="location" type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="wrap-row">
+                                <label for="email">Email</label>
+                                <div class="wrap-input">
+                                    <input class="input-style" id="email" formControlName="email" type="email" readonly>
+                                </div>
+                            </div>
+                            <div class="wrap-row">
+                                <label for="phone">Phone</label>
+                                <div class="wrap-input">
+                                    <input class="input-style" id="phone" formControlName="phone" type="text" readonly>
+                                </div>
+                            </div>
+                            <div class="wrap-row wrap-textarea">
+                                <label for="information">Information</label>
+                                <div class="wrap-input">
+                                    <textarea class="input-style" id="information" formControlName="information" readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="wrap-row wrap-textarea">
+                                <label for="information">Hours</label>
+                                <div class="wrap-input">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="list-hours">
+                                                <div class="hour" *ngFor="let item of hours">
+                                                    <span class="day">{{item.day}}</span>
+                                                    <span class="h-start">{{item.start}}</span>-<span class="h-end">{{item.end}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lt-header">
+                            <div class="title">Managers</div>
+                        </div>
+                        <div class="lt-form-rows">
+                            <div class="lt-list lt-list-manager">
+                                <div class="manager-item" *ngFor="let manager of managers">
+                                    <div class="info">
+                                        <div class="avatar">
+                                            <img [src]="manager.avatar ? baseUrl + manager.avatar : urlLogo" alt="">
+                                        </div>
+                                        <span class="name">{{manager.first_name}} {{manager.last_name}}</span>
+                                    </div>
+                                </div>
+                                <div *ngIf = "!managers.length" class="manager-item">
+                                    <p>No managers yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<opn-right-sidebar></opn-right-sidebar>

@@ -1,0 +1,180 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<opn-popup-post (onRemovePost)="onRemovePost($event)" (closeModal)="onCloseModal()" [indexFile]="modalIndex" [post]="popupPost"
+  [show]="showModal" *ngIf="showModal"></opn-popup-post>
+<opn-crop-cover-photo #cropCover [profileId]="userId" [cropperSrc]="cropper" (closeModel)="onCloseCoverModal()" (saveCover)="onChangeCover($event)"></opn-crop-cover-photo>
+<main class="row no-gutters justify-content-center">
+  <div class="col-12 max-content" *ngIf="profileload && !profileFound">
+    <div class="no-data">
+        Not found user
+    </div>
+  </div>
+  <div class="col-12 max-content" *ngIf="profileload && profileFound">
+    <div class="content-card-100">
+      <div class="user-data-wrap clearfix">
+        <div class="row cover_block no-gutters align-items-end" style="position: relative" [ngStyle]="coverBg">
+          <div class="edit-cover-photo" *ngIf="me == userId">
+            <label for="edit-cover-photo">Edit Cover</label>
+            <input id="edit-cover-photo" type="file" (change)="onEditCoverPhoto($event)">
+          </div>
+          <div class="col-12 profle-user-box">
+            <div class="row no-gutters">
+              <div class="col-auto profile-avatar">
+                <opn-view-avatar [belt]="belt" [src]="userAvatar" [widthImg]="'128px'"></opn-view-avatar>
+              </div>
+              <div class="col-auto profile-data">
+                <div class="row align-items-end profile-info justify-content-between no-gutters">
+                  <div class="col-8">
+                    <div class="profile-name">{{userProfile.first_name}} {{userProfile.last_name}}</div>
+                    <div class="academy-name" (click)="toAcademy(userProfile.academy.id)">{{academyName}}</div>
+                    <div class="academy-address">{{(userProfile.short_address) ? userProfile.short_address : userProfile.address}}</div>
+                    <div class="profile-date">{{userProfile.date | date: "MM/dd/yyyy"}}</div>
+                  </div>
+                  <div class="col-2 text-left count-follow" (click)="profileTab = 'followers'">
+                    <div class="follower-count">{{(userProfile.count_followers)?userProfile.count_followers:0}}</div>
+                    <div class="follower-title">Followers</div>
+                  </div>
+                  <div class="col-2 text-right count-follow" (click)="profileTab = 'followings'">
+                    <div class="follower-count">{{(userProfile.count_followings)?userProfile.count_followings:0}}</div>
+                    <div class="follower-title">Followings</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row no-gutters profile-panel justify-content-between">
+          <div class="col-auto">
+            <div class="row no-gutters">
+              <div class="col-auto align-self-center panel-btn active-tab" [ngClass]="{'active-tab': profileTab === 'posts'}" (click)="onChangeTab($event, 'posts')">Timeline
+              </div>
+              <div class="col-auto align-self-center panel-btn" [ngClass]="{'active-tab': profileTab === 'photos'}" (click)="onChangeTab($event, 'photos')">Photos
+              </div>
+              <div class="col-auto align-self-center panel-btn" [ngClass]="{'active-tab': profileTab === 'videos'}" (click)="onChangeTab($event, 'videos')">Videos
+              </div>
+              <div class="col-auto align-self-center panel-btn" [ngClass]="{'active-tab': profileTab === 'followers'}" (click)="onChangeTab($event, 'followers')">Followers
+              </div>
+              <div *ngIf="me == userId" class="col-auto align-self-center panel-btn" [ngClass]="{'active-tab': profileTab === 'followings'}" (click)="onChangeTab($event, 'followings')">Followings
+              </div>
+            </div>
+          </div>
+          <div class="col-auto align-self-center" *ngIf="userProfile.date">
+            <button class="btn-follow-me" *ngIf="me != userId" (click)="onEventMessage()">Message</button>
+            <button *ngIf="me != userId && !isFolow" class="btn-follow-me" (click)="onFollowUser(userId)">Follow</button>
+            <button *ngIf="me != userId && isFolow" class="btn-follow-me unfollow" (click)="onFollowRemove(userId)">Unfollow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-card-100">
+      <div *ngIf="profileTab === 'posts'" class="tab-container">
+        <div class="content-card" style="padding-bottom: 24px;" *ngIf="me == userId">
+          <opn-new-post-form (postAdded)="onPostAdded($event)"></opn-new-post-form>
+        </div>
+        <div class="right-content-box" style="float: right;">
+          <div class="content-card-right clearfix">
+            <div class="head-block">Academy
+              <button *ngIf="!addingAcademy && me == userId" class="add-btn" (click)="onNewAcademyInfo($event)"></button>
+            </div>
+            <div class="row no-gutters">
+              <div class="col-12 text-right">
+                <form class="new-academy-form" *ngIf="addingAcademy">
+                  <div class="row text-left">
+                    <div class="col-6">
+                      <div class="form-group select-academy">
+                        <select2 [data]="yearsF" [cssImport]="true" [value]="academiesInfo.from" [width]="100" [options]="optionsYearsF" (valueChanged)="changeFromYear($event)"></select2>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group select-academy">
+                        <select2 [data]="yearsT" [cssImport]="true" [value]="academiesInfo.to" [width]="100" [options]="optionsYearsT" (valueChanged)="changeToYear($event)"></select2>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group">
+                        <opn-academies-select [exclamation]="false" [setCurrent]="currentAcademy" [valid]="validErrAcademy" (selected)="setAcademy($event)"></opn-academies-select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row text-right">
+                    <div class="col-12">
+                      <div class="form-group">
+                        <button type="submit" (click)="onSubmitAcademy()" *ngIf="academiesInfo.action == 'add'">Save</button>
+                        <button type="reset" (click)="onResetAcademy()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div class="row no-gutters info-block" *ngFor="let infoAcademy of infoAcademies">
+                  <div class="col-auto years-range align-self-center">{{infoAcademy.begin_date}}-{{infoAcademy.end_date}}</div>
+                  <div class="col-auto name align-self-center">{{infoAcademy.name}}</div>
+                  <div class="col-auto actions align-self-center" *ngIf="me == userId">
+                    <i class="event-remove action-btn" (click)="removeAcademyInfo(infoAcademy)"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="content-card-right">
+            <div class="head-block">Prizes &amp; Competitions
+              <button *ngIf="!addingPrizes && me == userId" style="float: right" class="add-btn" (click)="onNewPrizesInfo($event)"></button>
+            </div>
+            <form [formGroup]="formPrizes" class="new-prizes-form" *ngIf="addingPrizes">
+                <div class="row text-left">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <textarea class="opn-scroll" formControlName="text" name="info-text" maxlength="150"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="row text-right">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <button type="submit" (click)="onSubmitPrizes()">Save</button>
+                      <button type="reset" (click)="onResetPrizes()">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            <div class="row no-gutters info-block prize-content" *ngFor="let infoPrize of infoPrizes">
+              <div class="col-11">
+                  {{infoPrize.content}}
+              </div>
+              <div class="col-1 actions" *ngIf="me == userId">
+                  <i class="event-remove action-btn" (click)="removeInfoPrize(infoPrize)"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper clearfix" style="padding-bottom: 24px;" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()"
+          [class.hide-new]="me != userId">
+          <div class="content-card feed-box" *ngFor="let post of posts;" id="{{'post_'+post.id}}">
+            <opn-view-post (openModal)="onOpenModal($event)" (onRemove)="onRemovePost($event)" [post]="post" [me]="viewUser"></opn-view-post>
+          </div>
+          <div class="content-card feed-box p-0">
+            <div class="loader" *ngIf="!load">Loading...</div>
+            <div class="col-12" *ngIf="posts.length == 0 && load">
+              <div class="no-data">
+                Not found posts
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="profileTab === 'photos'" class="tab-container">
+        <opn-profile-photos></opn-profile-photos>
+      </div>
+      <div *ngIf="profileTab === 'videos'" class="tab-container">
+        <opn-profile-videos></opn-profile-videos>
+      </div>
+      <div *ngIf="profileTab === 'followers'" class="tab-container">
+        <opn-profile-followers></opn-profile-followers>
+      </div>
+      <div *ngIf="profileTab === 'followings'" class="tab-container">
+        <opn-profile-following></opn-profile-following>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar>
+</opn-right-sidebar>

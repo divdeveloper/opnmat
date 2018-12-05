@@ -1,0 +1,187 @@
+<opn-left-sidebar></opn-left-sidebar>
+<main class="row no-gutters justify-content-center">
+    <opn-manager-panel *ngIf="academyId != 0" [academyId]="academyId" class="w-100" (checkManager)="isManager = $event"></opn-manager-panel>
+    <div class="col-12 max-content">
+        <div class="content-card-100">
+            <div class="row">
+                <div class="col-9 col-xl-10">
+                    <div class="lt-card">
+                        <form [formGroup]="formSettings">
+                            <div class="lt-header">
+                                <div class="title">Academy settings</div>
+                                <div class="lt-switcher">
+                                    <span *ngIf="activeProfile; else active">Profile Activate</span>
+                                    <ng-template #active>
+                                        <span>Profile Deactivate</span>
+                                    </ng-template>
+                                    <label for="status" class="sw-box">
+                                        <input id = "status" type="checkbox" formControlName="status_public"
+                                            (click)="toggleProfile()">
+                                        <span class="switch">
+                                            <span class="switcher"></span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="lt-form-rows">
+                                <div class="wrap-row">
+                                    <label for="logo">Current Picture</label>
+                                    <div class="wrap-input row-logo">
+                                        <div class="logo">
+                                            <div class="avatar-photo">
+                                                <div class="change-avatar">
+                                                    <opn-crop-logo-photo (onCropped)="setAvatar($event)"></opn-crop-logo-photo>
+                                                </div>
+                                                <opn-view-avatar [src]="urlLogo" [widthImg]="'128px'"></opn-view-avatar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-row">
+                                    <label for="name">Name</label>
+                                    <div class="wrap-input">
+                                        <input class="input-style" id="name" formControlName="name" type="text">
+                                    </div>
+                                </div>
+                                <div class="wrap-row">
+                                    <label>Location</label>
+                                    <div class="wrap-input">
+                                        <ng4geo-autocomplete [userSettings]="locationInputSettings"
+                                                            (componentCallback)="autoCompleteCallback($event)">
+                                        </ng4geo-autocomplete>
+                                    </div>
+                                </div>
+                                <div class="wrap-row">
+                                    <label for="email">Email</label>
+                                    <div class="wrap-input">
+                                        <input class="input-style" id="email" formControlName="email" type="email">
+                                    </div>
+                                </div>
+                                <div class="wrap-row">
+                                    <label for="phone">Phone</label>
+                                    <div class="wrap-input">
+                                        <input class="input-style" id="phone" formControlName="phone" type="text">
+                                    </div>
+                                </div>
+                                <div class="wrap-row wrap-textarea">
+                                    <label for="information">Information</label>
+                                    <div class="wrap-input">
+                                        <textarea class="input-style" id="information" formControlName="information"></textarea>
+                                    </div>
+                                </div>
+                                <div class="wrap-row wrap-textarea">
+                                    <label for="information">Hours</label>
+                                    <div class="wrap-input">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="list-hours">
+                                                    <div class="hour" *ngFor="let item of hours">
+                                                        <span class="day">{{item.day}}</span>
+                                                        <span class="h-start">{{item.start}}</span>-<span class="h-end">{{item.end}}</span>
+                                                        <span class="remove" (click)="removeHours(item.id)">Remove</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row align-items-center lt-hours">
+                                            <div class="col-xl-3">
+                                                    <ng-select placeholder="Select day"
+                                                            #elDays
+                                                            [options]="days">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                    <ng-select placeholder="Select start"
+                                                            #elHStart
+                                                            [options]="h_start">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                    <ng-select placeholder="Select end"
+                                                            #elHEnd
+                                                            [options]="h_end">
+                                                    </ng-select>
+                                            </div>
+                                            <div class="col-xl-3">
+                                                <span class="btn-add" (click)= "addHour(elDays.value, elHStart.value, elHEnd.value)">Add Hours</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lt-header">
+                                <div class="title">Admin Roles</div>
+                            </div>
+                            <div class="lt-form-rows">
+                                <div class="wrap-row form-manager" (clickOutside)=toggleManagersDropDown($event)>
+                                    <label for="add-manager">Add Managers</label>
+                                    <div class="wrap-input">
+                                        <input class="input-style" id="add-manager" #search type="text"
+                                               (click)="managersDropDownIsActive = true"
+                                               (keyup)="onSearch(search.value)">
+                                        <span [hidden]="!managersDropDownIsActive" class="lt-btn" (click)="onCloseSearch()">Close</span>
+                                    </div>
+                                    <div  [hidden]="!managersDropDownIsActive || listSearch.length < 1" class="lt-list lt-list-search">
+                                        <div class="manager-item" *ngFor="let item of listSearch">
+                                            <div class="info">
+                                                <div class="avatar">
+                                                    <img [src]="item.avatar ? baseUrl + item.avatar : urlLogo" alt="">
+                                                </div>
+                                                <span class="name">{{item.first_name}} {{item.last_name}}</span>
+                                            </div>
+                                            <div class="lt-button">
+                                                <span *ngIf="!item.is_manager; else added" (click)="addManager(item)">Add</span>
+                                                <ng-template #added>Added</ng-template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lt-list lt-list-manager">
+                                    <div class="manager-item" *ngFor="let manager of managers">
+                                        <div class="info">
+                                            <div class="avatar">
+                                                <img [src]="manager.avatar ? baseUrl + manager.avatar : noPhotoImg" alt="">
+                                            </div>
+                                            <span class="name">{{manager.first_name}} {{manager.last_name}}</span>
+                                        </div>
+                                        <div *ngIf="!manager.is_manager || +manager.is_manager.status === 0; else ownerBtn" class="lt-button" (click)="removeManager(manager)">Remove</div>
+                                      <ng-template #ownerBtn>
+                                        <div class="lt-button">Owner</div>
+                                      </ng-template>
+                                    </div>
+                                    <div *ngIf = "!managers.length" class="manager-item">
+                                        <p>No managers yet</p>
+                                    </div>
+                                </div>
+                                <div class="lt-form-footer">
+                                    <span [hidden]="!savedRecently" class="all-saved">All changes are saved!</span>
+                                    <button class="lt-btn" type="button" [disabled]="formSettings.invalid"
+                                            (click)="onUpdateForm(formSettings)">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-3 col-xl-2">
+                    <div class="lt-card">
+                        <div class="lt-content">
+                            <div class="lt-qrcode">
+                                <div class="title">
+                                    Your QR Code Here
+                                </div>
+                                <div class="wrap-img-code">
+                                    <img src="assets/images/qrcode.png" alt="">
+                                </div>
+                                <a href="assets/images/qrcode.png" download>
+                                    <img src="assets/images/icons/icon-download.png">
+                                    <span>download</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<opn-right-sidebar [isManager]="isManager"></opn-right-sidebar>

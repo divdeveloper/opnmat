@@ -1,0 +1,20 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<opn-upgrade-academy *ngIf="openPro" [academyId]="academyId" (close)="onClosePro()"></opn-upgrade-academy>
+<main class="row no-gutters justify-content-center">
+  <opn-manager-panel [academyId]="academyId" class="w-100" (checkManager)="onCheckManager($event)"></opn-manager-panel>
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="row no-gutters ">
+        <div class="col-auto grid-box">
+          <opn-teachers [academyId]="academyId"></opn-teachers>
+        </div>
+        <div class="col-auto grid-box">
+          <opn-techniques [academyId]="academyId"></opn-techniques>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar [isManager]="isManager">
+</opn-right-sidebar>

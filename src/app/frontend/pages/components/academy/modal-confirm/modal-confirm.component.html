@@ -1,0 +1,15 @@
+<div class="modal-container" *ngIf="isOpen">
+  <div class="modal-overlay"></div> <!--  (click)="close(true)" -->
+  <div class="app-modal opn-scroll">
+    <button class="btn-close close-modal" (click)="close()"></button>
+    <div class="body">
+        <div class="title">
+            <h3 *ngIf="modalTitle" [innerHTML]="modalTitle"></h3>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-5"><button class="action accept" (click)="onConfirm(true);">Delete</button></div>
+            <div class="col-5"><button class="action declide" (click)="onConfirm(false);">Close</button></div>
+          </div>
+    </div>
+  </div>
+</div>

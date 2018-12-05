@@ -1,0 +1,18 @@
+<div class="content-card-100" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="300" (scrolled)="onScrollDown()">
+  <div class="row profile-videos no-gutters">
+    <div class="col-6 profile-video-item" *ngFor="let video of videos">
+      <div class="video-item-source">
+        <video width="100%" controls class="align-self-center" controlsList="nodownload">
+          <source [src]="serverUrl+video.url" type="video/mp4"> Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+    <div class="loader" *ngIf="!load">Loading...</div>
+    <div class="col-12" *ngIf="videos.length == 0 && load">
+      <div class="no-data">
+        Not found videos
+      </div>
+    </div>
+    
+  </div>
+</div>

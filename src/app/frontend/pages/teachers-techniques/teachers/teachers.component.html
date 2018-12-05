@@ -1,0 +1,40 @@
+<div class="row no-gutters align-items-center grid-panel">
+  <div class="col-8 grid-title">Create a teacher</div>
+  <div class="col-4 grid-btns">
+    <button class="grid-add-btn" [class.open]="newTeacherShow" (click)="newTeacherShow = !newTeacherShow;">
+      <span *ngIf="!newTeacherShow">Add</span>  
+      <span *ngIf="newTeacherShow">Hide</span>  
+    </button>
+  </div>
+</div>
+<div class="grid-container">
+  <div class="grid-form clearfix" *ngIf="newTeacherShow">
+    <form [formGroup]="formTeachers">
+      <div class="form-group">
+        <input formControlName="name" type="text">
+        <button [disabled]="formTeachers.invalid" (click)="onCreateTeacher(formTeachers)">Add</button>
+      </div>
+    </form>
+  </div>
+  <div class="clearfix position-relative">
+    <div id="update-teacher" class="grid-update clearfix">
+      <form [formGroup]="formTeacher">
+        <div class="form-group">
+          <input formControlName="name" type="text">
+          <input formControlName="id" type="hidden">
+          <button [disabled]="formTeacher.invalid" (click)="onUpdateTeacher(formTeacher)">Save</button>
+        </div>
+      </form>
+    </div>
+    <div class="grid-row row no-gutters align-items-center" *ngFor="let teacher of teachersArr">
+      <div class="col-auto grid-title">{{teacher.first_name}} {{teacher.last_name}}</div>
+      <div class="col-auto grid-controls">
+        <div class="grid-btn-delete" (click)="onRemove(teacher)"></div>
+        <div class="grid-btn-edit" (click)="onOpenEdit($event, teacher)"></div>
+      </div>
+    </div>
+    <div *ngIf = "!teachersArr.length" class="grid-row row no-gutters align-items-center">
+      <div class="col-auto grid-title">No teachers yet</div>
+    </div>
+  </div>
+</div>

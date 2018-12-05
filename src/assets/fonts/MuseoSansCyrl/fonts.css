@@ -1,0 +1,78 @@
+/** MuseoSansCyrl**/
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_100_Italic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_300_Italic.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_300.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl Copy';
+  src: url('MuseoSansCyrl_300copy.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_500_Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_500.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_700_Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_700.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_900_Italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl';
+  src: url('MuseoSansCyrl_900.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MuseoSansCyrl Copy';
+  src: url('MuseoSansCyrl_900copy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}

@@ -1,0 +1,44 @@
+<div class="row no-gutters feed-box">
+  <div class="col-2">
+    <div class="feed-avatar">
+      <opn-view-avatar *ngIf="!academyId" [src]="userAvatar" [widthImg]="'50px'"></opn-view-avatar>
+      <opn-view-logo-academy *ngIf="academyId" [src]="userAvatar" [widthImg]="'50px'"></opn-view-logo-academy>
+    </div>
+  </div>
+  <div class="col-10 feed-fields">
+    <textarea name="feed-post" class="feed-post" placeholder="Start typing your post here ..." #description maxlength="30000" (keyup)="onEditText(description.value)"></textarea>
+    <div class="row justify-content-between">
+      <div class="upload-buttons col-3">
+        <label class="upload-photos">
+          <i class="photo-icon"></i>
+          <input type="file" #photosInput accept="image/*" (change)="InputChangePhoto($event)" multiple maxlength="3">
+        </label>
+        <!--<span class="separator"></span>-->
+        <label class="upload-video">
+          <i class="video-icon"></i>
+          <input type="file" #videoInput accept="video/*" (change)="InputChangeVideo($event)">
+        </label>
+      </div>
+      <div class="post-buttons col-9">
+        <button class="btn-right submit-post col" (click)="onCreatePost($event)" [disabled]="emptyData">Post</button>
+        <opn-dropdown-visibility class="float-right" (onCurrent)="onChangeVisibility($event)" (onSelected)="onChangeVisibility($event)"></opn-dropdown-visibility>
+      </div>
+    </div>
+    <div class="row no-gutters">
+      <div class="preview-photo col-md-auto" *ngFor="let image of imagesSrc;" style="width: 100px;">
+        <div class="removeImg float-right" (click)="onRemovePhoto($event, image.name)"></div>
+        <img [src]="image.src" width="100%" />
+      </div>
+      <div class="preview-photo col-md-auto" *ngIf="videoSrc" style="width: 100px;">
+        <div class="removeImg float-right" (click)="onRemoveVideo($event)"></div>
+        Video
+      </div>
+    </div>
+  </div>
+  <div class="overlay-olader" *ngIf="saveStatus">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+</div>

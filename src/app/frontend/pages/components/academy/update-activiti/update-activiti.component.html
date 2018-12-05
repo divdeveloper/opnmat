@@ -1,0 +1,94 @@
+<div class="overlay-modal-bg">
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto prev-modal" *ngIf="step > 1" (click)="onPevStep()"></div>
+      <div class="col-auto close-modal ml-auto" (click)="onClose()"></div>
+    </div>
+    <div class="modal-head">
+      Update Active
+    </div>
+    <div class="steps">
+      <div class="spet-nuber">
+        step
+        <span>{{step}}</span> of 3
+      </div>
+      <div class="step-bar step{{step}}"></div>
+    </div>
+    <div [ngSwitch]="step" class="step-container">
+      <div *ngSwitchCase="1">
+        <div class="step-container-head">
+          Choose Type Event
+        </div>
+        <div class="step-container-types clearfix">
+          <div class="step-type">
+            <div class="special-event" [class.active]="modelEvent.type == 'seminar'" (click)="onChangeTypeEvent($event, 'seminar')"></div>
+            <div class="step-type-title">Seminar</div>
+          </div>
+          <div class="step-type">
+            <div class="event" [class.active]="modelEvent.type == 'mat_event'" (click)="onChangeTypeEvent($event, 'mat_event')"></div>
+            <div class="step-type-title">Open Mat</div>
+          </div>
+          <div class="step-type">
+            <div class="others" [class.active]="modelEvent.type == 'others'" (click)="onChangeTypeEvent($event, 'others')"></div>
+            <div class="step-type-title">Others</div>
+          </div>
+        </div>
+        <button class="next-step accept" (click)="onNextStep()">Next Step</button>
+      </div>
+      <div *ngSwitchCase="2">
+        <div class="activiti-group">
+          <label for="activiti-name">Name:</label>
+          <input type="text" id="activiti-name" [(ngModel)]="modelEvent.name" (keyup)="onChangeField2()">
+        </div>
+        <div class="activiti-group">
+          <div class="activiti-group-left">
+            <div class="payment-text" [ngSwitch]="modelEvent.payment_status">
+              <span *ngSwitchCase="'free'">Free</span>
+              <span *ngSwitchCase="'fee'">Fee</span>
+            </div>
+            <div class="payment-control">
+              <opn-ui-checkbox [check]="(this.modelEvent.payment_status == 'free')?false:true" (changeCheckbox)="onChangePayment($event)"></opn-ui-checkbox>
+            </div>
+          </div>
+          <div class="activiti-group-right">
+            <label for="activiti-price-all">Price:</label>
+            <input type="text" id="activiti-price-all" [(ngModel)]="modelEvent.price_all" currencyMask [options]="{ align: 'left' }" [disabled]="(this.modelEvent.payment_status == 'free')?true:false"
+              (keyup)="onChangeField2({price_all: modelEvent.name})">
+          </div>
+        </div>
+        <div class="activiti-group">
+          <label for="activiti-person-about">About:</label>
+          <textarea class="opn-scroll" id="activiti-person-about" [(ngModel)]="modelEvent.about" (keyup)="onChangeField2()"></textarea>
+        </div>
+        <button [ngClass]="{'accept': acceptStep2}" class="next-step" (click)="onNextStep()">Next Step</button>
+      </div>
+      <div *ngSwitchCase="3">
+        <div class="activiti-group">
+          <div class="activiti-date">
+            <label>Start Date</label>
+            <opn-ui-datepicker [id]="11" [options]="dateOptions" [(ngModel)]="modelEvent.start_date" (changeDate)="onChangeStartDate($event)"></opn-ui-datepicker>
+          </div>
+          <div class="activiti-time">
+            <label for="start-time">Start Time</label>
+            <opn-ui-time [date]="time.start" (changeTime)="onChangeStartTime($event)"></opn-ui-time>
+          </div>
+        </div>
+        <div class="activiti-group">
+          <div class="activiti-date">
+            <label>End Date</label>
+            <opn-ui-datepicker [id]="22" [options]="dateOptions" [(ngModel)]="modelEvent.end_date"  (changeDate)="onChangeEndDate($event)"></opn-ui-datepicker>
+          </div>
+          <div class="activiti-time">
+            <label for="end-time">End Time</label>
+            <opn-ui-time [date]="time.end" (changeTime)="onChangeEndTime($event)"></opn-ui-time>
+          </div>
+        </div>
+        <div class="activiti-group">
+          <label for="activiti-person-limit">Person Limit:</label>
+          <input type="text" id="activiti-person-limit" [(ngModel)]="modelEvent.amount" mask="000000000" (keyup)="onChangeField3()">
+        </div>
+        <button [ngClass]="{'accept': acceptCreate}" class="create-event-btn" (click)="onUpdateActivity()" [disabled]="createDisabled">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

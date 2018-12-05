@@ -1,0 +1,94 @@
+<nb-card>
+    <nb-card-header>
+        {{title}}
+    </nb-card-header>
+    <nb-card-body>
+        <!-- <datetime [(ngModel)]="date"></datetime> -->
+        <form>
+            <div class="form-group">
+                <label for="">Type</label>
+                <div class="demo-radio">
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="type" value="special_event" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Special event</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="type" value="class" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Class</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="type" value="mat_event" [(ngModel)]="type" [ngModelOptions]="{standalone: true}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Open mat event</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="Name" placeholder="Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="form-group">
+                <label for="">Academy</label>
+                <div class="form-group select-academy">
+                    <select2 [data]="academies" [value]="academyVal" [cssImport]="true" [width]="100" [options]="optionsAcademy" (valueChanged)="changeAcademy($event)"></select2>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label for="">Location</label>
+                <!-- <input type="text" class="form-control" id="Location" placeholder="Location" [(ngModel)]="location" [ngModelOptions]="{standalone: true}"> -->
+                <ng4geo-autocomplete [userSettings]="gaAutocompleteStings" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+            </div>
+            <div class="form-group">
+                <label for="">Date Time</label>
+                <div class="input-group">
+                    <input class="form-control" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" />
+                    <span class="input-group-btn">
+                                <button class="btn btn-outline-secondary" (click)="onTogglePicker()">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                </div>
+                <datetime-popup [value]="myDate" (valueChange)="onValueChange($event)" [(showPopup)]="showPicker" [showDate]="showDate" [showTime]="showTime"></datetime-popup>
+            </div>
+            <div class="form-group">
+                <label for="">Payment</label>
+                <div class="demo-radio">
+                    <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" value="free" [(ngModel)]="payment" [ngModelOptions]="{standalone: true}">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Free</span>
+                        </label>
+                    <label class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" name="payment" value="fee" [(ngModel)]="payment" [ngModelOptions]="{standalone: true}">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Fee</span>
+                        </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">User group</label>
+                <div class="demo-radio">
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="group" value="junior" [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Junior</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" name="group" value="adult" [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Adult</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Ranking">Ranking</label>
+                <input type="number" min="1" class="form-control" id="Ranking" placeholder="Ranking" [(ngModel)]="rank" [ngModelOptions]="{standalone: true}">
+            </div>
+
+            <button class="btn btn-success" (click)="onClick(value)">{{buttonText}}</button>
+        </form>
+    </nb-card-body>
+</nb-card>

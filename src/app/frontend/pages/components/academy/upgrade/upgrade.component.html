@@ -1,0 +1,63 @@
+<div class="overlay-modal-bg">
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto prev-modal" *ngIf="(step > 1 && !isPro && step != 4) || (step > 2 && isPro && step != 4)" (click)="onPevStep()"></div>
+      <div class="col-auto close-modal ml-auto" (click)="onClose()"></div>
+    </div>
+    <div [ngSwitch]="step" class="step-container">
+      <div *ngSwitchCase="1">
+        <div class="row no-gutters justify-content-center">
+          <div class="col-auto logo-upgrade">
+            <img src="/assets/images/icons/logo-black.png" alt="OPN MAT">
+          </div>
+        </div>
+        <div class="step-container-head">
+            Get more features
+        </div>
+        <p class="step-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer </p>
+        <button class="create-event-btn accept" (click)="onNextStep()">I want it</button>
+      </div>
+      <div *ngSwitchCase="2">
+        <div class="step-container-head">
+            Pick Your<br> Promotion Type
+        </div>
+        <div class="step-container-types d-flex justify-content-center clearfix">
+          <div class="step-type">
+            <div class="time" [class.active]="promotion == 'time'" #special (click)="onChangeTypeEvent($event, 'time')"></div>
+            <div class="step-type-title">Time</div>
+          </div>
+          <div class="step-type">
+            <div class="attendance" [class.active]="promotion == 'attendance'" #event (click)="onChangeTypeEvent($event, 'attendance')"></div>
+            <div class="step-type-title">Attendance</div>
+          </div>
+        </div>
+        <div class="activiti-group mt-4" *ngIf="promotion == 'time'">
+          <label for="activiti-price-all">Time:</label>
+          <input type="text" id="activiti-price-all" [(ngModel)]="time" mask="000000000" (keyup)="onChangeFieldType(time, 'time')">
+        </div>
+        <div class="activiti-group mt-4" *ngIf="promotion == 'attendance'">
+          <label for="activiti-price-all">Attendance:</label>
+          <input type="text" id="activiti-price-all" [(ngModel)]="attendance" mask="000000000" (keyup)="onChangeFieldType(attendance, 'attendance')">
+        </div>
+        <button [ngClass]="{'accept': acceptStep2}" class="create-event-btn" (click)="onNextStep()">To choose</button>
+      </div>
+      <div *ngSwitchCase="3">
+        <div class="step-container-head">
+          Set fee price<br> for new users
+        </div>
+        <div class="activiti-group mt-4">
+          <label for="activiti-price-all">Price:</label>
+          <input type="text" id="activiti-price-all" [(ngModel)]="price" mask="000000000" (keyup)="onChangeField()">
+        </div>
+        <button [ngClass]="{'accept': acceptCreate}" class="create-event-btn" (click)="onUpgrade()" [disabled]="createDisabled">Create</button>
+      </div>
+      <div *ngSwitchCase="4">
+        <div class="step-container-head">
+            <div style="color: rgb( 76, 161, 255 ); font-size: 24px"><img src="assets/images/icons/success.png" style="width: 50px;margin-top: -20px;margin-right: 10px;">Success!</div>
+          <span class="pt-2" style="font-size: 30px;">Thank you for upgrading!<br> Your academy is PRO</span>
+        </div>
+        <button class="create-event-btn accept" (click)="onClose()" >Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

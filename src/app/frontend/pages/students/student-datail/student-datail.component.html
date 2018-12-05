@@ -1,0 +1,117 @@
+<div class="content-card-100">
+  <div class="row no-gutters row-10">
+    <div class="col-8 col-p">
+      <div class="student-card">
+        <div class="card-head">
+          Student Dashboard
+        </div>
+        <div class="card-content" *ngIf="userData">
+          <div class="row no-gutters">
+            <div class="col-8">
+              <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                  <opn-view-avatar [belt]="userData.belt.sourse_round" [src]="userData.avatar" [widthImg]="'70px'" [md]="'sidebar'"></opn-view-avatar>
+                </div>
+                <div class="col-auto user-data">
+                  <div class="user-name">
+                    {{userData.first_name}} {{userData.last_name}}
+                  </div>
+                  <div class="user-academy">
+                    {{userData.academy.name}}
+                  </div>
+                  <div class="user-address">
+                    {{userData.address}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 col-p">
+      <div class="student-card">
+        <div class="card-head">
+          Next Level Stripe
+        </div>
+        <div class="card-content">
+          <div class="level-stripe">
+            <div class="legend">
+              <div class="numbers">27/50</div>
+              <div class="name">Classes</div>
+            </div>
+            <round-progress [current]="27" [max]="50" [stroke]="10" [radius]="60" [semicircle]="false" [rounded]="false" [responsive]="false"
+              [clockwise]="true" [color]="'#4ca1ff'" [background]="'#d3dce9'" [duration]="800" [animation]="'easeOutCubic'"
+              [animationDelay]="0">
+            </round-progress>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content-card-100">
+  <div class="row no-gutters row-10">
+    <div class="col-7 col-p">
+      <div class="student-card">
+        <div class="card-head">
+          Total classes attended
+        </div>
+        <div class="card-content">
+          <div class="level-activity">
+            <div class="legend">
+              <div class="numbers">17</div>
+              <div class="name">Classes</div>
+            </div>
+            <round-progress [current]="50" [max]="50" [stroke]="10" [radius]="60" [semicircle]="false" [rounded]="false" [responsive]="false"
+              [clockwise]="true" [color]="'#4ca1ff'" [background]="'#d3dce9'" [duration]="800" [animation]="'easeOutCubic'"
+              [animationDelay]="0">
+            </round-progress>
+          </div>
+          <div class="level-activity">
+            <div class="legend">
+              <div class="numbers">17</div>
+              <div class="name">Classes</div>
+            </div>
+            <round-progress [current]="50" [max]="50" [stroke]="10" [radius]="60" [semicircle]="false" [rounded]="false" [responsive]="false"
+              [clockwise]="true" [color]="'#ff4f81'" [background]="'#d3dce9'" [duration]="800" [animation]="'easeOutCubic'"
+              [animationDelay]="0">
+            </round-progress>
+          </div>
+          <div class="level-activity">
+            <div class="legend">
+              <div class="numbers">17</div>
+              <div class="name">Classes</div>
+            </div>
+            <round-progress [current]="50" [max]="50" [stroke]="10" [radius]="60" [semicircle]="false" [rounded]="false" [responsive]="false"
+              [clockwise]="true" [color]="'#f3d928'" [background]="'#d3dce9'" [duration]="800" [animation]="'easeOutCubic'"
+              [animationDelay]="0">
+            </round-progress>
+          </div>
+          <div class="level-activity">
+            <div class="legend">
+              <div class="numbers">17</div>
+              <div class="name">Classes</div>
+            </div>
+            <round-progress [current]="50" [max]="50" [stroke]="10" [radius]="60" [semicircle]="false" [rounded]="false" [responsive]="false"
+              [clockwise]="true" [color]="'#11e66b'" [background]="'#d3dce9'" [duration]="800" [animation]="'easeOutCubic'"
+              [animationDelay]="0">
+            </round-progress>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 col-p">
+      <div class="student-card">
+        <div class="card-head">
+          Activity
+        </div>
+        <div class="card-content">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

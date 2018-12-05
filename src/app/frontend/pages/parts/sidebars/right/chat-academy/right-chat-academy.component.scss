@@ -1,0 +1,139 @@
+$lt-bg: #f0f2f8;
+$input-color: #bababa;
+
+$color-primary: #4ca1ff;
+$color-default: #202f3b;
+$color-label: #90949c;
+$color-border: #d3dce9;
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lt-chat {
+  width: 100%;
+  height: 100%;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .lt-chat-name {
+    padding: 10px 15px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    background: #4ba1ff;
+    color: #fff;
+
+    .user-name {
+      font-weight: bold;
+    }
+
+    .user-status {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      margin-right: 5px;
+
+      &.active {
+        background: #2bec4a;
+      }
+    }
+  }
+}
+
+.lt-scroll {
+  position: relative;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.list-messages {
+  height: calc(100% - 110px);
+  overflow-y: auto;
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+
+  .lt-message {
+    display: flex;
+    padding: 10px 0;
+
+    .msg-img {
+      width: 36px;
+      height: 36px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    .msg-date {
+      font-size: 11px;
+      color: #90949c;
+      margin-bottom: 5px;
+    }
+
+    .msg-info {
+      padding: 0 10px;
+      max-width: 80%;
+      text-align: left;
+    }
+
+    .msg-text {
+      background: $lt-bg;
+      display: inline-flex;
+      padding: 8px 10px;
+      font-size: 13px;
+      line-height: 17px;
+      color: #162d3d;
+      border-radius: 3px;
+      word-break: break-word;
+    }
+
+    &.lt-sender {
+      justify-content: flex-end;
+
+      .msg-date {
+        text-align: right;
+      }
+
+      .msg-text {
+        background: $color-primary;
+        color: #fff;
+      }
+
+      .msg-info {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.lt-message-form {
+  border-top: 1px solid $color-border;
+  padding: 10px 15px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+
+  .wrap-input {
+    width: 100%;
+  }
+}
+
+.lt-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}

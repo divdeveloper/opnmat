@@ -1,0 +1,41 @@
+<opn-upgrade-academy *ngIf="openPro" [isPro]="isPro" [academyId]="academyId" (onSetPro)="onSetPro()" (close)="onClosePro()"></opn-upgrade-academy>
+<div *ngIf="isManager" class="manager-panel d-flex justify-content-center">
+  <div class="col-12 max-content p-0">
+    <div class="manager-panel-container row no-gutters justify-content-between align-items-center">
+      <ul class="mg-menu col-auto">
+        <li class="mg-menu-item">
+          <a [routerLink]="academyLink" routerLinkActive="active-link">Home</a>
+        </li>
+        <li class="mg-menu-item">
+          <a (click)="router.navigate([academyLink + '/messages'])">Messages</a>
+        </li>
+        <li class="mg-menu-item has-childs">
+          <a>Management</a>
+          <ul class="menu-child">
+            <li class="menu-child-item" [class.not-pro]="!isPro">
+                <a (click)="goToLink('/teachers-techniques')">Teachers &amp; Techniques {{(!isPro)?'(pro)':''}}</a>
+            </li>
+            <li class="menu-child-item" [class.not-pro]="!isPro">
+              <a (click)="goToLink('/classes')">Classes  {{(!isPro)?'(pro)':''}}</a>
+            </li>
+            <li class="menu-child-item" [class.not-pro]="!isPro">
+              <a (click)="goToLink('/activities')">Activities  {{(!isPro)?'(pro)':''}}</a>
+            </li>
+          </ul>
+        </li>
+        <li class="mg-menu-item" [class.not-pro]="!isPro">
+          <a (click)="goToLink('/create-subscriptions')">Subscriptions {{(!isPro)?'(pro)':''}}</a>
+        </li>
+        <li class="mg-menu-item">
+          <a [routerLink]="academyLink+'/students'" routerLinkActive="active-link">Students</a>
+        </li>
+        <li class="mg-menu-item">
+          <a [routerLink]="academyLink+'/settings'" routerLinkActive="active-link">Settings</a>
+        </li>
+      </ul>
+      <div class="col-auto">
+          <button class="go-pro-btn d-block" [class.pro]="isPro" (click)="onOpenPro()">{{(isPro)?'Pro':'Upgrade'}}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+$color-primary: #4ca1ff;
+$color-default: #202f3b;
+$color-label: #90949c;
+$color-border: #d3dce9;
+
+:host {
+  color: $color-default;
+}
+
+.lt-subscription {
+  position: relative;
+  word-wrap: break-word;
+
+  .icon-info {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    cursor: pointer;
+    .tooltip-btn{
+      width: 20px;
+      height: 20px;
+      background: url("/assets/images/icons/info-sprite.png") center 0 no-repeat;
+      position: absolute;
+      cursor: pointer;
+      .tooltip-content{
+        display: none;
+      }
+      &:hover{
+        background: url("/assets/images/icons/info-sprite.png") center -24px no-repeat;
+        & .tooltip-content{
+          width: auto;
+          max-width: 270px;
+          min-width: 70px;
+          display: block;
+          position: absolute;
+          top: 35px;
+          right: -20px;
+          background: white;
+          padding: 22px;
+          font-family: "MuseoSansCyrl";
+          font-weight: 300;
+          font-size: 14px;
+          color: #3a4a57;
+          border-radius: 3px;
+          border: 1px solid #d4e0ec;
+          box-shadow: 0 4px 8px rgba(23, 42, 71, 0.25);
+          &:before{
+            display: block;
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-left: 1px solid #d4e0ec;
+            border-bottom: 1px solid #d4e0ec;
+            position: absolute;
+            top: -6px;
+            right: 24px;
+            background: white;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(135deg);
+          }
+        }
+      }
+    }
+  }
+
+  .subscription-header, .subscription-content {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .subscription-header {
+    padding: 15px 0;
+    text-align: center;
+
+    & > * {
+      margin-bottom: 5px;
+    }
+  }
+
+  .content-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .label {
+      font-size: 14px;
+      color: $color-label;
+    }
+  }
+
+  .subscription-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+   .f-btn {
+     display: inline-flex;
+     margin: 0 10px;
+     cursor: pointer;
+    }
+  }
+
+  .type {
+    font-size: 15px;
+    color: #172a47;
+    font-weight: 500;
+  }
+
+  .price {
+    color: $color-primary;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .time {
+    font-size: 14px;
+    color: $color-label;
+  }
+
+  .select-period {
+  }
+}

@@ -1,0 +1,41 @@
+<opn-left-sidebar></opn-left-sidebar>
+<main class="lt-bg">
+    <section class="lt-messages">
+        <div class="wrap-dialogs">
+            <div class="lt-dialog-search">
+                <div class="wrap-input icon-right">
+                    <input type="text" placeholder="Search" class="input-style"
+                           #search (keyup)="onSearch(search.value)">
+                    <div class="icon icon-search"></div>
+                    <div *ngIf="listSearch.length" class="lt-list-search">
+                        <div class="user-item" *ngFor="let item of listSearch" (click)="toChat(item)">
+                            <div class="info">
+                                <div class="avatar">
+                                    <img [src]="item.avatar ? baseUrl + item.avatar : noImg" alt="">
+                                </div>
+                                <span class="name">{{item.first_name}} {{item.last_name}}</span>
+                            </div>
+                            <!--<div class="lt-button" (click)="toChat(item)">-->
+                                <!--To chat-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="list-dialogs">
+                <app-dialog [isDialog] = "isDialog.id" [dialog] = "dialog" *ngFor="let dialog of dialogs"
+                            (click) ="onChangeDialog(dialog)">
+                </app-dialog>
+
+                <div class="lt-loader" *ngIf="isLoading">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <!--<app-list-dialog></app-list-dialog>-->
+        </div>
+        <div class="wrap-chat">
+            <app-chat [activeDialog] = "activeDialog"></app-chat>
+        </div>
+    </section>
+</main>
+<opn-right-sidebar></opn-right-sidebar>

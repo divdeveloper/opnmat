@@ -1,0 +1,8 @@
+<div class="dropdown-visibility clearfix position-relative" #dropdownVisibility>
+  <button class="btn-visibility" #dropdownBtn (click)="onToggle($event)">Private</button>
+  <div class="visibiliti-icon"><i [ngClass]="{'public': current, 'private': !current}"></i></div>
+  <ul class="dropdown-menu-visibility">
+      <li class="item" (click)="onSelect($event, 0)">Private</li>
+      <li class="item" (click)="onSelect($event, 1)">Public</li>
+  </ul>
+</div>

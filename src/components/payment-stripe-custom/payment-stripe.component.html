@@ -1,0 +1,22 @@
+<div class="overlay-modal-bg">
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto close-modal ml-auto" (click)="onClose()"></div>
+    </div>
+    <div class="modal-head">
+      Payment Form
+    </div>
+    <div class="payment-form">
+      <form (ngSubmit)="buy($event)" [formGroup]="stripePayment">
+        <div class="payment-group">
+          <input type="text" formControlName="name" placeholder="Jane Doe">
+        </div>
+        <div class="payment-group">
+          <div id="card-element" class="field" #card></div>
+        </div>
+        <div #error class="payment-errors"></div>
+        <button class="payment-btn" [class.accept]="stripePayment.valid" [disabled]="!stripePayment.valid" type="submit">Buy</button>
+      </form>
+    </div>
+  </div>
+</div>

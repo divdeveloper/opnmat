@@ -1,0 +1,78 @@
+$lt-bg: #f0f2f8;
+$input-color: #bababa;
+
+$color-primary: #4ca1ff;
+$color-default: #202f3b;
+$color-label: #90949c;
+$color-border: #d3dce9;
+
+.lt-dialog {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  transition: all 0.4s;
+  cursor: pointer;
+
+  &.active, &:hover {
+    background: $lt-bg;
+  }
+
+  .dialog-img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+
+    .wrap-img {
+      width: 50px;
+      height: 50px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    &.active {
+      &:after {
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        background: #2bec4a;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .dialog-info {
+    width: calc(100% - 50px);
+    padding-left: 15px;
+
+    .user-name {
+      display: flex;
+      justify-content: space-between;
+
+      span {
+        font-weight: bold;
+      }
+    }
+
+    .user-msg {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 24px;
+    }
+  }
+}
+
+.date {
+  font-size: 14px;
+  color: #c1c3c8;
+}

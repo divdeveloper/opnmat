@@ -1,0 +1,9 @@
+<div class="opn-ui-select" #uiSelect>
+  <div class="select-current-value" (click)="onClick($event)">
+    {{carrent}}
+    <button class="select-btn"></button>
+  </div>
+  <ul class="ui-select-options">
+    <li class="ui-select-otion" *ngFor="let option of dataSource" (mousedown)="onSelect(option)">{{option.title}}</li>
+  </ul>
+</div>

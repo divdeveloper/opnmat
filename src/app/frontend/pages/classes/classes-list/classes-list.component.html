@@ -1,0 +1,51 @@
+<opn-update-class [dataSource]="editClassSource" [academy]="academyProfile" *ngIf="classModal" (close)="onCloseUpdateClass()"></opn-update-class>
+<div class="content-card-100">
+  <div class="row no-gutters grid-panel align-items-center">
+    <div class="col-6 grid-title">List classes</div>
+    <div class="col-6 grid-form">
+      <input type="text" class="filter" #filter placeholder="Search" (keyup)="onFilter(filter.value)">
+    </div>
+  </div>
+  <div class="row no-gutters">
+    <div class="col-12 grid-content">
+      <table class="grid-table" [class.no-pagination]="!pagintion.show" *ngIf="classesData.length > 0">
+        <thead class="grid-table-head">
+        <tr class="grid-table-row">
+          <th>Name</th>
+          <th>Price</th>
+          <th>Date</th>
+          <th>Number</th>
+          <th>Subscription</th>
+          <th>Earned</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let class of classesData;" class="grid-table-row">
+          <td class="grid-table-cel blue-text link-text" (click)="toClass(class.id)">{{class.name}}</td>
+          <td class="grid-table-cel blue-text">{{(class.price_all)?'$'+class.price_all:(class.status_public)?'public':'private'}}</td>
+          <td class="grid-table-cel">{{class.start_date | date:'mediumDate'}}</td>
+          <td class="grid-table-cel">{{class.subscriptions.length}}/{{class.amount}}</td>
+          <td class="grid-table-cel blue-text">Subscription</td>
+          <td class="grid-table-cel blue-text">$ {{class.price_all}}</td>
+          <td class="grid-table-cel">
+            <button class="grid-btn-delete" (click)="onRemoveClass(class)"></button>
+            <button class="grid-btn-edit" (click)="onEditClass(class)"></button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="no-data" *ngIf="classesData.length == 0">
+        You do not have classes
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters justify-content-between pagination" *ngIf="classesData.length > 0">
+    <div class="col-auto">
+      <opn-per-page (change)="onChangePerPage($event)"></opn-per-page>
+    </div>
+    <div class="col-auto pages" *ngIf="pagintion.show">
+      <div class="page" *ngFor="let p of pagintion.pages;" [class.active]="page == p" (click)="onLoadPage(p);">{{p}}</div>
+    </div>
+  </div>
+</div>

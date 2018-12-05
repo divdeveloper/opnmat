@@ -1,0 +1,222 @@
+$white-gray: #d3dce9;
+.ui-time-picker {
+  position: relative;
+  input[type="text"] {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #d3dce9;
+    border-radius: 2px;
+    padding-left: 24px;
+    color: #202f3b;
+    font-family: "MuseoSansCyrl";
+    font-size: 15px;
+    font-weight: 300;
+    outline: none;
+    cursor: pointer;
+    ::-webkit-input-placeholder {
+      font-family: "MuseoSansCyrl";
+      font-size: 15px;
+    }
+    ::-moz-placeholder {
+      font-family: "MuseoSansCyrl";
+      font-size: 15px;
+    }
+    :-ms-input-placeholder {
+      font-family: "MuseoSansCyrl";
+      font-size: 15px;
+    }
+    :-moz-placeholder {
+      font-family: "MuseoSansCyrl";
+      font-size: 15px;
+    }
+  }
+  .timepicker-btn {
+    width: 50px;
+    height: 49px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-left: 1px solid $white-gray;
+    cursor: pointer;
+    &:after {
+      display: block;
+      content: '';
+      width: 16px;
+      height: 18px;
+      background: url("/assets/images/icons/time-btn-icon.png") center top no-repeat;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+  }
+  &.open,
+  &:hover {
+    input[type="text"] {
+      border-color: #98a6bc;
+    }
+    .timepicker-btn {
+      border-left: 1px solid #98a6bc;
+      &:after {
+        background: url("/assets/images/icons/time-btn-icon.png") center -64px no-repeat;
+      }
+    }
+  }
+  .time-picker-modal {
+    min-width: 207px;
+    padding: 0;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    list-style-type: none;
+    border: 1px solid #d3dce9;
+    border-radius: 2px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(23, 42, 71, 0.15);
+    display: none;
+    z-index: 9;
+    padding: 5px 15px;
+    .time-picker-split{
+      width: 20px;
+      float: left;
+      text-align: center;
+      margin-top: 38px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #202f3b;
+    }
+    .time-picker-hour{
+      width: 35px;
+      float: left;
+    }
+    .time-picker-minute{
+      width: 35px;
+      float: left;
+    }
+    .time-picker-hour,
+    .time-picker-minute {
+      position: relative;
+      input[type="number"] {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #d3dce9;
+        border-radius: 2px;
+        text-align: center;
+        color: #202f3b;
+        font-family: "MuseoSansCyrl";
+        font-size: 15px;
+        font-weight: 300;
+        outline: none;
+        &::-webkit-input-placeholder {
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+        }
+        &::-moz-placeholder {
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+        }
+        &:-ms-input-placeholder {
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+        }
+        &:-moz-placeholder {
+          font-family: "MuseoSansCyrl";
+          font-size: 15px;
+        }
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+      button.stepUp{
+        position: relative;
+        width: 35px;
+        height: 25px;
+        background: transparent;
+        border: 0;
+        // border-left: 1px solid #d3dce9;
+        // border-top: 1px solid #d3dce9;
+        // border-right: 1px solid #d3dce9;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        &:after{
+          display: block;
+          content: '';
+          background: url("/assets/images/icons/plus-btn-icon.png") center top no-repeat;
+          width: 8px;
+          height: 8px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate3d(-50%, -50%, 0);
+        }
+      }
+      button.stepDown{
+        position: relative;
+        width: 35px;
+        height: 25px;
+        background: transparent;
+        border: 0;
+        // border-left: 1px solid #d3dce9;
+        // border-bottom: 1px solid #d3dce9;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        margin-top: 5px;
+        &:after{
+          display: block;
+          content: '';
+          background: url("/assets/images/icons/minus-btn-icon.png") center top no-repeat;
+          width: 8px;
+          height: 2px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate3d(-50%, -50%, 0);
+        }
+      }
+      button.stepUp,
+      button.stepDown{
+        &:hover{
+          background: #d3dce9;
+          &:after{
+            background-position-y: bottom;
+          }
+        }
+      }
+    }
+    .time-picker-amnet{
+      width: 40px;
+      float: left;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 15px;
+      color: #202f3b;
+      text-align: center;
+      margin-top: 44px;
+      cursor: pointer;
+    }
+    .time-picker-set{
+      width: 45px;
+      height: 30px;
+      float: left;
+      font-family: "MuseoSansCyrl";
+      font-weight: 300;
+      font-size: 14px;
+      background: #4ca1ff;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      border-radius: 1px;
+      outline: 0;
+      margin-top: 38px;
+    }
+  }
+  &.open {
+    .time-picker-modal {
+      display: block;
+    }
+  }
+}

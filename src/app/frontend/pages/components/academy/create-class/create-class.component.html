@@ -1,0 +1,89 @@
+<div class="overlay-modal-bg">
+  <div class="modalConteiner">
+    <div class="row modal-panel no-gutters">
+      <div class="col-auto prev-modal" *ngIf="step > 1 && step < 3" (click)="onPevStep()"></div>
+      <div class="col-auto close-modal ml-auto" (click)="onClose()"></div>
+    </div>
+    <div class="modal-head">
+      Create Class
+    </div>
+    <div class="steps" *ngIf="step < 3">
+      <div class="spet-nuber">
+        step
+        <span>{{step}}</span> of 2
+      </div>
+      <div class="step-bar step{{step}}"></div>
+    </div>
+    <div [ngSwitch]="step" class="step-container">
+      <div *ngSwitchCase="1">
+        <div class="activiti-group">
+          <label for="activiti-name">Name:</label>
+          <input type="text" id="activiti-name" [(ngModel)]="modelEvent.name" (keyup)="onChangeField2()">
+        </div>
+        <div class="activiti-group">
+          <opn-ui-select [currentValue]="modelEvent.status_public" [dataSource]="[
+            {value: '1', title: 'Public'}, 
+            {value: '0', title: 'Private'}
+          ]" (change)="onChangeStatusPublic($event)"></opn-ui-select>
+        </div>
+        <div class="activiti-group" *ngIf="modelEvent.status_public == 1">
+          <label for="activiti-price-all">Price:</label>
+          <input type="text" id="activiti-price-all" [(ngModel)]="modelEvent.price_all" currencyMask [options]="{ align: 'left' }" (keyup)="onChangeField2()">
+        </div>
+        <div class="activiti-group">
+          <label for="activiti-name">Subscription:</label>
+          <angular2-multiselect [data]="subscriptionsList" [(ngModel)]="modelEvent.subscriptions" [settings]="subscriptionSettings" (onSelect)="onSubscriptionSelect($event)"
+            (onDeSelect)="OnSubscriptionDeSelect($event)">
+          </angular2-multiselect>
+        </div>
+        <div class="activiti-group d-none">
+          <label for="activiti-person-limit">Person Limit:</label>
+          <input type="hidden" id="activiti-person-limit" [(ngModel)]="modelEvent.amount" mask="000000000" (keyup)="onChangeField2()">
+        </div>
+        <button [ngClass]="{'accept': acceptStep2}" class="next-step" (click)="onNextStep()">Next Step</button>
+      </div>
+      <div *ngSwitchCase="2">
+        <div class="activiti-group">
+          <div class="activiti-date">
+            <label>Start Date</label>
+            <opn-ui-datepicker [id]="11" [options]="dateOptions" [(ngModel)]="modelEvent.start_date" (changeDate)="onChangeStartDate($event)"></opn-ui-datepicker>
+          </div>
+          <div class="activiti-time">
+            <label for="start-time">Start Time</label>
+            <opn-ui-time [date]="time.start" (changeTime)="onChangeStartTime($event)"></opn-ui-time>
+          </div>
+        </div>
+        <div class="activiti-group">
+          <div class="activiti-date">
+            <label>End Date</label>
+            <opn-ui-datepicker [id]="22" [options]="dateOptions" [(ngModel)]="modelEvent.end_date" (changeDate)="onChangeEndDate($event)"></opn-ui-datepicker>
+          </div>
+          <div class="activiti-time">
+            <label for="end-time">End Time</label>
+            <opn-ui-time [date]="time.end" (changeTime)="onChangeEndTime($event)"></opn-ui-time>
+          </div>
+        </div>
+        <div class="activiti-group">
+          <label for="activiti-name">Teachers:</label>
+          <angular2-multiselect [data]="teacherList" [(ngModel)]="modelEvent.teachers" [settings]="teachersSettings" (onSelect)="onTeacherSelect($event)"
+            (onDeSelect)="OnTeacherDeSelect($event)" (onSelectAll)="onSelectAllTeacher($event)" (onDeSelectAll)="onDeSelectAllTeacher($event)">
+          </angular2-multiselect>
+        </div>
+        <div class="activiti-group">
+          <label for="activiti-name">Techniques:</label>
+          <angular2-multiselect [data]="techniqueList" [(ngModel)]="modelEvent.techniques" [settings]="techniquesSettings" (onSelect)="onTechniqueSelect($event)"
+            (onDeSelect)="OnTechniqueDeSelect($event)" (onSelectAll)="onSelectAllTechnique($event)" (onDeSelectAll)="onDeSelectAllTechnique($event)">
+          </angular2-multiselect>
+        </div>
+        <button [ngClass]="{'accept': acceptCreate}" class="create-event-btn" (click)="onCreateActivity()" [disabled]="createDisabled">Create</button>
+      </div>
+      <div *ngSwitchCase="3">
+        <div class="step-container-head mt-5">
+          <div style="color: rgb( 76, 161, 255 ); font-size: 24px"><img src="assets/images/icons/success.png" style="width: 50px;margin-top: -20px;margin-right: 10px;">Success!</div>
+          <p class="mt-4">You class <b>{{modelEvent.name}}</b> created!</p>
+        </div>
+        <button class="create-event-btn accept" (click)="onClose()" >Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

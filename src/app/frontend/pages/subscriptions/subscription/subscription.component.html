@@ -1,0 +1,36 @@
+<div class="row no-gutters subscription-wrap">
+    <div class="col-3 subscription-card" *ngFor="let subscribe of subscriptions;">
+     <div class="card-body">
+        <div class="tooltip-btn" *ngIf="subscribe.subscription.information != ''">
+          <div class="tooltip-content">
+            {{subscribe.subscription.information}}
+          </div>
+        </div>
+        <div class="card-title">{{subscribe.subscription.name}}</div>
+        <div class="card-price">$ {{subscribe.subscription.price}}</div>
+        <div class="card-time">{{membership[subscribe.subscription.membership]}}</div>
+        <div class="card-divider"></div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Trial</div>
+          <div class="col-4 value">{{subscribe.subscription.trial_days?subscribe.subscription.trial_days + ' day':'-'}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Registration Fee</div>
+          <div class="col-4 value">$ {{subscribe.subscription.registration_fee}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-8 label">Age</div>
+          <div class="col-4 value">{{subscribe.subscription.age}}</div>
+        </div>
+        <div class="card-row row no-gutters">
+          <div class="col-12">
+            <button class="sign-up" (click)="onCancel(subscribe.subscription)">Cancel</button>
+          </div>
+        </div>
+     </div>
+    </div>
+    <div class="loader" *ngIf="!load">Loading...</div>
+    <div class="col-12 no-data" *ngIf="subscriptions.length == 0 && load">
+        No Subscriptions!
+    </div>
+  </div>

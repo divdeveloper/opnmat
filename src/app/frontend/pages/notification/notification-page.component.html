@@ -1,0 +1,33 @@
+<opn-left-sidebar>
+</opn-left-sidebar>
+<main class="row no-gutters justify-content-center">
+  <div class="col-12 max-content">
+    <div class="content-card-100">
+      <div class="notification-tabs">
+          <div class="col-auto panel-radio-group">
+              <div class="radio-item" [class.unread]="unreadGroup.user > 0"> <!-- unread -->
+                <input type="radio" name="group" [(ngModel)]="group" value="user" id="status1" (change)="onChangeFilterStatus(group)">
+                <label for="status1">Notification</label>
+              </div>
+              <div class="radio-item" [class.unread]="unreadGroup.manager > 0" *ngIf="isManager">
+                <input type="radio" name="group" [(ngModel)]="group" value="manager" id="status2" (change)="onChangeFilterStatus(group)">
+                <label for="status2">Manager</label>
+              </div>
+            </div>
+      </div>
+      <div class="notification-list">
+        
+        <div class="notification-item" [class.unread]="notification.view == 0" *ngFor="let notification of notifications;">
+          <div class="nt-date">{{ notification.created_at | date: 'd MMM y' }}</div>
+          <div class="nt-text" [innerHtml]="notification.content | keepHtml"></div>
+        </div>
+        <div class="loader" *ngIf="!load">Loading...</div>
+        <div class="no-data" *ngIf="notifications.length == 0 && load">
+          Not found notifications
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<opn-right-sidebar>
+</opn-right-sidebar>

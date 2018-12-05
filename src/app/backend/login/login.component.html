@@ -1,0 +1,24 @@
+<section class="register">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-8 col-lg-7 col-xl-5 auth-box">
+                <div class="form-head">
+                    <h1>{{ title }}</h1>
+                </div>
+                <form [formGroup]="form">
+                    <div class="form-group">
+                        <input id="email" formControlName="email" type="email" placeholder="Email" required [ngClass]="displayFieldCss('email')">
+                        <i class="ion-alert" [ngClass]="displayFieldCss('email')" tooltip="Email is missing an '@'" [tooltipDisabled]="!isFieldValid('email')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                    </div>
+                    <div class="form-group">
+                        <input id="password" formControlName="password" type="password" placeholder="Password" [ngClass]="displayFieldCss('password')">
+                        <i class="ion-alert" [ngClass]="displayFieldCss('password')" tooltip="Password (8 characters: 1 letter / 1 number at least)" [tooltipDisabled]="!isFieldValid('password')" [tooltipAnimation]="true" tooltipPlacement="left"></i>
+                    </div>
+                    <div>
+                        <button class="button-submit" (click)="onSubmit()">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

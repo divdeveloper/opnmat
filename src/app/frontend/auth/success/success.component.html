@@ -1,0 +1,39 @@
+<section class="register">
+    <!--<opn-header></opn-header>-->
+    <div style="background-color: white;" class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-lg-4 text-center left-side">
+                <a [routerLink]="['/auth/login']"><img src="assets/images/logo.png" alt="OPN MAT"></a>
+                    <h4 class="welcome" style="color: rgb( 76, 151, 255 )">{{ title }}!</h4>
+                <div class="login-via-email">
+                        We have sent you a confirmation email to {{userEmail}}.<br> Please follow the link in the email to confirm your registration.
+                </div>
+                <form [formGroup]="form" class="form-margin">
+                    <div class="form-group">
+                        <h6 class="text-left credentials">EMAIL</h6>
+                        <input id="email" formControlName="email" type="email"  required>
+                    </div>
+                    <div class="text-right">
+                        <button class="button-submit" (click)="onSubmit()">Send again</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8 col-lg-8 col-sm-8 carousel right-side">
+                <carousel [interval]="NextPhotoInterval" [noWrap]="noLoopSlides">
+                    <slide *ngFor="let slidez of slides; let index=index"
+                           [active]="slidez.active">
+                        <div style="background-color: rgb( 23, 42, 71 ); z-index: -111;">
+                            <img src="/assets/images/BG.jpg" class="slide-img">
+                        </div>
+                        <div class="carousel-caption" style="bottom: 200px;">
+                            <img class="icon-with" src="assets/images/icons/some.png">
+                            <h3 class="slide-title">{{slidez.title}}</h3>
+                            <p  class="slide-text">{{slidez.text}}</p>
+                        </div>
+                    </slide>
+                </carousel>
+                <!--<img src="assets/images/icons/some.png">-->
+            </div>
+        </div>
+    </div>
+</section>
